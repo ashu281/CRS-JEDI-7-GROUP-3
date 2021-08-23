@@ -1,10 +1,12 @@
 package com.flipkart.bean;
 
-public class User {
+public abstract class User {
     private String id;
     private String password;
     private String name;
+    private String gender;
 
+    
     public void setId(String id) {
         this.id = id;
     }
@@ -17,6 +19,10 @@ public class User {
         this.name = name;
     }
 
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     public String getId() {
         return id;
     }
@@ -27,5 +33,9 @@ public class User {
 
     public String getName() {
         return name;
+    }
+
+    public String getGender() {
+        return gender;
     }
 }

@@ -7,5 +7,6 @@ public interface UserInterface {
     public void deleteUser(String userId);
     public void login(String userId);
     public void logout();
+    public boolean isUserLogin(String userId);
 
 }

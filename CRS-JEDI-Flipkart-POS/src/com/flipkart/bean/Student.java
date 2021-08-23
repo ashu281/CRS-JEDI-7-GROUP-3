@@ -2,23 +2,23 @@ package com.flipkart.bean;
 
 public class Student extends User{
 
-    private int studentId;
+    private String studentId;
     private String branch;
     private int semester;
     private boolean isApproved = false;
 
-    public Student(String userId, String name, String gender, String password,String branch, int studentId, int semester) {
-        super(userId, name, gender, password);
+    public Student(String userId, String name, String gender, String password,String branch, String studentId, int semester, String address) {
+        super(userId, name, gender, password,address);
         this.studentId = studentId;
         this.branch = branch;
         this.semester = semester;
     }
 
-    public int getStudentId() {
+    public String getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(int studentId) {
+    public void setStudentId(String studentId) {
         this.studentId = studentId;
     }
 

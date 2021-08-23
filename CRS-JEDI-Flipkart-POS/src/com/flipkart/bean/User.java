@@ -5,17 +5,18 @@ public abstract class User {
     private String password;
     private String name;
     private String gender;
-
+    private String address;
 
     public User(){
 
     }
 
-    public User(String id, String name, String gender, String password) {
+    public User(String id, String name, String gender, String password, String address) {
         this.id = id;
         this.name = name;
         this.gender = gender;
         this.password = password;
+        this.address = address;
     }
 
     public void setId(String id) {
@@ -48,5 +49,13 @@ public abstract class User {
 
     public String getGender() {
         return gender;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

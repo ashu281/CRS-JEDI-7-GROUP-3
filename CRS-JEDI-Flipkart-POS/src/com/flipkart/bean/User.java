@@ -6,7 +6,18 @@ public abstract class User {
     private String name;
     private String gender;
 
-    
+
+    public User(){
+
+    }
+
+    public User(String id, String name, String gender, String password) {
+        this.id = id;
+        this.name = name;
+        this.gender = gender;
+        this.password = password;
+    }
+
     public void setId(String id) {
         this.id = id;
     }

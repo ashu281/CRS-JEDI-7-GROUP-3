@@ -6,17 +6,15 @@ public class User {
     private String name;
     private String gender;
     private String address;
+    private String role;
 
-    public User(){
-
-    }
-
-    public User(String id, String name, String gender, String password, String address) {
+    public User(String id, String name, String gender, String password, String address,String role) {
         this.id = id;
         this.name = name;
         this.gender = gender;
         this.password = password;
         this.address = address;
+        this.role = role;
     }
 
     public void setId(String id) {
@@ -33,6 +31,10 @@ public class User {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getId() {
@@ -53,6 +55,10 @@ public class User {
 
     public String getAddress() {
         return address;
+    }
+
+    public String getRole() {
+        return role;
     }
 
     public void setAddress(String address) {

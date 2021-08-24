@@ -7,8 +7,8 @@ public class Student extends User{
     private int semester;
     private boolean isApproved = false;
 
-    public Student(String userId, String name, String gender, String password,String branch, String studentId, int semester, String address) {
-        super(userId, name, gender, password,address);
+    public Student(String userId, String name, String gender, String password,String branch, String studentId, int semester, String address,String role) {
+        super(userId, name, gender, password,address,role);
         this.studentId = studentId;
         this.branch = branch;
         this.semester = semester;

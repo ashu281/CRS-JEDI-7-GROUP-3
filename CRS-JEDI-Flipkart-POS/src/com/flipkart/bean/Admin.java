@@ -12,8 +12,8 @@ import java.util.Date;
 public class Admin extends User{
 	private String adminID;
 
-	public Admin(String userId, String name, String gender, String password,String address, String adminId) {
-		super(userId, name, gender, password, address);
+	public Admin(String userId, String name, String gender, String password,String address, String adminId,String role) {
+		super(userId, name, gender, password, address,role);
 		this.adminID = adminId;
 	}
 

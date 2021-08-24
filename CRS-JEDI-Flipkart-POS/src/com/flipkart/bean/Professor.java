@@ -6,8 +6,8 @@ public class Professor extends User{
     private String department;
     private String profId;
 
-    public Professor(String userId, String name, String gender, String password,String address,String designation,String department, String profId) {
-        super(userId, name, gender, password, address);
+    public Professor(String userId, String name, String gender, String password,String address,String designation,String department, String profId,String role) {
+        super(userId, name, gender, password, address,role);
         this.designation = designation;
         this.department = department;
         this.profId = profId;

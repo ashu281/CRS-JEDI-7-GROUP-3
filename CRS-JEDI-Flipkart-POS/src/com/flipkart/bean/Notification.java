@@ -2,39 +2,79 @@ package com.flipkart.bean;
 
 public class Notification {
 
-    float refId;
-    int paymentId;
-    int studentId;
+    float refID;
+    int paymentID;
+    int studentID;
     String notificationMessage;
 
-    public float getRefId() {
-        return refId;
+    /**
+     * Method to get reference ID
+     *
+     * @return reference ID
+     */
+    public float getRefID() {
+        return refID;
     }
 
-    public void setRefId(float refId) {
-        this.refId = refId;
+    /**
+     * Method to set reference ID
+     *
+     * @param refID
+     */
+    public void setRefID(float refID) {
+        this.refID = refID;
     }
 
-    public int getPaymentId() {
-        return paymentId;
+    /**
+     * Method to get payment ID
+     *
+     * @return payment ID
+     */
+    public int getPaymentID() {
+        return paymentID;
     }
 
-    public void setPaymentId(int paymentId) {
-        this.paymentId = paymentId;
+    /**
+     * Method to set payment ID
+     *
+     * @param paymentID
+     */
+    public void setPaymentID(int paymentID) {
+        this.paymentID = paymentID;
     }
 
-    public int getStudentId() {
-        return studentId;
+    /**
+     * Method to get student ID
+     *
+     * @return student ID
+     */
+    public int getStudentID() {
+        return studentID;
     }
 
-    public void setStudentId(int studentId) {
-        this.studentId = studentId;
+    /**
+     * Method to set student ID
+     *
+     * @param studentID
+     */
+    public void setStudentID(int studentID) {
+        this.studentID = studentID;
     }
 
+    /**
+     * Method to get notification message
+     *
+     * @return notification message
+     */
     public String getNotificationMessage() {
         return notificationMessage;
     }
 
+    /**
+     * Method to set notification message
+     *
+     * @param notificationMessage
+     */
     public void setNotificationMessage(String notificationMessage) {
         this.notificationMessage = notificationMessage;
     }

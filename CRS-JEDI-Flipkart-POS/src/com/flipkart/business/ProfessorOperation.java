@@ -3,19 +3,38 @@ package com.flipkart.business;
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Student;
 
+import java.util.List;
+
 public class ProfessorOperation implements ProfessorInterface {
+    /**
+     * Method for Professor to grade the student on course
+     * @param studentId
+     * @param courseCode
+     * @param grade
+     */
     @Override
     public void addGrade(String studentId, String courseCode, String grade) {
-
+        return;
     }
 
+    /**
+     * Method for viewing enrolled students in a course
+     * @param profId
+     * @param courseCode
+     * @return
+     */
     @Override
-    public Student[] viewEnrolledStudents(int profId, String courseCode) {
-        return new Student[0];
+    public List<Student> viewEnrolledStudents(int profId, String courseCode) {
+        return null;
     }
 
+    /**
+     * Method to view all courses taught by the professor
+     * @param profId
+     * @return
+     */
     @Override
-    public Course[] getCourses(int profId) {
-        return new Course[0];
+    public List<Course> getCourses(int profId) {
+        return null;
     }
 }

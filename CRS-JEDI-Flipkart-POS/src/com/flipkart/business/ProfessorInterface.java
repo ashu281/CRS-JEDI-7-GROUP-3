@@ -4,6 +4,8 @@ import com.flipkart.bean.Course;
 import com.flipkart.bean.Grade;
 import com.flipkart.bean.Student;
 
+import java.util.List;
+
 /**
  *
  * @author JEDI-07
@@ -11,7 +13,26 @@ import com.flipkart.bean.Student;
  *
  */
 public interface ProfessorInterface {
+    /**
+     * Method for Professor to grade the student on course
+     * @param studentId
+     * @param courseCode
+     * @param grade
+     */
     public void addGrade(String studentId, String courseCode, String grade);
-    public Student[] viewEnrolledStudents(int profId,String courseCode);
-    public Course[] getCourses(int profId);
+
+    /**
+     * Method for viewing enrolled students in a course
+     * @param profId
+     * @param courseCode
+     * @return
+     */
+    public List<Student> viewEnrolledStudents(int profId, String courseCode);
+
+    /**
+     * Method to view all courses taught by the professor
+     * @param profId
+     * @return
+     */
+    public List<Course> getCourses(int profId);
 }

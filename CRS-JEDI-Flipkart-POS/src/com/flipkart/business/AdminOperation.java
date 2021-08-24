@@ -15,9 +15,13 @@ import java.util.Map;
 
 
 public class AdminOperation implements AdminInterface {
-    @Override
-    public void addProfessor() {
 
+    @Override
+    public void addProfessor(String userId, String name, String gender, String password,String address,String designation,String department) {
+        int size=DummyDB.professorList.size();
+        //Generates unique professorId
+        String profId="P"+Integer.toString(size);
+        DummyDB.professorList.put(profId,new Professor(userId,name,gender,password,address,designation,department,profId,"P"));
     }
 
     @Override

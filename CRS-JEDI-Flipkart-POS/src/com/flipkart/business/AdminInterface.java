@@ -16,7 +16,7 @@ public interface AdminInterface {
 	 * Method to add a new professor
 	 *
 	 */
-	public void addProfessor();
+	public void addProfessor(String userId, String name, String gender, String password,String address,String designation,String department);
 
 	/**
 	 * Method to approve a student

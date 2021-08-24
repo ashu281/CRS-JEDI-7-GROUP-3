@@ -4,6 +4,8 @@ package com.flipkart.business;
 import com.flipkart.bean.Student;
 import com.flipkart.bean.Professor;
 
+import java.util.Map;
+
 /**
  *
  * @author JEDI-07
@@ -19,8 +21,19 @@ public class AdminOperation implements AdminInterface{
     }
 
     @Override
-    public void approveStudents() {
-
+    public void approveStudent(String studentId) {
+        Map<String, Student> studentList = DummyDB.studentList;
+        if(studentList.containsKey(studentId)){
+            Student student = studentList.get(studentId);
+            if(student.isApproved()){
+                System.out.println("Student already approved");
+            }else{
+                student.setApproved(true);
+                System.out.println("Successfully Approved " + student.getName());
+            }
+        }else{
+            System.out.println("Student " + studentId + " doesn't exists");
+        }
     }
 
     @Override

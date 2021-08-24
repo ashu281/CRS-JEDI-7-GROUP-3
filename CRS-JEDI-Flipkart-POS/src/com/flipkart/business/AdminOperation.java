@@ -3,6 +3,7 @@ package com.flipkart.business;
 
 import com.flipkart.bean.Student;
 import com.flipkart.bean.Professor;
+import com.flipkart.bean.User;
 import com.flipkart.business.DummyDB;
 
 
@@ -18,10 +19,15 @@ public class AdminOperation implements AdminInterface {
 
     @Override
     public void addProfessor(String userId, String name, String gender, String password,String address,String designation,String department) {
-        int size=DummyDB.professorList.size();
+        int pListSize=DummyDB.professorList.size();
+        int uListSize=DummyDB.userList.size();
         //Generates unique professorId
-        String profId="P"+Integer.toString(size);
+        String profId="P"+Integer.toString(pListSize);
+        //Unique key for userList
+        String uid="U"+Integer.toString(uListSize);
         DummyDB.professorList.put(profId,new Professor(userId,name,gender,password,address,designation,department,profId,"P"));
+        DummyDB.userList.put(uid,new User(userId, name, gender, password, address,"P"));
+
     }
 
     @Override

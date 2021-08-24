@@ -12,6 +12,11 @@ import java.util.Date;
 public class Admin extends User{
 	private String adminID;
 
+	public Admin(String userId, String name, String gender, String password,String address, String adminId) {
+		super(userId, name, gender, password, address);
+		this.adminID = adminId;
+	}
+
 	/**
 	 * Method to get Admin ID
 	 * @return Admin ID

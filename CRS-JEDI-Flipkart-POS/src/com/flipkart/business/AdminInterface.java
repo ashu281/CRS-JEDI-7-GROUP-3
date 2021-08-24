@@ -26,12 +26,12 @@ public interface AdminInterface {
 	/**
 	 * Method to add courses in the catalog
 	 */
-	public void addCourse();
+	public void addCourse(Course course);
 
 	/**
 	 * Method to delete courses in the catalog
 	 */
-	public void deleteCourse();
+	public void deleteCourse(String courseID);
 
 	/**
 	 * Method to generate students' grade card

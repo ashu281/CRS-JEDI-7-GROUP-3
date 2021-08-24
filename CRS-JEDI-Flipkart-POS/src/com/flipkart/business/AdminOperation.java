@@ -1,5 +1,17 @@
 package com.flipkart.business;
 
+
+import com.flipkart.bean.Student;
+import com.flipkart.bean.Professor;
+
+/**
+ *
+ * @author JEDI-07
+ * Implementations of Admin Operations
+ *
+ */
+
+
 public class AdminOperation implements AdminInterface{
     @Override
     public void addProfessor() {
@@ -12,7 +24,12 @@ public class AdminOperation implements AdminInterface{
     }
 
     @Override
-    public void modifyCourses() {
+    public void addCourse() {
+
+    }
+
+    @Override
+    public void deleteCourse() {
 
     }
 

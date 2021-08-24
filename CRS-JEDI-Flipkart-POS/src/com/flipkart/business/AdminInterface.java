@@ -21,7 +21,7 @@ public interface AdminInterface {
 	/**
 	 * Method to approve a student
 	 */
-	public void approveStudents();
+	public void approveStudent(String studentId);
 
 	/**
 	 * Method to add courses in the catalog

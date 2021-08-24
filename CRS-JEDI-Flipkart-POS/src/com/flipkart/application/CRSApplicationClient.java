@@ -58,7 +58,10 @@ public class CRSApplicationClient {
         System.out.println("Enter user input");
     }
 
-    // login
+
+    /**
+     * Log-in to the CRS
+     */
     public void loginUser()
     {
         Scanner sc=new Scanner(System.in);
@@ -104,7 +107,9 @@ public class CRSApplicationClient {
         }
     }
 
-    // Student registration into the system
+    /**
+     * Student registration into the system
+     */
     public void registerStudent()
     {
         Scanner sc=new Scanner(System.in);
@@ -114,15 +119,15 @@ public class CRSApplicationClient {
 
         System.out.println("-----Student Registration-----");
         System.out.println("Name:");
-        name=sc.nextLine();
+        name=sc.next();
         System.out.println("UserID:");
         userId=sc.next();
         System.out.println("Password:");
         password=sc.next();
-        System.out.println("Gender: ('Male', 'Female', 'Other')");
-        gender=sc.nextLine();
+        System.out.println("Gender:");
+        gender=sc.next();
         System.out.println("Branch:");
-        branchName=sc.nextLine();
+        branchName=sc.next();
         System.out.println("Semester:");
         semester=sc.nextInt();
         sc.nextLine();
@@ -132,7 +137,9 @@ public class CRSApplicationClient {
         studentInterface.register(userId, name, password, gender, branchName, semester, address);
     }
 
-    // Update Password of User
+    /**
+     * Update Password of User
+     */
     public void updatePassword()
     {
         Scanner sc=new Scanner(System.in);

@@ -58,19 +58,19 @@ public class CRSAdminMenu {
 
         System.out.println("-----Professor Registration-----");
         System.out.println("Name:");
-        name=sc.nextLine();
+        name=sc.next();
         System.out.println("UserID:");
         userId=sc.next();
         System.out.println("Password:");
         password=sc.next();
-        System.out.println("Gender: ('Male', 'Female', 'Other')");
-        gender=sc.nextLine();
+        System.out.println("Gender:");
+        gender=sc.next();
         System.out.println("Department:");
-        department=sc.nextLine();
+        department=sc.next();
         System.out.println("Designation:");
-        designation=sc.nextLine();
+        designation=sc.next();
         System.out.println("Address:");
-        address=sc.nextLine();
+        address=sc.next();
         adminOperation.addProfessor(userId,name,gender,password,address,designation,department);
     }
 

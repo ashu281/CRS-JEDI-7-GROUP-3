@@ -38,7 +38,7 @@ public class CRSApplicationClient {
                     CRSApplicationClient.updatePassword();
                     break;
                 default:
-                    System.out.println("Invalid Input");
+                    System.out.println("Invalid input");
             }
             showMainMenu();
             userInput=sc.nextInt();
@@ -98,7 +98,7 @@ public class CRSApplicationClient {
         }
         else
         {
-            System.out.println("Invalid Credentials!");
+            System.out.println("Invalid Credentials.");
         }
     }
 
@@ -143,8 +143,8 @@ public class CRSApplicationClient {
         newPassword=sc.next();
         boolean isUpdated=userInterface.updatePassword(userId, newPassword);
         if(isUpdated)
-            System.out.println("Password updated successfully!");
+            System.out.println("Password updated successfully.");
         else
-            System.out.println("Error");
+            System.out.println("Some error occurred");
     }
 }

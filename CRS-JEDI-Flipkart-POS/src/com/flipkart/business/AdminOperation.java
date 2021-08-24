@@ -50,12 +50,27 @@ public class AdminOperation implements AdminInterface {
             System.out.println("Student " + studentId + " doesn't exists");
         }
     }
-
+    
+    /**
+     * Method to add courses in the catalog
+     *
+     * @param courseID
+     * @param courseName
+     * @param instructorID
+     * @param semester
+     * @param seatsAvailable
+     */
     @Override
     public void addCourse(String courseID, String courseName, String instructorID, Integer semester, Integer seatsAvailable) {
         Course course = new Course(courseID, courseName, instructorID, semester, seatsAvailable);
         DummyDB.courseList.put(course.getCourseID(), course);
     }
+    
+    /**
+     * Method to delete courses in the catalog
+     *
+     * @param courseID
+     */
     @Override
     public void deleteCourse(String courseID) {
         DummyDB.courseList.remove(courseID);

@@ -1,6 +1,6 @@
 package com.flipkart.bean;
 
-public abstract class User {
+public class User {
     private String id;
     private String password;
     private String name;

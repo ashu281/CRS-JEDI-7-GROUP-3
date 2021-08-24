@@ -31,6 +31,10 @@ public class AdminOperation implements AdminInterface {
 
     }
 
+    /**+
+     * Method to approve registration of a Student
+     * @param studentId
+     */
     @Override
     public void approveStudent(String studentId) {
         Map<String, Student> studentList = DummyDB.studentList;

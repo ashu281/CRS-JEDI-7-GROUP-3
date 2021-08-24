@@ -18,6 +18,18 @@ import java.util.Map;
 
 public class AdminOperation implements AdminInterface {
 
+
+    /**
+     *
+     * Method to add a new professor
+     * @param userId
+     * @param name
+     * @param gender
+     * @param password
+     * @param address
+     * @param designation
+     * @param department
+     */
     @Override
     public void addProfessor(String userId, String name, String gender, String password,String address,String designation,String department) {
         int pListSize=DummyDB.professorList.size();

@@ -26,7 +26,7 @@ public interface AdminInterface {
 	/**
 	 * Method to add courses in the catalog
 	 */
-	public void addCourse(Course course);
+	public void addCourse(String courseID, String courseName, String instructorID, Integer semester, Integer seatsAvailable);
 
 	/**
 	 * Method to delete courses in the catalog

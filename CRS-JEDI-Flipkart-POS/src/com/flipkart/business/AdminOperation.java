@@ -1,6 +1,7 @@
 package com.flipkart.business;
 
 
+import com.flipkart.bean.Course;
 import com.flipkart.bean.Student;
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.User;
@@ -47,12 +48,12 @@ public class AdminOperation implements AdminInterface {
     }
 
     @Override
-    public void addCourse(Course course) {
-        DummyDB.courseList.put(course.courseID, course);
+    public void addCourse(String courseID, String courseName, String instructorID, Integer semester, Integer seatsAvailable) {
+        Course course = new Course(courseID, courseName, instructorID, semester, seatsAvailable);
+        DummyDB.courseList.put(course.getCourseID(), course);
     }
-
     @Override
-    public void deleteCourse(String courseID;) {
+    public void deleteCourse(String courseID) {
         DummyDB.courseList.remove(courseID);
     }
 

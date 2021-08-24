@@ -1,9 +1,6 @@
 package com.flipkart.application;
 
-import com.flipkart.business.StudentInterface;
-import com.flipkart.business.StudentOperation;
-import com.flipkart.business.UserInterface;
-import com.flipkart.business.UserOperation;
+import com.flipkart.business.*;
 
 import java.util.Scanner;
 
@@ -14,13 +11,18 @@ public class CRSApplicationClient {
     UserInterface userInterface = new UserOperation();
 
     public static void main(String[] args) {
+
+        // initialize database
+        DummyDB.createDatabase();
+
         Scanner sc = new Scanner(System.in);
         CRSApplicationClient CRSApplicationClient=new CRSApplicationClient();
+
+        showMainMenu();
 
         int userInput;
         userInput=sc.nextInt();
 
-        showMainMenu();
         while(userInput!=4)
         {
             switch(userInput)
@@ -74,16 +76,16 @@ public class CRSApplicationClient {
         {
             String userType=userInterface.userType(userId);
             switch(userType) {
-                case "Admin":
+                case "A":
                     CRSAdminMenu adminMenu = new CRSAdminMenu();
                     adminMenu.showMenu();
                     break;
-                case "Professor":
+                case "P":
                     CRSProfessorMenu professorMenu = new CRSProfessorMenu();
                     professorMenu.showMenu(userId);
 
                     break;
-                case "Student":
+                case "S":
                     boolean isApproved = studentInterface.isApproved(userId);
                     if (isApproved) {
                         CRSStudentMenu studentMenu = new CRSStudentMenu();
@@ -141,10 +143,7 @@ public class CRSApplicationClient {
         userId=sc.next();
         System.out.println("New Password:");
         newPassword=sc.next();
-        boolean isUpdated=userInterface.updatePassword(userId, newPassword);
-        if(isUpdated)
-            System.out.println("Password updated successfully.");
-        else
-            System.out.println("Some error occurred");
+        userInterface.updatePassword(userId, newPassword);
+        System.out.println("Password updated successfully.");
     }
 }

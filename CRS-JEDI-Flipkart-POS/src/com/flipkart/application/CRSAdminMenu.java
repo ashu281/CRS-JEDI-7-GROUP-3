@@ -52,18 +52,59 @@ public class CRSAdminMenu {
         }
     }
 
-    private void generateReportCard() {
-    }
-
     private void addProfessor() {
+        String userId,name,password,gender,department,designation,address;
+        Scanner sc=new Scanner(System.in);
+
+        System.out.println("-----Professor Registration-----");
+        System.out.println("Name:");
+        name=sc.nextLine();
+        System.out.println("UserID:");
+        userId=sc.next();
+        System.out.println("Password:");
+        password=sc.next();
+        System.out.println("Gender: ('Male', 'Female', 'Other')");
+        gender=sc.nextLine();
+        System.out.println("Department:");
+        department=sc.nextLine();
+        System.out.println("Designation:");
+        designation=sc.nextLine();
+        System.out.println("Address:");
+        address=sc.nextLine();
+        adminOperation.addProfessor(userId,name,gender,password,address,designation,department);
     }
 
     private void approveStudent() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("StudentID:");
+        String studentId = sc.next();
+        adminOperation.approveStudent(studentId);
     }
 
     private void deleteCourse() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("CourseID:");
+        String courseId = sc.next();
+        adminOperation.deleteCourse(courseId);
     }
 
     private void addCourse() {
+        String courseId,courseName,instructorId;
+        int semester, seatsAvailable=10;
+        Scanner sc=new Scanner(System.in);
+
+        System.out.println("-----Add Course-----");
+        System.out.println("Course Name:");
+        courseName=sc.nextLine();
+        System.out.println("CourseID:");
+        courseId=sc.next();
+        System.out.println("InstructorId:");
+        instructorId=sc.next();
+        System.out.println("Semester:");
+        semester=sc.nextInt();
+        adminOperation.addCourse(courseId, courseName, instructorId, semester, seatsAvailable);
+    }
+    private void generateReportCard() {
+
     }
 }

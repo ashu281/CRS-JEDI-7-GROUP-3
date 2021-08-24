@@ -16,7 +16,13 @@ public class Course {
     private Integer semester;
     private Integer seatsAvailable=10;
 
-
+    public Course(String courseID, String courseName, String instructorID, Integer semester, Integer seatsAvailable) {
+        this.courseID = courseID;
+        this.courseName = courseName;
+        this.instructorID = instructorID;
+        this.semester = semester;
+        this.seatsAvailable = seatsAvailable;
+    }
 
     /**
      * Method to get Course ID

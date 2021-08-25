@@ -88,7 +88,7 @@ public class CRSAdminMenu {
         designation=sc.next();
         System.out.println("Address:");
         address=sc.next();
-        adminOperation.addProfessor(userId,name,gender,password,address,designation,department);
+        adminOperation.addProfessor(name,gender,password,address,designation,department);
     }
 
     /**
@@ -97,7 +97,7 @@ public class CRSAdminMenu {
     private void approveStudent() {
         Scanner sc = new Scanner(System.in);
         System.out.println("StudentID:");
-        String studentId = sc.next();
+        int studentId = sc.nextInt();
         adminOperation.approveStudent(studentId);
     }
 
@@ -107,7 +107,7 @@ public class CRSAdminMenu {
     private void deleteCourse() {
         Scanner sc = new Scanner(System.in);
         System.out.println("CourseID:");
-        String courseId = sc.next();
+        int courseId = sc.nextInt();
         adminOperation.deleteCourse(courseId);
     }
 
@@ -130,7 +130,7 @@ public class CRSAdminMenu {
         instructorId=sc.nextInt();
         System.out.println("Semester:");
         semester=sc.nextInt();
-        adminOperation.addCourse(courseId, courseName, instructorId, semester, seatsAvailable);
+        adminOperation.addCourse(courseName, instructorId, semester);
     }
 
     /**

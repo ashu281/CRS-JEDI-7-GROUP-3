@@ -166,7 +166,7 @@ public class CRSApplicationClient {
 
         System.out.println();
         System.out.println("-----Update Password-----");
-        System.out.println("Email");
+        System.out.println("UserID");
         userId=sc.nextInt();
         System.out.println("New Password:");
         newPassword=sc.next();

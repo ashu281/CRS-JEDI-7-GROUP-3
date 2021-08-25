@@ -122,7 +122,23 @@ public class StudentOperation implements StudentInterface{
      */
     @Override
     public void registerForCourses(int studentId) {
-        //
-        return;
+        StudentDaoInterface studentDao = new StudentDaoOperation();
+        List<Course> selectedCourses = studentDao.getSelectedCourses(studentId);
+
+        System.out.println("Selected Courses");
+        for(Course course: selectedCourses){
+            System.out.println(course.getCourseID() + " " + course.getCourseName());
+        }
+
+        if(selectedCourses.size()<6){
+            System.out.println("Select at least 6 courses to register");
+        }else{
+            List<Course> registeredCourses = studentDao.getRegisteredCourses(studentId);
+            if(registeredCourses.size()>=4){
+                System.out.println("Registration Completed");
+            }else{
+                System.out.println("Administrator approval pending.");
+            }
+        }
     }
 }

@@ -26,9 +26,9 @@ public class SQLQueriesConstants {
     // Student Queries
       public static final String VIEW_REGISTERED_COURSES=" select * from student_reg_course  inner join course on course.courseId = student_reg_course.courseId where student_reg_course.studentId = ? AND student_reg_course.isApproved = 1";
       public static final String VIEW_AVAILABLE_COURSES=" select * from course where semester = ?";
-    public static final String GET_STUDID="select studentId from student where userId = ?";
+      public static final String GET_STUDID="select studentId from student where userId = ?";
       public static final String IS_APPROVED="select isApproved from student where studentId = ? ";
-
+      public static final String VIEW_SELECTED_COURSES="select * from student_reg_course  inner join course on course.courseId = student_reg_course.courseId where student_reg_course.studentId = ?";
       public static final String STUDENT_ADD_COURSE="insert into student_reg_course (studentId,courseId,isApproved) values ( ? , ? , true )";
       public static final String STUDENT_DROP_COURSE = "delete from student_reg_course where courseId = ? AND studentId = ?;";
       public static final String VIEW_GRADE = "select * from student_reg_course inner join course on course.courseId = student_reg_course.courseId where studentId = ? AND isApproved = 1 AND semester = ?;";

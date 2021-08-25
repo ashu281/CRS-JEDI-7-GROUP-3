@@ -214,4 +214,34 @@ public class StudentDaoOperation implements StudentDaoInterface{
         return 0;
     }
 
+    @Override
+    public List<Course> getSelectedCourses(int studentId) {
+        Connection connection=DBUtil.getConnection();
+        List<Course> registered_courses = new ArrayList<>();
+
+        try{
+            PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.VIEW_SELECTED_COURSES);
+
+            statement.setInt(1, studentId);
+
+            ResultSet results=statement.executeQuery();
+
+            while(results.next())
+            {
+                registered_courses.add(new Course(
+                        results.getInt("courseId"),
+                        results.getString("courseName"),
+                        results.getInt("profId"),
+                        results.getInt("semester")
+                ));
+            }
+            return registered_courses;
+        }
+        catch(SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
 }

@@ -65,4 +65,6 @@ public interface StudentDaoInterface {
     void dropCourse(int studentId, int courseId);
 
     int getStudentId(int userId);
+
+    List<Course> getSelectedCourses(int studentId);
 }

@@ -1,10 +1,6 @@
-package com.flipkart.business;
+package com.flipkart.dao;
 
-/**
- * @author Sarthak
- */
-public interface UserInterface {
-
+public interface UserDaoInterface {
     /**
      * Method to delete User
      * @param userId

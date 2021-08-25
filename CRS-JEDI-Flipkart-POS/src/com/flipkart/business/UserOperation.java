@@ -11,7 +11,7 @@ public class UserOperation implements UserInterface {
      * @param userId
      */
     @Override
-    public void deleteUser(String userId) {
+    public void deleteUser(int userId) {
         DummyDB.userList.remove(userId);
     }
 
@@ -21,7 +21,7 @@ public class UserOperation implements UserInterface {
      * @param password
      */
     @Override
-    public void updatePassword(String userId, String password) {
+    public void updatePassword(int userId, String password) {
         DummyDB.userList.get(userId).setPassword(password);
     }
 
@@ -31,7 +31,7 @@ public class UserOperation implements UserInterface {
      * @param name
      */
     @Override
-    public void updateName(String userId, String name) {
+    public void updateName(int userId, String name) {
             DummyDB.userList.get(userId).setName(name);
     }
 
@@ -41,7 +41,7 @@ public class UserOperation implements UserInterface {
      * @param gender
      */
     @Override
-    public void updateGender(String userId, String gender) {
+    public void updateGender(int userId, String gender) {
         DummyDB.userList.get(userId).setGender(gender);
     }
 
@@ -51,7 +51,7 @@ public class UserOperation implements UserInterface {
      * @param address
      */
     @Override
-    public void updateAddress(String userId, String address) {
+    public void updateAddress(int userId, String address) {
         DummyDB.userList.get(userId).setAddress(address);
     }
 
@@ -62,7 +62,7 @@ public class UserOperation implements UserInterface {
      * @return
      */
     @Override
-    public boolean verifyCredentials(String userId, String password) {
+    public boolean verifyCredentials(int userId, String password) {
         return DummyDB.userList.containsKey(userId) && DummyDB.userList.get(userId).getPassword().equals(password);
     }
 
@@ -72,7 +72,7 @@ public class UserOperation implements UserInterface {
      * @return
      */
     @Override
-    public String userType(String userId) {
+    public String userType(int userId) {
         return DummyDB.userList.get(userId).getRole();
     }
 }

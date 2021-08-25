@@ -74,11 +74,12 @@ public class CRSApplicationClient {
     public void loginUser()
     {
         Scanner sc=new Scanner(System.in);
-        String userId,password;
+        int userId;
+        String password;
 
         System.out.println("-----Login-----");
         System.out.println("UserID:");
-        userId=sc.next();
+        userId=sc.nextInt();
         System.out.println("Password:");
         password=sc.next();
 
@@ -155,12 +156,13 @@ public class CRSApplicationClient {
     public void updatePassword()
     {
         Scanner sc=new Scanner(System.in);
-        String userId,newPassword;
+        int userId;
+        String newPassword;
 
         System.out.println();
         System.out.println("-----Update Password-----");
         System.out.println("Email");
-        userId=sc.next();
+        userId=sc.nextInt();
         System.out.println("New Password:");
         newPassword=sc.next();
         userInterface.updatePassword(userId, newPassword);

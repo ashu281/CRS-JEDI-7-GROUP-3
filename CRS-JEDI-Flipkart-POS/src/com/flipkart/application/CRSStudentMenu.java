@@ -19,7 +19,7 @@ public class CRSStudentMenu {
      * Method to Show the student menu
      * @param studentId
      */
-    public void showMenu(String studentId) {
+    public void showMenu(int studentId) {
         while (CRSApplicationClient.loggedin)
         {
             System.out.println("-----Student Choices-----");
@@ -78,7 +78,7 @@ public class CRSStudentMenu {
      * Method to Make payment for the semester
      * @param studentId
      */
-    private void makePayment(String studentId) {
+    private void makePayment(int studentId) {
         System.out.println("-----Make Payment-----");
         System.out.println("Semester:");
         int semester=sc.nextInt();
@@ -89,7 +89,7 @@ public class CRSStudentMenu {
      * Method to View Grade card for the semester
      * @param studentId
      */
-    private void viewGradeCard(String studentId) {
+    private void viewGradeCard(int studentId) {
         System.out.println("-----View Grade Card-----");
         System.out.println("Semester:");
         int semester=sc.nextInt();
@@ -100,7 +100,7 @@ public class CRSStudentMenu {
      * Method to View enrolled courses
      * @param studentId
      */
-    private void viewRegisteredCourse(String studentId) {
+    private void viewRegisteredCourse(int studentId) {
         List<Course> courseList = studentInterface.getRegisteredCourses(studentId);
         for(Course course: courseList) {
             System.out.println(course.getCourseID() + "\t" + course.getCourseName());
@@ -111,7 +111,7 @@ public class CRSStudentMenu {
      * Method to View available courses
      * @param studentId
      */
-    private void viewCourse(String studentId) {
+    private void viewCourse(int studentId) {
         List<Course> courseList = studentInterface.getCourses(studentId);
         for(Course course: courseList) {
             System.out.println(course.getCourseID() + "\t" + course.getCourseName());
@@ -122,11 +122,11 @@ public class CRSStudentMenu {
      * Method to Add a course
      * @param studentId
      */
-    private void addCourse(String studentId) {
-        String courseId;
+    private void addCourse(int studentId) {
+        int courseId;
         System.out.println("-----Enrolled Students-----");
         System.out.println("Course Code:");
-        courseId=sc.next();
+        courseId=sc.nextInt();
         studentInterface.addCourse(courseId);
     }
 
@@ -134,11 +134,11 @@ public class CRSStudentMenu {
      * Method to Drop a course
      * @param studentId
      */
-    private void dropCourse(String studentId) {
-        String courseId;
+    private void dropCourse(int studentId) {
+        int courseId;
         System.out.println("-----Enrolled Students-----");
         System.out.println("Course Code:");
-        courseId=sc.next();
+        courseId=sc.nextInt();
         studentInterface.dropCourse(courseId);
     }
 
@@ -146,7 +146,7 @@ public class CRSStudentMenu {
      * Method to Register for selected courses
      * @param studentId
      */
-    private void registerCourses(String studentId) {
+    private void registerCourses(int studentId) {
         studentInterface.registerForCourses(studentId);
     }
 }

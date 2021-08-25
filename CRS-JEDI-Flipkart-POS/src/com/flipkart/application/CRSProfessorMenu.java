@@ -20,7 +20,7 @@ public class CRSProfessorMenu {
      * Method to Show the professor Menu
      * @param profId
      */
-    public void showMenu(String profId) {
+    public void showMenu(int profId) {
         int input;
         while(CRSApplicationClient.loggedin)
         {
@@ -57,13 +57,14 @@ public class CRSProfessorMenu {
      * Method to Add grade for a given student and course
      * @param profId
      */
-    private void addGrade(String profId) {
-        String studentId, courseId, grade;
+    private void addGrade(int profId) {
+        String grade;
+        int studentId, courseId;
         System.out.println("-----Add Grade-----");
         System.out.println("StudentID:");
-        studentId=sc.next();
+        studentId=sc.nextInt();
         System.out.println("Course Code:");
-        courseId=sc.next();
+        courseId=sc.nextInt();
         System.out.println("Grade:");
         grade=sc.next();
         professorInterface.addGrade(studentId,courseId,grade);
@@ -73,11 +74,10 @@ public class CRSProfessorMenu {
      * Method to View enrolled students for a specific course
      * @param profId
      */
-    private void viewEnrolledStudents(String profId) {
-        String courseId;
+    private void viewEnrolledStudents(int profId) {
         System.out.println("-----Enrolled Students-----");
         System.out.println("Course Code:");
-        courseId=sc.next();
+        int courseId=sc.nextInt();
         List<Student> studentList =  professorInterface.viewEnrolledStudents(profId,courseId);
         for(Student student: studentList) {
             System.out.println(student.getStudentId() + "\t" + student.getName());
@@ -88,7 +88,7 @@ public class CRSProfessorMenu {
      * Method to Get course list that professor teaches
      * @param profId
      */
-    private void getCourses(String profId) {
+    private void getCourses(int profId) {
         List<Course> courseList = professorInterface.getCourses(profId);
         for(Course course: courseList) {
             System.out.println(course.getCourseID() + "\t" + course.getCourseName());

@@ -21,7 +21,7 @@ public class StudentOperation implements StudentInterface{
      * @param address
      */
     @Override
-    public void register(String studentID, String name, String password, String gender, String branch, int semester, String address) {
+    public void register(int studentID, String name, String password, String gender, String branch, int semester, String address) {
 
     }
 
@@ -31,7 +31,7 @@ public class StudentOperation implements StudentInterface{
      * @return Approval Status
      */
     @Override
-    public boolean isApproved(String userId) {
+    public boolean isApproved(int userId) {
         return false;
     }
 
@@ -42,7 +42,7 @@ public class StudentOperation implements StudentInterface{
      * @param semester
      */
     @Override
-    public void makePayment(String studentId, int semester) {
+    public void makePayment(int studentID, int semester) {
 
     }
 
@@ -53,7 +53,7 @@ public class StudentOperation implements StudentInterface{
      * @return
      */
     @Override
-    public List<Course> getRegisteredCourses(String studentId) {
+    public List<Course> getRegisteredCourses(int studentID) {
         return null;
     }
 
@@ -64,7 +64,7 @@ public class StudentOperation implements StudentInterface{
      * @return
      */
     @Override
-    public List<Course> getCourses(String studentId) {
+    public List<Course> getCourses(int studentID) {
         return null;
     }
 
@@ -74,7 +74,7 @@ public class StudentOperation implements StudentInterface{
      * @param courseId
      */
     @Override
-    public void addCourse(String courseId) {
+    public void addCourse(int courseId) {
 
     }
 
@@ -84,7 +84,7 @@ public class StudentOperation implements StudentInterface{
      * @param courseId
      */
     @Override
-    public void dropCourse(String courseId) {
+    public void dropCourse(int courseId) {
 
     }
 
@@ -94,7 +94,7 @@ public class StudentOperation implements StudentInterface{
      * @param studentId
      */
     @Override
-    public void registerForCourses(String studentId) {
+    public void registerForCourses(int studentID) {
 
     }
 
@@ -105,7 +105,7 @@ public class StudentOperation implements StudentInterface{
      * @return grade card
      */
     @Override
-    public String viewGradeCard(String studentID, int semester) {
+    public String viewGradeCard(int studentID, int semester) {
         return null;
     }
 

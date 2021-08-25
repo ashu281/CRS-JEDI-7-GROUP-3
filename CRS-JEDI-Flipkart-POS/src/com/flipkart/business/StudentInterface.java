@@ -20,7 +20,7 @@ public interface StudentInterface {
      * @param semester
      * @param address
      */
-    void register(String studentID, String name, String password, String gender, String branch, int semester, String address);
+    void register(int studentId, String name, String password, String gender, String branch, int semester, String address);
 
     /**+
      * Method to view Student's grade card
@@ -28,51 +28,51 @@ public interface StudentInterface {
      * @param semester
      * @return Grade Card
      */
-    String viewGradeCard(String studentID, int semester);
+    String viewGradeCard(int studentId, int semester);
 
     /**+
      * Method to check Approval status of Student
      * @param userId
      * @return Approval Status
      */
-    boolean isApproved(String userId);
+    boolean isApproved(int userId);
 
     /**
      * Method to make Payment
      * @param studentId
      * @param semester
      */
-    void makePayment(String studentId, int semester);
+    void makePayment(int studentId, int semester);
 
     /**
      * Method to get Registered Courses
      * @param studentId
      * @return
      */
-    List<Course> getRegisteredCourses(String studentId);
+    List<Course> getRegisteredCourses(int studentId);
 
     /**
      * Method to get available courses
      * @param studentId
      * @return
      */
-    List<Course> getCourses(String studentId);
+    List<Course> getCourses(int studentId);
 
     /**
      * Method to add course
      * @param courseId
      */
-    void addCourse(String courseId);
+    void addCourse(int courseId);
 
     /**
      * Method to drop course
      * @param courseId
      */
-    void dropCourse(String courseId);
+    void dropCourse(int courseId);
 
     /**
      * Method to register for selected courses
      * @param studentId
      */
-    void registerForCourses(String studentId);
+    void registerForCourses(int studentId);
 }

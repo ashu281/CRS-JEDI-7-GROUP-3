@@ -74,8 +74,8 @@ public class CRSApplicationClient {
     public void loginUser()
     {
         Scanner sc=new Scanner(System.in);
-        int userId;
         String password;
+        int userId;
 
         System.out.println("-----Login-----");
         System.out.println("UserID:");
@@ -125,15 +125,15 @@ public class CRSApplicationClient {
     {
         Scanner sc=new Scanner(System.in);
 
-        String userId,name,password,branchName,gender,address;
-        int semester;
+        String name,password,branchName,gender,address;
+        int userId,semester;
 
         System.out.println();
         System.out.println("-----Student Registration-----");
         System.out.println("Name:");
         name=sc.next();
         System.out.println("UserID:");
-        userId=sc.next();
+        userId=sc.nextInt();
         System.out.println("Password:");
         password=sc.next();
         System.out.println("Gender:");

@@ -16,7 +16,7 @@ public class ProfessorOperation implements ProfessorInterface {
      * @param grade
      */
     @Override
-    public void addGrade(String studentId, String courseCode, String grade) {
+    public void addGrade(int studentId, int courseCode, String grade) {
         return;
     }
 
@@ -27,7 +27,7 @@ public class ProfessorOperation implements ProfessorInterface {
      * @return
      */
     @Override
-    public List<Student> viewEnrolledStudents(String profId, String courseCode) {
+    public List<Student> viewEnrolledStudents(int profId, int courseCode) {
         return null;
     }
 
@@ -37,7 +37,7 @@ public class ProfessorOperation implements ProfessorInterface {
      * @return
      */
     @Override
-    public List<Course> getCourses(String profId) {
+    public List<Course> getCourses(int profId) {
         return null;
     }
 }

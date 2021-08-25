@@ -1,8 +1,7 @@
 package com.flipkart.application;
 
 import com.flipkart.business.*;
-import com.flipkart.dao.UserDaoInterface;
-import com.flipkart.dao.UserDaoOperation;
+import com.flipkart.dao.*;
 import com.flipkart.utils.DBUtil;
 
 import java.util.Scanner;
@@ -100,14 +99,18 @@ public class CRSApplicationClient {
                     break;
                 case "P":
                     CRSProfessorMenu professorMenu = new CRSProfessorMenu();
-                    professorMenu.showMenu(userId);
+                    ProfessorDaoInterface professorDaoInterface = new ProfessorDaoOperation();
+                    int profId = professorDaoInterface.getProfId(userId);
+                    professorMenu.showMenu(profId);
 
                     break;
                 case "S":
-                    boolean isApproved = studentInterface.isApproved(userId);
+                    StudentDaoOperation studentDaoOperation = new StudentDaoOperation();
+                    int studentId = studentDaoOperation.getStudentId(userId);
+                    boolean isApproved = studentInterface.isApproved(studentId);
                     if (isApproved) {
                         CRSStudentMenu studentMenu = new CRSStudentMenu();
-                        studentMenu.showMenu(userId);
+                        studentMenu.showMenu(studentId);
 
                     } else {
                         System.out.println("Administrator approval pending.");
@@ -137,8 +140,6 @@ public class CRSApplicationClient {
         System.out.println("-----Student Registration-----");
         System.out.println("Name:");
         name=sc.next();
-        System.out.println("UserID:");
-        userId=sc.nextInt();
         System.out.println("Password:");
         password=sc.next();
         System.out.println("Gender:");
@@ -152,7 +153,7 @@ public class CRSApplicationClient {
         address=sc.nextLine();
         System.out.println();
 
-        studentInterface.register(userId, name, password, gender, branchName, semester, address);
+        studentInterface.register(name, password, gender, branchName, semester, address);
     }
 
     /**
@@ -161,17 +162,30 @@ public class CRSApplicationClient {
     public void updatePassword()
     {
         Scanner sc=new Scanner(System.in);
+        String password;
         int userId;
-        String newPassword;
 
-        System.out.println();
-        System.out.println("-----Update Password-----");
-        System.out.println("UserID");
+        System.out.println("-----Login-----");
+        System.out.println("UserID:");
         userId=sc.nextInt();
-        System.out.println("New Password:");
-        newPassword=sc.next();
-        userInterface.updatePassword(userId, newPassword);
-        System.out.println("Password updated successfully.");
-        System.out.println();
+        System.out.println("Password:");
+        password=sc.next();
+
+        loggedin = userInterface.verifyCredentials(userId, password);
+
+        if(loggedin) {
+            String newPassword;
+
+            System.out.println();
+            System.out.println("-----Update Password-----");
+            System.out.println("New Password:");
+            newPassword = sc.next();
+            userInterface.updatePassword(userId, newPassword);
+            System.out.println("Password updated successfully.");
+            System.out.println();
+        }
+        else {
+            System.out.println("Invalid Credentials");
+        }
     }
 }

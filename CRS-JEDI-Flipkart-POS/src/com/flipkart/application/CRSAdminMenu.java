@@ -75,19 +75,17 @@ public class CRSAdminMenu {
 
         System.out.println("-----Professor Registration-----");
         System.out.println("Name:");
-        name=sc.next();
-        System.out.println("UserID:");
-        userId=sc.nextInt();
+        name=sc.nextLine();
         System.out.println("Password:");
         password=sc.next();
         System.out.println("Gender:");
         gender=sc.next();
         System.out.println("Department:");
-        department=sc.next();
+        department=sc.nextLine();
         System.out.println("Designation:");
-        designation=sc.next();
+        designation=sc.nextLine();
         System.out.println("Address:");
-        address=sc.next();
+        address=sc.nextLine();
         adminOperation.addProfessor(name,gender,password,address,designation,department);
     }
 
@@ -124,9 +122,7 @@ public class CRSAdminMenu {
         System.out.println("-----Add Course-----");
         System.out.println("Course Name:");
         courseName=sc.nextLine();
-        System.out.println("CourseID:");
-        courseId=sc.nextInt();
-        System.out.println("InstructorId:");
+        System.out.println("ProfessorId:");
         instructorId=sc.nextInt();
         System.out.println("Semester:");
         semester=sc.nextInt();

@@ -76,9 +76,9 @@ public class CRSProfessorMenu {
      * @param profId
      */
     private void viewEnrolledStudents(int profId) {
-        System.out.println("-----Enrolled Students-----");
         System.out.println("Course Code:");
         int courseId=sc.nextInt();
+        System.out.println("-----Enrolled Students-----");
         List<String> studentList =  professorInterface.viewEnrolledStudents(courseId);
         for(String student: studentList) {
             System.out.println(student);
@@ -90,6 +90,7 @@ public class CRSProfessorMenu {
      * @param profId
      */
     private void getCourses(int profId) {
+        System.out.println("Courses for ProfessorID: "+profId);
         List<Pair<Integer,String>> courseList = professorInterface.getCourses(profId);
         for(Pair<Integer,String>course: courseList) {
             System.out.println(course);

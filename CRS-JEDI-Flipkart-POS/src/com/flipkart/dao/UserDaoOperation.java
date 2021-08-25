@@ -16,8 +16,8 @@ public class UserDaoOperation implements UserDaoInterface {
         Connection connection = DBUtil.getConnection();
         try {
             PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.UPDATE_PASSWORD);
-            statement.setString(2, password);
-            statement.setInt(1, userId);
+            statement.setString(1, password);
+            statement.setInt(2, userId);
             statement.executeUpdate();
 
         }

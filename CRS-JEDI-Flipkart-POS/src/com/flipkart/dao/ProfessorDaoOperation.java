@@ -31,6 +31,7 @@ public class ProfessorDaoOperation implements ProfessorDaoInterface{
 
     @Override
     public List<String> viewEnrolledStudents(int courseId) {
+
         List<String> students = new ArrayList<String>();
         try {
             PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.GET_ENROLLED_STUDENTS);
@@ -39,7 +40,7 @@ public class ProfessorDaoOperation implements ProfessorDaoInterface{
 
             while(results.next())
             {
-                students.add(results.getString("name"));
+                students.add(results.getInt("studentId") +": "+results.getString("name"));
 
             }
             return students;
@@ -58,12 +59,9 @@ public class ProfessorDaoOperation implements ProfessorDaoInterface{
             PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.GET_COURSES);
             statement.setInt(1,profId);
             ResultSet results=statement.executeQuery();
-
             while(results.next())
             {
-                courses.add(new Pair<Integer,String>(results.getInt("courseId"),results.getString("name")));
-
-
+                courses.add(new Pair<Integer,String>(results.getInt("courseId"),results.getString("courseName")));
             }
             return courses;
         }
@@ -72,6 +70,25 @@ public class ProfessorDaoOperation implements ProfessorDaoInterface{
             System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    @Override
+    public int getProfId(int userId) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.GET_PROFID);
+            statement.setInt(1,userId);
+            ResultSet results=statement.executeQuery();
+
+            while(results.next())
+            {
+                return results.getInt("profId");
+            }
+        }
+        catch(SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        return 0;
     }
 
 

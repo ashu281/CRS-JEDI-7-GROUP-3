@@ -16,4 +16,6 @@ public interface ProfessorDaoInterface {
 
 
     public List<Pair<Integer,String>> getCourses(int profId);
+
+    int getProfId(int userId);
 }

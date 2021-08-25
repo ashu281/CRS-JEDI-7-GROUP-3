@@ -97,7 +97,7 @@ public class StudentDaoOperation implements StudentDaoInterface{
     @Override
     public Notification makePayment(int studentId, int semester) {
 
-        return new Notification(" ");
+        return new Notification("Payment Approved");    // TODO
     }
 
     @Override
@@ -192,6 +192,26 @@ public class StudentDaoOperation implements StudentDaoInterface{
         {
             System.out.println(e.getMessage());
         }
+    }
+
+    @Override
+    public int getStudentId(int userId) {
+        Connection connection=DBUtil.getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.GET_STUDID);
+            statement.setInt(1,userId);
+            ResultSet results=statement.executeQuery();
+
+            while(results.next())
+            {
+                return results.getInt("studentId");
+            }
+        }
+        catch(SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        return 0;
     }
 
 }

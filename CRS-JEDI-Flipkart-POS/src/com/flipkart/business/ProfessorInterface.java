@@ -27,12 +27,12 @@ public interface ProfessorInterface {
      * @param courseCode
      * @return
      */
-    public List<Student> viewEnrolledStudents(int profId, String courseCode);
+    public List<Student> viewEnrolledStudents(String profId, String courseCode);
 
     /**
      * Method to view all courses taught by the professor
      * @param profId
      * @return
      */
-    public List<Course> getCourses(int profId);
+    public List<Course> getCourses(String profId);
 }

@@ -1,5 +1,9 @@
 package com.flipkart.business;
 
+import com.flipkart.bean.Course;
+
+import java.util.List;
+
 /**
  * @author Pulkit
  */
@@ -31,6 +35,69 @@ public class StudentOperation implements StudentInterface{
         return false;
     }
 
+    /**
+     * Make Payment
+     *
+     * @param studentId
+     * @param semester
+     */
+    @Override
+    public void makePayment(String studentId, int semester) {
+
+    }
+
+    /**
+     * Method to get Registered Courses
+     *
+     * @param studentId
+     * @return
+     */
+    @Override
+    public List<Course> getRegisteredCourses(String studentId) {
+        return null;
+    }
+
+    /**
+     * Method to get available courses
+     *
+     * @param studentId
+     * @return
+     */
+    @Override
+    public List<Course> getCourses(String studentId) {
+        return null;
+    }
+
+    /**
+     * Method to add course
+     *
+     * @param courseId
+     */
+    @Override
+    public void addCourse(String courseId) {
+
+    }
+
+    /**
+     * Method to drop course
+     *
+     * @param courseId
+     */
+    @Override
+    public void dropCourse(String courseId) {
+
+    }
+
+    /**
+     * Method to register for selected courses
+     *
+     * @param studentId
+     */
+    @Override
+    public void registerForCourses(String studentId) {
+
+    }
+
     /**+
      * Method to view Student's grade card
      * @param studentID
@@ -38,7 +105,9 @@ public class StudentOperation implements StudentInterface{
      * @return grade card
      */
     @Override
-    public String viewGradeCard(int studentID, int semester) {
+    public String viewGradeCard(String studentID, int semester) {
         return null;
     }
+
+
 }

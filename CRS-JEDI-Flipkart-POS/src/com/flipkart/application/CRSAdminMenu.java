@@ -5,20 +5,28 @@ import com.flipkart.business.AdminOperation;
 
 import java.util.Scanner;
 
+/**
+ * @author Abhinav
+ */
 public class CRSAdminMenu {
 
     AdminInterface adminOperation = new AdminOperation();
     Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Method to Show the Admin Menu
+     */
     public void showMenu() {
         while(CRSApplicationClient.loggedin) {
-            System.out.println("-----Admin Choices-----");
+            System.out.println("----------Welcome Admin----------");
+            System.out.println("----------Admin Choices----------");
             System.out.println("1. Add course in catalog");
             System.out.println("2. Delete Course from catalog");
             System.out.println("3. Approve Student Registration");
             System.out.println("4. Add Professor");
             System.out.println("5. Generate Report Card");
             System.out.println("6. Logout");
+            System.out.println("Enter choice:-");
 
             int choice = scanner.nextInt();
             switch (choice) {
@@ -47,11 +55,14 @@ public class CRSAdminMenu {
                     return;
 
                 default:
-                    System.out.println("Invalid input");
+                    System.out.println("Invalid choice");
             }
         }
     }
 
+    /**
+     * Method to Add a professor into the system
+     */
     private void addProfessor() {
         String userId,name,password,gender,department,designation,address;
         Scanner sc=new Scanner(System.in);
@@ -74,6 +85,9 @@ public class CRSAdminMenu {
         adminOperation.addProfessor(userId,name,gender,password,address,designation,department);
     }
 
+    /**
+     * Method to Approve Student Registration
+     */
     private void approveStudent() {
         Scanner sc = new Scanner(System.in);
         System.out.println("StudentID:");
@@ -81,6 +95,9 @@ public class CRSAdminMenu {
         adminOperation.approveStudent(studentId);
     }
 
+    /**
+     * Method to Delete course from catalogue
+     */
     private void deleteCourse() {
         Scanner sc = new Scanner(System.in);
         System.out.println("CourseID:");
@@ -88,6 +105,9 @@ public class CRSAdminMenu {
         adminOperation.deleteCourse(courseId);
     }
 
+    /**
+     * Method to Add course to catalogue
+     */
     private void addCourse() {
         String courseId,courseName,instructorId;
         int semester, seatsAvailable=10;
@@ -104,6 +124,10 @@ public class CRSAdminMenu {
         semester=sc.nextInt();
         adminOperation.addCourse(courseId, courseName, instructorId, semester, seatsAvailable);
     }
+
+    /**
+     * Method to Generate Report Card
+     */
     private void generateReportCard() {
 
     }

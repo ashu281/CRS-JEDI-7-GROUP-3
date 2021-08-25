@@ -5,6 +5,9 @@ import com.flipkart.bean.Student;
 
 import java.util.List;
 
+/**
+ * @author Abhinav
+ */
 public class ProfessorOperation implements ProfessorInterface {
     /**
      * Method for Professor to grade the student on course
@@ -24,7 +27,7 @@ public class ProfessorOperation implements ProfessorInterface {
      * @return
      */
     @Override
-    public List<Student> viewEnrolledStudents(int profId, String courseCode) {
+    public List<Student> viewEnrolledStudents(String profId, String courseCode) {
         return null;
     }
 
@@ -34,7 +37,7 @@ public class ProfessorOperation implements ProfessorInterface {
      * @return
      */
     @Override
-    public List<Course> getCourses(int profId) {
+    public List<Course> getCourses(String profId) {
         return null;
     }
 }

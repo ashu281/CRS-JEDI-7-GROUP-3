@@ -4,6 +4,9 @@ import com.flipkart.business.*;
 
 import java.util.Scanner;
 
+/**
+ * @author Abhinav
+ */
 public class CRSApplicationClient {
 
     static boolean loggedin = false;
@@ -48,19 +51,23 @@ public class CRSApplicationClient {
         sc.close();
     }
 
+    /**
+     * Method to Show the main CRS Menu
+     */
     public static void showMainMenu()
     {
+        System.out.println("--------------WELCOME-------------");
         System.out.println("-----Course Management System-----");
         System.out.println("1. Login");
         System.out.println("2. Student Registration");
         System.out.println("3. Update password");
         System.out.println("4. Exit");
-        System.out.println("Enter user input");
+        System.out.println("Enter choice:-");
     }
 
 
     /**
-     * Log-in to the CRS
+     * Method to Log-in to the CRS
      */
     public void loginUser()
     {
@@ -103,12 +110,13 @@ public class CRSApplicationClient {
         }
         else
         {
-            System.out.println("Invalid Credentials.");
+            System.out.println("Invalid Credentials");
         }
+        System.out.println();
     }
 
     /**
-     * Student registration into the system
+     * Method for Student registration into the system
      */
     public void registerStudent()
     {
@@ -117,6 +125,7 @@ public class CRSApplicationClient {
         String userId,name,password,branchName,gender,address;
         int semester;
 
+        System.out.println();
         System.out.println("-----Student Registration-----");
         System.out.println("Name:");
         name=sc.next();
@@ -133,18 +142,20 @@ public class CRSApplicationClient {
         sc.nextLine();
         System.out.println("Address:");
         address=sc.nextLine();
+        System.out.println();
 
         studentInterface.register(userId, name, password, gender, branchName, semester, address);
     }
 
     /**
-     * Update Password of User
+     * Method to Update Password of User
      */
     public void updatePassword()
     {
         Scanner sc=new Scanner(System.in);
         String userId,newPassword;
 
+        System.out.println();
         System.out.println("-----Update Password-----");
         System.out.println("Email");
         userId=sc.next();
@@ -152,5 +163,6 @@ public class CRSApplicationClient {
         newPassword=sc.next();
         userInterface.updatePassword(userId, newPassword);
         System.out.println("Password updated successfully.");
+        System.out.println();
     }
 }

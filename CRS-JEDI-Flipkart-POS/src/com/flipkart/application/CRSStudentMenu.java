@@ -1,15 +1,24 @@
 package com.flipkart.application;
 
+import com.flipkart.bean.Course;
 import com.flipkart.business.StudentInterface;
 import com.flipkart.business.StudentOperation;
 
+import java.util.List;
 import java.util.Scanner;
 
+/**
+ * @author Abhinav
+ */
 public class CRSStudentMenu {
 
     StudentInterface studentInterface = new StudentOperation();
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Method to Show the student menu
+     * @param studentId
+     */
     public void showMenu(String studentId) {
         while (CRSApplicationClient.loggedin)
         {
@@ -22,6 +31,7 @@ public class CRSStudentMenu {
             System.out.println("6. View Grade Card");
             System.out.println("7. Make Payment");
             System.out.println("8. Logout");
+            System.out.println("Enter choice:-");
 
             int choice = sc.nextInt();
             switch (choice) {
@@ -59,29 +69,84 @@ public class CRSStudentMenu {
                     return;
 
                 default:
-                    System.out.println("Invalid input");
+                    System.out.println("Invalid choice");
             }
         }
     }
 
+    /**
+     * Method to Make payment for the semester
+     * @param studentId
+     */
     private void makePayment(String studentId) {
+        System.out.println("-----Make Payment-----");
+        System.out.println("Semester:");
+        int semester=sc.nextInt();
+        studentInterface.makePayment(studentId,semester);
     }
 
+    /**
+     * Method to View Grade card for the semester
+     * @param studentId
+     */
     private void viewGradeCard(String studentId) {
+        System.out.println("-----View Grade Card-----");
+        System.out.println("Semester:");
+        int semester=sc.nextInt();
+        studentInterface.viewGradeCard(studentId,semester); // Currently, function is void
     }
 
+    /**
+     * Method to View enrolled courses
+     * @param studentId
+     */
     private void viewRegisteredCourse(String studentId) {
+        List<Course> courseList = studentInterface.getRegisteredCourses(studentId);
+        for(Course course: courseList) {
+            System.out.println(course.getCourseID() + "\t" + course.getCourseName());
+        }
     }
 
+    /**
+     * Method to View available courses
+     * @param studentId
+     */
     private void viewCourse(String studentId) {
+        List<Course> courseList = studentInterface.getCourses(studentId);
+        for(Course course: courseList) {
+            System.out.println(course.getCourseID() + "\t" + course.getCourseName());
+        }
     }
 
-    private void dropCourse(String studentId) {
-    }
-
+    /**
+     * Method to Add a course
+     * @param studentId
+     */
     private void addCourse(String studentId) {
+        String courseId;
+        System.out.println("-----Enrolled Students-----");
+        System.out.println("Course Code:");
+        courseId=sc.next();
+        studentInterface.addCourse(courseId);
     }
 
+    /**
+     * Method to Drop a course
+     * @param studentId
+     */
+    private void dropCourse(String studentId) {
+        String courseId;
+        System.out.println("-----Enrolled Students-----");
+        System.out.println("Course Code:");
+        courseId=sc.next();
+        studentInterface.dropCourse(courseId);
+    }
+
+    /**
+     * Method to Register for selected courses
+     * @param studentId
+     */
     private void registerCourses(String studentId) {
+        studentInterface.registerForCourses(studentId);
     }
 }

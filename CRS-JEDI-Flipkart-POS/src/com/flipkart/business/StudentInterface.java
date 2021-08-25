@@ -1,6 +1,7 @@
 package com.flipkart.business;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.Grade;
 
 import java.util.List;
 
@@ -12,7 +13,6 @@ public interface StudentInterface {
 
     /**+
      * Method to register Student for courses
-     * @param studentId
      * @param name
      * @param password
      * @param gender
@@ -20,7 +20,7 @@ public interface StudentInterface {
      * @param semester
      * @param address
      */
-    void register(int studentId, String name, String password, String gender, String branch, int semester, String address);
+    void register(String name, String password, String gender, String branch, int semester, String address);
 
     /**+
      * Method to view Student's grade card
@@ -28,7 +28,7 @@ public interface StudentInterface {
      * @param semester
      * @return Grade Card
      */
-    String viewGradeCard(int studentId, int semester);
+    Grade viewGradeCard(int studentId, int semester);
 
     /**+
      * Method to check Approval status of Student
@@ -61,18 +61,16 @@ public interface StudentInterface {
     /**
      * Method to add course
      * @param courseId
+     * @param studentId
      */
-    void addCourse(int courseId);
+    void addCourse(int courseId, int studentId);
 
     /**
      * Method to drop course
      * @param courseId
-     */
-    void dropCourse(int courseId);
-
-    /**
-     * Method to register for selected courses
      * @param studentId
      */
+    void dropCourse(int courseId, int studentId);
+
     void registerForCourses(int studentId);
 }

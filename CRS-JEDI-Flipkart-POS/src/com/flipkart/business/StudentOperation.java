@@ -1,6 +1,10 @@
 package com.flipkart.business;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.Grade;
+import com.flipkart.bean.Notification;
+import com.flipkart.dao.StudentDaoInterface;
+import com.flipkart.dao.StudentDaoOperation;
 
 import java.util.List;
 
@@ -12,7 +16,6 @@ public class StudentOperation implements StudentInterface{
 
     /**+
      * Method to register Student for courses
-     * @param studentID
      * @param name
      * @param password
      * @param gender
@@ -21,18 +24,20 @@ public class StudentOperation implements StudentInterface{
      * @param address
      */
     @Override
-    public void register(int studentID, String name, String password, String gender, String branch, int semester, String address) {
-
+    public void register(String name, String password, String gender, String branch, int semester, String address) {
+        StudentDaoInterface studentDao = new StudentDaoOperation();
+        studentDao.register(name, password, gender, branch, semester, address);
     }
 
     /**+
      * Method to check Approval status of Student
-     * @param userId
+     * @param studentId
      * @return Approval Status
      */
     @Override
-    public boolean isApproved(int userId) {
-        return false;
+    public boolean isApproved(int studentId) {
+        StudentDaoInterface studentDao = new StudentDaoOperation();
+        return studentDao.isApproved(studentId);
     }
 
     /**
@@ -43,7 +48,10 @@ public class StudentOperation implements StudentInterface{
      */
     @Override
     public void makePayment(int studentID, int semester) {
+        StudentDaoInterface studentDao = new StudentDaoOperation();
+        Notification paymentNotification = studentDao.makePayment(studentID, semester);
 
+        System.out.println("Notification: "+ paymentNotification.getNotificationMessage());
     }
 
     /**
@@ -54,7 +62,8 @@ public class StudentOperation implements StudentInterface{
      */
     @Override
     public List<Course> getRegisteredCourses(int studentID) {
-        return null;
+        StudentDaoInterface studentDao = new StudentDaoOperation();
+        return studentDao.getRegisteredCourses(studentID);
     }
 
     /**
@@ -65,38 +74,35 @@ public class StudentOperation implements StudentInterface{
      */
     @Override
     public List<Course> getCourses(int semester) {
-        return null;
+        StudentDaoInterface studentDao = new StudentDaoOperation();
+        return studentDao.getCourses(semester);
     }
 
     /**
      * Method to add course
      *
      * @param courseId
+     * @param studentId
      */
     @Override
-    public void addCourse(int courseId) {
-
+    public void addCourse(int courseId, int studentId) {
+        StudentDaoInterface studentDao = new StudentDaoOperation();
+        studentDao.addCourse(studentId, courseId);
     }
 
     /**
      * Method to drop course
      *
      * @param courseId
+     * @param studentId
      */
     @Override
-    public void dropCourse(int courseId) {
-
+    public void dropCourse(int courseId, int studentId) {
+        StudentDaoInterface studentDao = new StudentDaoOperation();
+        studentDao.dropCourse(studentId, courseId);
     }
 
-    /**
-     * Method to register for selected courses
-     *
-     * @param studentID
-     */
-    @Override
-    public void registerForCourses(int studentID) {
 
-    }
 
     /**+
      * Method to view Student's grade card
@@ -105,9 +111,18 @@ public class StudentOperation implements StudentInterface{
      * @return grade card
      */
     @Override
-    public String viewGradeCard(int studentID, int semester) {
-        return null;
+    public Grade viewGradeCard(int studentID, int semester) {
+        StudentDaoInterface studentDao = new StudentDaoOperation();
+        return studentDao.viewGradeCard(studentID, semester);
     }
 
-
+    /**+
+     *
+     * @param studentId
+     */
+    @Override
+    public void registerForCourses(int studentId) {
+        //
+        return;
+    }
 }

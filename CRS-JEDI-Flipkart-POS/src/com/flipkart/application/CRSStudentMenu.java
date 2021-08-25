@@ -1,10 +1,13 @@
 package com.flipkart.application;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.Grade;
 import com.flipkart.business.StudentInterface;
 import com.flipkart.business.StudentOperation;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -93,7 +96,15 @@ public class CRSStudentMenu {
         System.out.println("-----View Grade Card-----");
         System.out.println("Semester:");
         int semester=sc.nextInt();
-        studentInterface.viewGradeCard(studentId,semester); // Currently, function is void
+        Grade gradeCard = studentInterface.viewGradeCard(studentId,semester);
+        HashMap <String, Double> grades = gradeCard.getGrades();
+
+        for (Map.Entry mapElement : grades.entrySet()) {
+            String courseName = (String) mapElement.getKey();
+            Double grade = (Double) mapElement.getValue();
+
+            System.out.println(courseName + " : " + grade);
+        }
     }
 
     /**
@@ -127,7 +138,7 @@ public class CRSStudentMenu {
         System.out.println("-----Enrolled Students-----");
         System.out.println("Course Code:");
         courseId=sc.nextInt();
-        studentInterface.addCourse(courseId);
+        studentInterface.addCourse(courseId, studentId);
     }
 
     /**
@@ -139,7 +150,7 @@ public class CRSStudentMenu {
         System.out.println("-----Enrolled Students-----");
         System.out.println("Course Code:");
         courseId=sc.nextInt();
-        studentInterface.dropCourse(courseId);
+        studentInterface.dropCourse(courseId, studentId);
     }
 
     /**

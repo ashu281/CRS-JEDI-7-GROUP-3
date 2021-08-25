@@ -1,13 +1,14 @@
 package com.flipkart.dao;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.Grade;
+import com.flipkart.bean.Notification;
 
 import java.util.List;
 
 public interface StudentDaoInterface {
     /**+
      * Method to register Student for courses
-     * @param studentID
      * @param name
      * @param password
      * @param gender
@@ -15,29 +16,27 @@ public interface StudentDaoInterface {
      * @param semester
      * @param address
      */
-    void register(int studentId, String name, String password, String gender, String branch, int semester, String address);
+    void register(String name, String password, String gender, String branch, int semester, String address);
 
     /**+
      * Method to view Student's grade card
-     * @param studentID
      * @param semester
      * @return Grade Card
      */
-    String viewGradeCard(int studentId, int semester);
+    Grade viewGradeCard(int studentId, int semester);
 
     /**+
      * Method to check Approval status of Student
-     * @param userId
      * @return Approval Status
      */
-    boolean isApproved(int userId);
+    boolean isApproved(int studentId);
 
     /**
      * Method to make Payment
      * @param studentId
      * @param semester
      */
-    void makePayment(int studentId, int semester);
+    Notification makePayment(int studentId, int semester);
 
     /**
      * Method to get Registered Courses
@@ -48,26 +47,21 @@ public interface StudentDaoInterface {
 
     /**
      * Method to get available courses
-     * @param studentId
+     * @param semester
      * @return
      */
-    List<Course> getCourses(int studentId);
+    List<Course> getCourses(int semester);
 
     /**
      * Method to add course
      * @param courseId
      */
-    void addCourse(int courseId);
+    void addCourse(int studentId, int courseId);
 
     /**
      * Method to drop course
      * @param courseId
      */
-    void dropCourse(int courseId);
+    void dropCourse(int studentId, int courseId);
 
-    /**
-     * Method to register for selected courses
-     * @param studentId
-     */
-    void registerForCourses(int studentId);
 }

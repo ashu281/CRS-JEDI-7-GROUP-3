@@ -24,6 +24,13 @@ public class Course {
         this.seatsAvailable = seatsAvailable;
     }
 
+    public Course(int courseId, String courseName, int profId, int semester) {
+        this.courseID = courseId;
+        this.courseName = courseName;
+        this.instructorID = profId;
+        this.semester = semester;
+    }
+
     /**
      * Method to get Course ID
      * @return Course ID
@@ -51,7 +58,7 @@ public class Course {
 
     /**
      * Method to set Course Name
-     * @param  Course Name
+     * @param  courseName
      */
     public void setCourseName(String courseName) {
         this.courseName = courseName;
@@ -85,7 +92,7 @@ public class Course {
 
     /**
      * Method to set instructor ID
-     * @param  instructor ID
+     * @param  instructorID
      */
     public void setInstructorID(int instructorID) {
         this.instructorID = instructorID;
@@ -102,7 +109,7 @@ public class Course {
 
     /**
      * Method to set available seats in a course
-     * @param  available seats
+     * @param  seatsAvailable
      */
     public void setSeatsAvailable(int seatsAvailable) {
         this.seatsAvailable = seatsAvailable;

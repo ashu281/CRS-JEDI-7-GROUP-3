@@ -12,7 +12,7 @@ public interface StudentInterface {
 
     /**+
      * Method to register Student for courses
-     * @param studentID
+     * @param studentId
      * @param name
      * @param password
      * @param gender
@@ -24,7 +24,7 @@ public interface StudentInterface {
 
     /**+
      * Method to view Student's grade card
-     * @param studentID
+     * @param studentId
      * @param semester
      * @return Grade Card
      */
@@ -53,10 +53,10 @@ public interface StudentInterface {
 
     /**
      * Method to get available courses
-     * @param studentId
+     * @param semester
      * @return
      */
-    List<Course> getCourses(int studentId);
+    List<Course> getCourses(int semester);
 
     /**
      * Method to add course

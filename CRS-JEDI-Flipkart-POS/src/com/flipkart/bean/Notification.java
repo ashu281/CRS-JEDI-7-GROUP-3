@@ -7,6 +7,10 @@ public class Notification {
     int studentID;
     String notificationMessage;
 
+    public Notification(String s) {
+        this.notificationMessage = s;
+    }
+
     /**
      * Method to get reference ID
      *

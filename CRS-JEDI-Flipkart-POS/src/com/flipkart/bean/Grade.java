@@ -3,31 +3,16 @@ package com.flipkart.bean;
 import java.util.HashMap;
 
 public class Grade {
-    String courseName;
-    String studentID;
-    int semester;
+    int studentID;
     float CGPA;
-    HashMap<String, Integer> grades;
+    HashMap<String, Double> grades;
+
+    public Grade(int studentId, HashMap<String, Double> grades) {
+        this.studentID = studentId;
+        this.grades = grades;
+    }
     /*courseCode to gradePoint*/
 
-    /**
-     * Method to get Courses name
-     *
-     * @return Course Name
-     */
-    public String getCourseName() {
-        return courseName;
-    }
-
-    /**
-     * Method to set Courses name
-     *
-     * @param courseName
-     */
-
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
 
     /**
      * Method to get studentId
@@ -35,7 +20,7 @@ public class Grade {
      * @return student Id
      */
 
-    public String getStudentID() {
+    public int getStudentID() {
         return studentID;
     }
 
@@ -45,29 +30,10 @@ public class Grade {
      * @param studentID
      */
 
-    public void setStudentId(String studentID) {
+    public void setStudentId(int studentID) {
         this.studentID = studentID;
     }
 
-    /**
-     * Method to get semester number
-     *
-     * @return semester number
-     */
-
-    public int getSemester() {
-        return semester;
-    }
-
-    /**
-     * Method to set semester number
-     *
-     * @param semester : semester number
-     */
-
-    public void setSemester(int semester) {
-        this.semester = semester;
-    }
 
     /**
      * Method to get CGPA
@@ -94,7 +60,7 @@ public class Grade {
      * @return Hashmap with CourseID as key and Grade point as value
      */
 
-    public HashMap<String, Integer> getGrades() {
+    public HashMap<String, Double> getGrades() {
         return grades;
     }
 
@@ -104,7 +70,7 @@ public class Grade {
      * @param grades : Hashmap with CourseID as key and Grade point as value
      */
 
-    public void setGrades(HashMap<String, Integer> grades) {
+    public void setGrades(HashMap<String, Double> grades) {
         this.grades = grades;
     }
 }

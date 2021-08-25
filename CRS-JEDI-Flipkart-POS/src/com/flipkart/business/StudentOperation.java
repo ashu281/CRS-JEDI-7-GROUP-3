@@ -38,7 +38,7 @@ public class StudentOperation implements StudentInterface{
     /**
      * Make Payment
      *
-     * @param studentId
+     * @param studentID
      * @param semester
      */
     @Override
@@ -49,7 +49,7 @@ public class StudentOperation implements StudentInterface{
     /**
      * Method to get Registered Courses
      *
-     * @param studentId
+     * @param studentID
      * @return
      */
     @Override
@@ -60,11 +60,11 @@ public class StudentOperation implements StudentInterface{
     /**
      * Method to get available courses
      *
-     * @param studentId
+     * @param semester
      * @return
      */
     @Override
-    public List<Course> getCourses(int studentID) {
+    public List<Course> getCourses(int semester) {
         return null;
     }
 
@@ -91,7 +91,7 @@ public class StudentOperation implements StudentInterface{
     /**
      * Method to register for selected courses
      *
-     * @param studentId
+     * @param studentID
      */
     @Override
     public void registerForCourses(int studentID) {

@@ -10,13 +10,13 @@ package com.flipkart.bean;
 
 public class Course {
 
-    private String courseID;
+    private int courseID;
     private String courseName;
-    private String instructorID;
-    private Integer semester;
-    private Integer seatsAvailable=10;
+    private int instructorID;
+    private int semester;
+    private int seatsAvailable=10;
 
-    public Course(String courseID, String courseName, String instructorID, Integer semester, Integer seatsAvailable) {
+    public Course(int courseID, String courseName, int instructorID, Integer semester, Integer seatsAvailable) {
         this.courseID = courseID;
         this.courseName = courseName;
         this.instructorID = instructorID;
@@ -28,7 +28,7 @@ public class Course {
      * Method to get Course ID
      * @return Course ID
      */
-    public String getCourseID() {
+    public int getCourseID() {
         return courseID;
     }
 
@@ -37,7 +37,7 @@ public class Course {
      * Method to set Course ID
      * @param courseID
      */
-    public void setCourseID(String courseID) {
+    public void setCourseID(int courseID) {
         this.courseID = courseID;
     }
 
@@ -62,7 +62,7 @@ public class Course {
      * Method to get semester No
      * @return semester
      */
-    public Integer getSemester() {
+    public int getSemester() {
         return semester;
     }
 
@@ -70,7 +70,7 @@ public class Course {
      * Method to set semester
      * @param semester
      */
-    public void setSemester(Integer semester) {
+    public void setSemester(int semester) {
         this.semester = semester;
     }
 
@@ -78,7 +78,7 @@ public class Course {
      * Method to get instructor ID
      * @return instructor ID
      */
-    public String getInstructorID() {
+    public int getInstructorID() {
         return instructorID;
     }
 
@@ -87,7 +87,7 @@ public class Course {
      * Method to set instructor ID
      * @param  instructor ID
      */
-    public void setInstructorID(String instructorID) {
+    public void setInstructorID(int instructorID) {
         this.instructorID = instructorID;
     }
 
@@ -96,7 +96,7 @@ public class Course {
      * Method to get available seats in a course
      * @return  available seats
      */
-    public Integer getSeatsAvailable() {
+    public int getSeatsAvailable() {
         return seatsAvailable;
     }
 
@@ -104,7 +104,7 @@ public class Course {
      * Method to set available seats in a course
      * @param  available seats
      */
-    public void setSeatsAvailable(Integer seatsAvailable) {
+    public void setSeatsAvailable(int seatsAvailable) {
         this.seatsAvailable = seatsAvailable;
     }
 }

@@ -6,7 +6,7 @@ package com.flipkart.bean;
 
 public class Student extends User{
 
-    private String studentId;
+    private int studentId;
     private String branch;
     private int semester;
     private boolean isApproved = false;
@@ -23,7 +23,7 @@ public class Student extends User{
      * @param address
      * @param role
      */
-    public Student(String userId, String name, String gender, String password,String branch, String studentId, int semester, String address,String role) {
+    public Student(int userId, String name, String gender, String password, String branch, int studentId, int semester, String address, String role) {
         super(userId, name, gender, password,address,role);
         this.studentId = studentId;
         this.branch = branch;
@@ -34,7 +34,7 @@ public class Student extends User{
      * Method to get studentID of Student
      * @return studentId
      */
-    public String getStudentId() {
+    public int getStudentId() {
         return studentId;
     }
 
@@ -42,7 +42,7 @@ public class Student extends User{
      * Method to set studentId of Student
      * @param studentId
      */
-    public void setStudentId(String studentId) {
+    public void setStudentId(int studentId) {
         this.studentId = studentId;
     }
 

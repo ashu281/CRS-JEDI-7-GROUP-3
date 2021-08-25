@@ -4,7 +4,7 @@ package com.flipkart.bean;
  * @author Sarthak
  */
 public class User {
-    private String id;
+    private int id;
     private String password;
     private String name;
     private String gender;
@@ -20,7 +20,7 @@ public class User {
      * @param address
      * @param role
      */
-    public User(String id, String name, String gender, String password, String address,String role) {
+    public User(int id, String name, String gender, String password, String address, String role) {
         this.id = id;
         this.name = name;
         this.gender = gender;
@@ -33,7 +33,7 @@ public class User {
      *
      * @param id
      */
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -73,7 +73,7 @@ public class User {
      *
      * @return id
      */
-    public String getId() {
+    public int getId() {
         return id;
     }
 

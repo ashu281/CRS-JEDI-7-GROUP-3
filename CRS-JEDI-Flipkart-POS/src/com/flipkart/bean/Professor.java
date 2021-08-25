@@ -12,9 +12,9 @@ public class Professor extends User{
 
     private String designation;
     private String department;
-    private String profId;
+    private int profId;
 
-    public Professor(String userId, String name, String gender, String password,String address,String designation,String department, String profId,String role) {
+    public Professor(int userId, String name, String gender, String password, String address, String designation, String department, int profId, String role) {
         super(userId, name, gender, password, address,role);
         this.designation = designation;
         this.department = department;

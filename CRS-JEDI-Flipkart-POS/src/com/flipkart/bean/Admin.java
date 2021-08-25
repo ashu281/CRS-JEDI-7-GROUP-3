@@ -1,7 +1,5 @@
 package com.flipkart.bean;
 
-import java.util.Date;
-
 /**
  *
  * @author JEDI-07
@@ -10,9 +8,9 @@ import java.util.Date;
  */
 
 public class Admin extends User{
-	private String adminID;
+	private int adminID;
 
-	public Admin(String userId, String name, String gender, String password,String address, String adminId,String role) {
+	public Admin(int userId, String name, String gender, String password, String address, int adminId, String role) {
 		super(userId, name, gender, password, address,role);
 		this.adminID = adminId;
 	}
@@ -22,7 +20,7 @@ public class Admin extends User{
 	 * @return Admin ID
 	 */
 
-	public String getAdminID() {
+	public int getAdminID() {
 		return adminID;
 	}
 
@@ -31,7 +29,7 @@ public class Admin extends User{
 	 * @param Admin ID
 	 */
 
-	public void setAdminID(String adminID) {
+	public void setAdminID(int adminID) {
 		this.adminID = adminID;
 	}
 	 

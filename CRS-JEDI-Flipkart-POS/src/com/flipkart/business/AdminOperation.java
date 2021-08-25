@@ -5,7 +5,6 @@ import com.flipkart.bean.Course;
 import com.flipkart.bean.Student;
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.User;
-import com.flipkart.business.DummyDB;
 
 
 import java.util.Map;
@@ -31,13 +30,13 @@ public class AdminOperation implements AdminInterface {
      * @param department
      */
     @Override
-    public void addProfessor(String userId, String name, String gender, String password,String address,String designation,String department) {
+    public void addProfessor(int userId, String name, String gender, String password, String address, String designation, String department) {
         int pListSize=DummyDB.professorList.size();
         int uListSize=DummyDB.userList.size();
         //Generates unique professorId
-        String profId="P"+Integer.toString(pListSize);
+        int profId=pListSize+1;
         //Unique key for userList
-        String uid="U"+Integer.toString(uListSize);
+        int uid=uListSize+1;
         DummyDB.professorList.put(profId,new Professor(userId,name,gender,password,address,designation,department,profId,"P"));
         DummyDB.userList.put(uid,new User(userId, name, gender, password, address,"P"));
 
@@ -49,7 +48,7 @@ public class AdminOperation implements AdminInterface {
      */
     @Override
     public void approveStudent(String studentId) {
-        Map<String, Student> studentList = DummyDB.studentList;
+        Map<Integer, Student> studentList = DummyDB.studentList;
         if(studentList.containsKey(studentId)){
             Student student = studentList.get(studentId);
             if(student.isApproved()){
@@ -73,7 +72,7 @@ public class AdminOperation implements AdminInterface {
      * @param seatsAvailable
      */
     @Override
-    public void addCourse(String courseID, String courseName, String instructorID, Integer semester, Integer seatsAvailable) {
+    public void addCourse(int courseID, String courseName, int instructorID, Integer semester, Integer seatsAvailable) {
         Course course = new Course(courseID, courseName, instructorID, semester, seatsAvailable);
         DummyDB.courseList.put(course.getCourseID(), course);
     }

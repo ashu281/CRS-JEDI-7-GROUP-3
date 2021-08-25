@@ -64,14 +64,20 @@ public class CRSAdminMenu {
      * Method to Add a professor into the system
      */
     private void addProfessor() {
-        String userId,name,password,gender,department,designation,address;
+        int userId;
+        String name;
+        String password;
+        String gender;
+        String department;
+        String designation;
+        String address;
         Scanner sc=new Scanner(System.in);
 
         System.out.println("-----Professor Registration-----");
         System.out.println("Name:");
         name=sc.next();
         System.out.println("UserID:");
-        userId=sc.next();
+        userId=sc.nextInt();
         System.out.println("Password:");
         password=sc.next();
         System.out.println("Gender:");
@@ -109,7 +115,9 @@ public class CRSAdminMenu {
      * Method to Add course to catalogue
      */
     private void addCourse() {
-        String courseId,courseName,instructorId;
+        int courseId;
+        String courseName;
+        int instructorId;
         int semester, seatsAvailable=10;
         Scanner sc=new Scanner(System.in);
 
@@ -117,9 +125,9 @@ public class CRSAdminMenu {
         System.out.println("Course Name:");
         courseName=sc.nextLine();
         System.out.println("CourseID:");
-        courseId=sc.next();
+        courseId=sc.nextInt();
         System.out.println("InstructorId:");
-        instructorId=sc.next();
+        instructorId=sc.nextInt();
         System.out.println("Semester:");
         semester=sc.nextInt();
         adminOperation.addCourse(courseId, courseName, instructorId, semester, seatsAvailable);

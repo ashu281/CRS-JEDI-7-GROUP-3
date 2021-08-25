@@ -38,6 +38,6 @@ public class SQLQueriesConstants {
       public static final String ADD_GRADE="update student_reg_course set grade=? where courseId=? and studentId=?";
       public static final String GET_COURSES="select * from course where profId=?";
 
-      public  static  final  String GET_ENROLLED_STUDENTS = "select studentId from student_reg_course where courseId = ?";
+      public  static  final  String GET_ENROLLED_STUDENTS = "select student_reg_course.studentId,student.userId,user.name from student_reg_course join student on student.studentId = course.studentId join user on user.userId = student.userId";
 
 }

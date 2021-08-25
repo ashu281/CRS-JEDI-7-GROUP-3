@@ -1,6 +1,7 @@
 package com.flipkart.application;
 
 import com.flipkart.business.*;
+import com.flipkart.utils.DBUtil;
 
 import java.util.Scanner;
 
@@ -16,7 +17,8 @@ public class CRSApplicationClient {
     public static void main(String[] args) {
 
         // initialize database
-        DummyDB.createDatabase();
+//        DummyDB.createDatabase();
+        DBUtil.getConnection();
 
         Scanner sc = new Scanner(System.in);
         CRSApplicationClient CRSApplicationClient=new CRSApplicationClient();

@@ -1,6 +1,8 @@
 package com.flipkart.application;
 
 import com.flipkart.business.*;
+import com.flipkart.dao.UserDaoInterface;
+import com.flipkart.dao.UserDaoOperation;
 import com.flipkart.utils.DBUtil;
 
 import java.util.Scanner;
@@ -18,7 +20,7 @@ public class CRSApplicationClient {
 
         // initialize database
 //        DummyDB.createDatabase();
-        DBUtil.getConnection();
+
 
         Scanner sc = new Scanner(System.in);
         CRSApplicationClient CRSApplicationClient=new CRSApplicationClient();
@@ -45,12 +47,14 @@ public class CRSApplicationClient {
                     CRSApplicationClient.updatePassword();
                     break;
                 default:
+
                     System.out.println("Invalid input");
             }
             showMainMenu();
             userInput=sc.nextInt();
         }
         sc.close();
+        DBUtil.closeConnection();
     }
 
     /**
@@ -87,6 +91,7 @@ public class CRSApplicationClient {
 
         if(loggedin)
         {
+
             String userType=userInterface.userType(userId);
             switch(userType) {
                 case "A":

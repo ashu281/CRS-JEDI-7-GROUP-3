@@ -9,10 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDaoOperation implements UserDaoInterface {
-    Connection connection = DBUtil.getConnection();
+
 
     @Override
     public void updatePassword(int userId, String password) {
+        Connection connection = DBUtil.getConnection();
         try {
             PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.UPDATE_PASSWORD);
             statement.setString(2, password);
@@ -26,11 +27,11 @@ public class UserDaoOperation implements UserDaoInterface {
         }
         finally
         {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                connection.close();
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
         }
 
     }
@@ -39,8 +40,10 @@ public class UserDaoOperation implements UserDaoInterface {
 
     @Override
     public boolean verifyCredentials(int userId, String password) {
+        Connection connection = DBUtil.getConnection();
         try
         {
+
             //open db connection
             PreparedStatement preparedStatement=connection.prepareStatement(SQLQueriesConstants.VERIFY_CREDENTIALS);
             preparedStatement.setInt(1,userId);
@@ -67,17 +70,18 @@ public class UserDaoOperation implements UserDaoInterface {
         }
         finally
         {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                connection.close();
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
         }
         return false;
     }
 
     @Override
     public String userType(int userId) {
+        Connection connection = DBUtil.getConnection();
         try {
             PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.GET_ROLE);
             statement.setInt(1, userId);
@@ -95,11 +99,11 @@ public class UserDaoOperation implements UserDaoInterface {
         }
         finally
         {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                connection.close();
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
         }
         return null;
     }

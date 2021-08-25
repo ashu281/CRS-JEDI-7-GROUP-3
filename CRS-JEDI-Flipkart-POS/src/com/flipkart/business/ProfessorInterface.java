@@ -2,6 +2,7 @@ package com.flipkart.business;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Student;
+import javafx.util.Pair;
 
 import java.util.List;
 
@@ -15,10 +16,10 @@ public interface ProfessorInterface {
     /**
      * Method for Professor to grade the student on course
      * @param studentId
-     * @param courseCode
+     * @param courseId
      * @param grade
      */
-    public void addGrade(int studentId, int courseCode, String grade);
+    public void addGrade(int studentId, int courseId, double grade);
 
     /**
      * Method for viewing enrolled students in a course
@@ -26,12 +27,12 @@ public interface ProfessorInterface {
      * @param courseCode
      * @return
      */
-    public List<Student> viewEnrolledStudents(int profId, int courseCode);
+    public List<String> viewEnrolledStudents(int courseId);
 
     /**
      * Method to view all courses taught by the professor
      * @param profId
      * @return
      */
-    public List<Course> getCourses(int profId);
+    public List<Pair<Integer,String>> getCourses(int profId);
 }

@@ -4,6 +4,7 @@ import com.flipkart.bean.Course;
 import com.flipkart.bean.Student;
 import com.flipkart.business.ProfessorInterface;
 import com.flipkart.business.ProfessorOperation;
+import javafx.util.Pair;
 
 import java.util.List;
 import java.util.Scanner;
@@ -58,7 +59,7 @@ public class CRSProfessorMenu {
      * @param profId
      */
     private void addGrade(int profId) {
-        String grade;
+        double grade;
         int studentId, courseId;
         System.out.println("-----Add Grade-----");
         System.out.println("StudentID:");
@@ -66,7 +67,7 @@ public class CRSProfessorMenu {
         System.out.println("Course Code:");
         courseId=sc.nextInt();
         System.out.println("Grade:");
-        grade=sc.next();
+        grade=sc.nextDouble();
         professorInterface.addGrade(studentId,courseId,grade);
     }
 
@@ -78,9 +79,9 @@ public class CRSProfessorMenu {
         System.out.println("-----Enrolled Students-----");
         System.out.println("Course Code:");
         int courseId=sc.nextInt();
-        List<Student> studentList =  professorInterface.viewEnrolledStudents(profId,courseId);
-        for(Student student: studentList) {
-            System.out.println(student.getStudentId() + "\t" + student.getName());
+        List<String> studentList =  professorInterface.viewEnrolledStudents(courseId);
+        for(String student: studentList) {
+            System.out.println(student);
         }
     }
 
@@ -89,9 +90,9 @@ public class CRSProfessorMenu {
      * @param profId
      */
     private void getCourses(int profId) {
-        List<Course> courseList = professorInterface.getCourses(profId);
-        for(Course course: courseList) {
-            System.out.println(course.getCourseID() + "\t" + course.getCourseName());
+        List<Pair<Integer,String>> courseList = professorInterface.getCourses(profId);
+        for(Pair<Integer,String>course: courseList) {
+            System.out.println(course);
         }
     }
 

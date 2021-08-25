@@ -2,6 +2,9 @@ package com.flipkart.business;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Student;
+import com.flipkart.dao.ProfessorDaoInterface;
+import com.flipkart.dao.ProfessorDaoOperation;
+import javafx.util.Pair;
 
 import java.util.List;
 
@@ -9,6 +12,7 @@ import java.util.List;
  * @author Abhinav
  */
 public class ProfessorOperation implements ProfessorInterface {
+    ProfessorDaoInterface professorDaoInterface = new ProfessorDaoOperation();
     /**
      * Method for Professor to grade the student on course
      * @param studentId
@@ -16,19 +20,19 @@ public class ProfessorOperation implements ProfessorInterface {
      * @param grade
      */
     @Override
-    public void addGrade(int studentId, int courseCode, String grade) {
-        return;
+    public void addGrade(int studentId, int courseCode, double grade) {
+
+        professorDaoInterface.addGrade(studentId,courseCode,grade);
     }
 
     /**
      * Method for viewing enrolled students in a course
-     * @param profId
-     * @param courseCode
-     * @return
+     * @param courseId
+     *
      */
     @Override
-    public List<Student> viewEnrolledStudents(int profId, int courseCode) {
-        return null;
+    public List<String> viewEnrolledStudents(int courseId) {
+        return professorDaoInterface.viewEnrolledStudents(courseId);
     }
 
     /**
@@ -37,7 +41,7 @@ public class ProfessorOperation implements ProfessorInterface {
      * @return
      */
     @Override
-    public List<Course> getCourses(int profId) {
-        return null;
+    public List<Pair<Integer,String>>  getCourses(int profId) {
+        return professorDaoInterface.getCourses(profId);
     }
 }

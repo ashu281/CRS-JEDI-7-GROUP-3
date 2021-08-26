@@ -8,6 +8,7 @@ import com.flipkart.dao.StudentDaoOperation;
 import com.flipkart.exception.CourseLimitExceedException;
 import com.flipkart.exception.CourseNotFoundException;
 import com.flipkart.exception.GradeNotAddedException;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
  */
 
 public class StudentOperation implements StudentInterface{
+    private static Logger logger = Logger.getLogger(StudentOperation.class);
 
     /**+
      * Method to register Student for courses
@@ -28,6 +30,8 @@ public class StudentOperation implements StudentInterface{
      */
     @Override
     public void register(String name, String password, String gender, String branch, int semester, String address) {
+        logger.info("register()");
+        logger.debug(name+" "+branch+" "+address);
         StudentDaoInterface studentDao = new StudentDaoOperation();
         studentDao.register(name, password, gender, branch, semester, address);
     }
@@ -39,6 +43,8 @@ public class StudentOperation implements StudentInterface{
      */
     @Override
     public boolean isApproved(int studentId) {
+        logger.info("isApproved()");
+        logger.debug(studentId);
         StudentDaoInterface studentDao = new StudentDaoOperation();
         return studentDao.isApproved(studentId);
     }
@@ -51,6 +57,8 @@ public class StudentOperation implements StudentInterface{
      */
     @Override
     public void makePayment(int studentID, int semester) {
+        logger.info("makePayment()");
+        logger.debug(studentID+" "+semester);
         StudentDaoInterface studentDao = new StudentDaoOperation();
         Notification paymentNotification = studentDao.makePayment(studentID, semester);
 
@@ -65,6 +73,8 @@ public class StudentOperation implements StudentInterface{
      */
     @Override
     public List<Course> getRegisteredCourses(int studentID) {
+        logger.info("getRegisteredCourses()");
+        logger.debug(studentID);
         StudentDaoInterface studentDao = new StudentDaoOperation();
         return studentDao.getRegisteredCourses(studentID);
     }
@@ -77,6 +87,8 @@ public class StudentOperation implements StudentInterface{
      */
     @Override
     public List<Course> getCourses(int semester) {
+        logger.info("getCourses()");
+        logger.debug(semester);
         StudentDaoInterface studentDao = new StudentDaoOperation();
         return studentDao.getCourses(semester);
     }
@@ -89,12 +101,15 @@ public class StudentOperation implements StudentInterface{
      */
     @Override
     public void addCourse(int courseId, int studentId) throws CourseNotFoundException, CourseLimitExceedException {
+        logger.info("addCourse()");
+        logger.debug(studentId+" "+courseId);
         StudentDaoInterface studentDao = new StudentDaoOperation();
         List<Course> selectedCourses = studentDao.getSelectedCourses(studentId);
         if(selectedCourses.size() >= 6){
             throw new CourseLimitExceedException(selectedCourses.size());
         }
         studentDao.addCourse(studentId, courseId);
+       // System.out.println("Course added successfully in opera");
     }
 
     /**
@@ -105,6 +120,8 @@ public class StudentOperation implements StudentInterface{
      */
     @Override
     public void dropCourse(int courseId, int studentId) throws CourseNotFoundException {
+        logger.info("dropCourse()");
+        logger.debug(studentId+" "+ courseId);
         StudentDaoInterface studentDao = new StudentDaoOperation();
         studentDao.dropCourse(studentId, courseId);
     }
@@ -129,12 +146,17 @@ public class StudentOperation implements StudentInterface{
      */
     @Override
     public void registerForCourses(int studentId) {
+//        logger.info("registerForCourses()");
+//        logger.debug(studentId);
         StudentDaoInterface studentDao = new StudentDaoOperation();
         List<Course> selectedCourses = studentDao.getSelectedCourses(studentId);
 
-        System.out.println("Selected Courses");
+        System.out.println("These are the selected Courses:");
+        System.out.println("-------------------------------");
+        System.out.printf("%-6s%20s\n","COURSE ID", "COURSE NAME");
         for(Course course: selectedCourses){
-            System.out.println(course.getCourseID() + " " + course.getCourseName());
+            System.out.printf("%-6d%15s\n",course.getCourseID(),course.getCourseName());
+            //System.out.println(course.getCourseID() + " " + course.getCourseName());
         }
 
         if(selectedCourses.size()<6){

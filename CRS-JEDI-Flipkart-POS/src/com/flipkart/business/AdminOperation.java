@@ -5,6 +5,7 @@ import com.flipkart.dao.AdminDaoInterface;
 import com.flipkart.dao.AdminDaoOperation;
 import com.flipkart.exception.CourseNotFoundException;
 import com.flipkart.exception.StudentNotFoundForApprovalException;
+import org.apache.log4j.Logger;
 
 /**
  * @author JEDI-07
@@ -13,6 +14,7 @@ import com.flipkart.exception.StudentNotFoundForApprovalException;
 
 
 public class AdminOperation implements AdminInterface {
+    private static Logger logger = Logger.getLogger(AdminOperation.class);
     /**
      *
      * Method to add a new professor
@@ -25,6 +27,8 @@ public class AdminOperation implements AdminInterface {
      */
     @Override
     public void addProfessor(String name, String gender, String password, String address, String designation, String department) {
+//        logger.info("addProfessor()");
+//        logger.debug(name+" "+gender+" "+address);
         AdminDaoInterface adminDaoInterface = new AdminDaoOperation();
         adminDaoInterface.addProfessor(name,gender,password,address,designation,department);
     }

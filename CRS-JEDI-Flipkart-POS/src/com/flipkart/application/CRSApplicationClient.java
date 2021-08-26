@@ -5,6 +5,7 @@ import com.flipkart.dao.*;
 import com.flipkart.exception.UserNotFoundException;
 import com.flipkart.utils.DBUtil;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -12,43 +13,43 @@ import java.util.Scanner;
  */
 public class CRSApplicationClient {
 
-    static boolean loggedin = false;
+    static boolean loggedIn = false;
     StudentInterface studentInterface= new StudentOperation();
     UserInterface userInterface = new UserOperation();
 
     public static void main(String[] args) {
-
-        // initialize database
-//        DummyDB.createDatabase();
-
 
         Scanner sc = new Scanner(System.in);
         CRSApplicationClient CRSApplicationClient=new CRSApplicationClient();
 
         showMainMenu();
 
-        int userInput;
-        userInput=sc.nextInt();
+        int userInput=0;
+        try {
+            userInput = sc.nextInt();
+        }
+        catch (InputMismatchException ex) {
+            System.out.println(ex.getMessage());
+        }
 
         while(userInput!=4)
         {
-            switch(userInput)
-            {
+            switch (userInput) {
+                // login
                 case 1:
-                    // login
                     CRSApplicationClient.loginUser();
                     break;
+                // student registration
                 case 2:
-                    // student registration
                     CRSApplicationClient.registerStudent();
                     break;
+                // update Password
                 case 3:
-                    // update Password
                     CRSApplicationClient.updatePassword();
                     break;
                 default:
-
                     System.out.println("Invalid input");
+                    break;
             }
             showMainMenu();
             userInput=sc.nextInt();
@@ -81,18 +82,25 @@ public class CRSApplicationClient {
         String password;
         int userId;
 
-        System.out.println("-----Login-----");
-        System.out.println("UserID:");
-        userId=sc.nextInt();
-        System.out.println("Password:");
-        password=sc.next();
+        try {
+            System.out.println("-----Login-----");
+            System.out.println("UserID:");
+            userId = sc.nextInt();
+            System.out.println("Password:");
+            password = sc.next();
+        }
+        catch(InputMismatchException ex) {
+            System.out.println(ex.getMessage());
+            return;
+        }
+
         try{
-            loggedin = userInterface.verifyCredentials(userId, password);
-            if(loggedin)
+            loggedIn = userInterface.verifyCredentials(userId, password);
+            if(loggedIn)
             {
 
                 String userType=userInterface.userType(userId);
-                switch(userType) {
+                switch (userType) {
                     case "A":
                         CRSAdminMenu adminMenu = new CRSAdminMenu();
                         adminMenu.showMenu();
@@ -102,7 +110,6 @@ public class CRSApplicationClient {
                         ProfessorDaoInterface professorDaoInterface = new ProfessorDaoOperation();
                         int profId = professorDaoInterface.getProfId(userId);
                         professorMenu.showMenu(profId);
-
                         break;
                     case "S":
                         StudentDaoOperation studentDaoOperation = new StudentDaoOperation();
@@ -114,7 +121,7 @@ public class CRSApplicationClient {
 
                         } else {
                             System.out.println("Administrator approval pending.");
-                            loggedin = false;
+                            loggedIn = false;
                         }
                         break;
                 }
@@ -137,25 +144,30 @@ public class CRSApplicationClient {
         Scanner sc=new Scanner(System.in);
 
         String name,password,branchName,gender,address;
-        int userId,semester;
+        int semester;
 
-        System.out.println();
-        System.out.println("-----Student Registration-----");
-        System.out.println("Name:");
-        name=sc.next();
-        System.out.println("Password:");
-        password=sc.next();
-        System.out.println("Gender:");
-        gender=sc.next();
-        System.out.println("Branch:");
-        branchName=sc.next();
-        System.out.println("Semester:");
-        semester=sc.nextInt();
-        sc.nextLine();
-        System.out.println("Address:");
-        address=sc.nextLine();
-        System.out.println();
-
+        try {
+            System.out.println();
+            System.out.println("-----Student Registration-----");
+            System.out.println("Name:");
+            name = sc.next();
+            System.out.println("Password:");
+            password = sc.next();
+            System.out.println("Gender:");
+            gender = sc.next();
+            System.out.println("Branch:");
+            branchName = sc.next();
+            System.out.println("Semester:");
+            semester = sc.nextInt();
+            sc.nextLine();
+            System.out.println("Address:");
+            address = sc.nextLine();
+            System.out.println();
+        }
+        catch(InputMismatchException ex) {
+            System.out.println(ex.getMessage());
+            return;
+        }
         studentInterface.register(name, password, gender, branchName, semester, address);
     }
 
@@ -168,15 +180,22 @@ public class CRSApplicationClient {
         String password;
         int userId;
 
-        System.out.println("-----Login-----");
-        System.out.println("UserID:");
-        userId=sc.nextInt();
-        System.out.println("Password:");
-        password=sc.next();
-        try{
-            loggedin = userInterface.verifyCredentials(userId, password);
+        try {
+            System.out.println("-----Login-----");
+            System.out.println("UserID:");
+            userId = sc.nextInt();
+            System.out.println("Password:");
+            password = sc.nextLine();
+        }
+        catch(InputMismatchException ex) {
+            System.out.println(ex.getMessage());
+            return;
+        }
 
-            if(loggedin) {
+        try{
+            loggedIn = userInterface.verifyCredentials(userId, password);
+
+            if(loggedIn) {
                 String newPassword;
 
                 System.out.println();

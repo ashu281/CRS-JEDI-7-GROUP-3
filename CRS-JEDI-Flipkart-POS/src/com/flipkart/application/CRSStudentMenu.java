@@ -8,10 +8,7 @@ import com.flipkart.exception.CourseLimitExceedException;
 import com.flipkart.exception.CourseNotFoundException;
 import com.flipkart.exception.GradeNotAddedException;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * @author Abhinav
@@ -26,56 +23,54 @@ public class CRSStudentMenu {
      * @param studentId
      */
     public void showMenu(int studentId) {
-        while (CRSApplicationClient.loggedin)
+        while (CRSApplicationClient.loggedIn)
         {
             System.out.println("-----Student Choices-----");
             System.out.println("1. Course Registration");
             System.out.println("2. Add Course");
             System.out.println("3. Drop Course");
-            System.out.println("4. View Course");
+            System.out.println("4. View Available Courses");
             System.out.println("5. View Registered Courses");
             System.out.println("6. View Grade Card");
             System.out.println("7. Make Payment");
             System.out.println("8. Logout");
             System.out.println("Enter choice:-");
 
-            int choice = sc.nextInt();
+            int choice=0;
+            try {
+                choice = sc.nextInt();
+            } catch(InputMismatchException ex) {
+                System.out.println(ex.getMessage());
+            }
+
             switch (choice) {
                 case 1:
                     registerCourses(studentId);
                     break;
-
                 case 2:
                     addCourse(studentId);
                     break;
-
                 case 3:
-
                     dropCourse(studentId);
                     break;
-
                 case 4:
                     viewCourse(studentId);
                     break;
-
                 case 5:
                     viewRegisteredCourse(studentId);
                     break;
-
                 case 6:
                     viewGradeCard(studentId);
                     break;
-
                 case 7:
                     makePayment(studentId);
                     break;
-
                 case 8:
-                    CRSApplicationClient.loggedin = false;
+                    CRSApplicationClient.loggedIn = false;
                     return;
-
                 default:
                     System.out.println("Invalid choice");
+                    break;
             }
         }
     }
@@ -87,7 +82,13 @@ public class CRSStudentMenu {
     private void makePayment(int studentId) {
         System.out.println("-----Make Payment-----");
         System.out.println("Semester:");
-        int semester=sc.nextInt();
+        int semester;
+        try {
+            semester = sc.nextInt();
+        } catch(InputMismatchException ex) {
+            System.out.println(ex.getMessage());
+            return;
+        }
         studentInterface.makePayment(studentId,semester);
     }
 
@@ -98,7 +99,13 @@ public class CRSStudentMenu {
     private void viewGradeCard(int studentId) {
         System.out.println("-----View Grade Card-----");
         System.out.println("Semester:");
-        int semester=sc.nextInt();
+        int semester;
+        try {
+            semester = sc.nextInt();
+        } catch(InputMismatchException ex) {
+            System.out.println(ex.getMessage());
+            return;
+        }
         try{
             Grade gradeCard = studentInterface.viewGradeCard(studentId,semester);
             HashMap <String, Double> grades = gradeCard.getGrades();
@@ -144,7 +151,13 @@ public class CRSStudentMenu {
         int courseId;
         System.out.println("-----Enrolled Students-----");
         System.out.println("Course Code:");
-        courseId=sc.nextInt();
+        try {
+            courseId = sc.nextInt();
+        } catch(InputMismatchException ex) {
+            System.out.println(ex.getMessage());
+            return;
+        }
+
         try{
             studentInterface.addCourse(courseId, studentId);
         }catch (CourseNotFoundException ex){
@@ -163,7 +176,13 @@ public class CRSStudentMenu {
         int courseId;
         System.out.println("-----Enrolled Students-----");
         System.out.println("Course Code:");
-        courseId=sc.nextInt();
+        try {
+            courseId = sc.nextInt();
+        } catch(InputMismatchException ex) {
+            System.out.println(ex.getMessage());
+            return;
+        }
+
         try {
             studentInterface.dropCourse(courseId, studentId);
         }catch (CourseNotFoundException ex){

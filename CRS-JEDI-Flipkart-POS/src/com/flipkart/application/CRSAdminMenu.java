@@ -5,6 +5,7 @@ import com.flipkart.business.AdminOperation;
 import com.flipkart.exception.CourseNotFoundException;
 import com.flipkart.exception.StudentNotFoundForApprovalException;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -19,7 +20,7 @@ public class CRSAdminMenu {
      * Method to Show the Admin Menu
      */
     public void showMenu() {
-        while(CRSApplicationClient.loggedin) {
+        while(CRSApplicationClient.loggedIn) {
             System.out.println("----------Welcome Admin----------");
             System.out.println("----------Admin Choices----------");
             System.out.println("1. Add course in catalog");
@@ -31,7 +32,12 @@ public class CRSAdminMenu {
             System.out.println("7. Logout");
             System.out.println("Enter choice:-");
 
-            int choice = scanner.nextInt();
+            int choice = 0;
+            try {
+                choice = scanner.nextInt();
+            } catch(InputMismatchException ex) {
+                System.out.println(ex.getMessage());
+            }
             switch (choice) {
                 case 1:
                     addCourse();
@@ -57,7 +63,7 @@ public class CRSAdminMenu {
                     break;
 
                 case 7:
-                    CRSApplicationClient.loggedin = false;
+                    CRSApplicationClient.loggedIn = false;
                     return;
 
                 default:
@@ -71,12 +77,17 @@ public class CRSAdminMenu {
      */
     private void approveCourse() {
         int studentId, courseId;
-        Scanner sc=new Scanner(System.in);
-        System.out.println("-----Course Approval-----");
-        System.out.println("StudentID:");
-        studentId = sc.nextInt();
-        System.out.println("CourseID:");
-        courseId = sc.nextInt();
+        Scanner sc = new Scanner(System.in);
+        try {
+            System.out.println("-----Course Approval-----");
+            System.out.println("StudentID:");
+            studentId = sc.nextInt();
+            System.out.println("CourseID:");
+            courseId = sc.nextInt();
+        } catch(InputMismatchException ex) {
+            System.out.println(ex.getMessage());
+            return;
+        }
         adminOperation.approveCourse(studentId,courseId);
     }
 
@@ -92,19 +103,24 @@ public class CRSAdminMenu {
         String address;
         Scanner sc=new Scanner(System.in);
 
-        System.out.println("-----Professor Registration-----");
-        System.out.println("Name:");
-        name=sc.nextLine();
-        System.out.println("Password:");
-        password=sc.next();
-        System.out.println("Gender:");
-        gender=sc.next();
-        System.out.println("Department:");
-        department=sc.nextLine();
-        System.out.println("Designation:");
-        designation=sc.nextLine();
-        System.out.println("Address:");
-        address=sc.nextLine();
+        try {
+            System.out.println("-----Professor Registration-----");
+            System.out.println("Name:");
+            name = sc.nextLine();
+            System.out.println("Password:");
+            password = sc.next();
+            System.out.println("Gender:");
+            gender = sc.next();
+            System.out.println("Department:");
+            department = sc.nextLine();
+            System.out.println("Designation:");
+            designation = sc.nextLine();
+            System.out.println("Address:");
+            address = sc.nextLine();
+        } catch(InputMismatchException ex) {
+            System.out.println(ex.getMessage());
+            return;
+        }
         adminOperation.addProfessor(name,gender,password,address,designation,department);
     }
 
@@ -113,8 +129,14 @@ public class CRSAdminMenu {
      */
     private void approveStudent() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("StudentID:");
-        int studentId = sc.nextInt();
+        int studentId;
+        try {
+            System.out.println("StudentID:");
+            studentId = sc.nextInt();
+        } catch(InputMismatchException ex) {
+            System.out.println(ex.getMessage());
+            return;
+        }
         try{
             adminOperation.approveStudent(studentId);
         }catch (StudentNotFoundForApprovalException ex){
@@ -128,8 +150,14 @@ public class CRSAdminMenu {
      */
     private void deleteCourse() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("CourseID:");
-        int courseId = sc.nextInt();
+        int courseId;
+        try {
+            System.out.println("CourseID:");
+            courseId = sc.nextInt();
+        } catch(InputMismatchException ex) {
+            System.out.println(ex.getMessage());
+            return;
+        }
         try {
             adminOperation.deleteCourse(courseId);
         }catch (CourseNotFoundException ex){
@@ -143,16 +171,21 @@ public class CRSAdminMenu {
     private void addCourse() {
         String courseName;
         int instructorId;
-        int semester, seatsAvailable=10;
+        int semester;
         Scanner sc=new Scanner(System.in);
 
-        System.out.println("-----Add Course-----");
-        System.out.println("Course Name:");
-        courseName=sc.nextLine();
-        System.out.println("ProfessorId:");
-        instructorId=sc.nextInt();
-        System.out.println("Semester:");
-        semester=sc.nextInt();
+        try {
+            System.out.println("-----Add Course-----");
+            System.out.println("Course Name:");
+            courseName = sc.nextLine();
+            System.out.println("ProfessorId:");
+            instructorId = sc.nextInt();
+            System.out.println("Semester:");
+            semester = sc.nextInt();
+        } catch(InputMismatchException ex) {
+            System.out.println(ex.getMessage());
+            return;
+        }
         adminOperation.addCourse(courseName, instructorId, semester);
     }
 

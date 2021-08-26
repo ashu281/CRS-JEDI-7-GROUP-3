@@ -1,11 +1,10 @@
 package com.flipkart.application;
 
-import com.flipkart.bean.Course;
-import com.flipkart.bean.Student;
 import com.flipkart.business.ProfessorInterface;
 import com.flipkart.business.ProfessorOperation;
 import javafx.util.Pair;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,8 +21,8 @@ public class CRSProfessorMenu {
      * @param profId
      */
     public void showMenu(int profId) {
-        int input;
-        while(CRSApplicationClient.loggedin)
+        int input=0;
+        while(CRSApplicationClient.loggedIn)
         {
             System.out.println("-----Professor Options-----");
             System.out.println("1. View Courses");
@@ -32,24 +31,28 @@ public class CRSProfessorMenu {
             System.out.println("4. Logout");
             System.out.println("Enter choice:-");
 
-            input=sc.nextInt();
-            switch(input)
-            {
+            try {
+                input = sc.nextInt();
+            } catch(InputMismatchException ex) {
+                System.out.println(ex.getMessage());
+            }
+
+            switch (input) {
                 case 1:
                     getCourses(profId);
                     break;
                 case 2:
                     viewEnrolledStudents(profId);
                     break;
-
                 case 3:
                     addGrade(profId);
                     break;
                 case 4:
-                    CRSApplicationClient.loggedin=false;
+                    CRSApplicationClient.loggedIn = false;
                     return;
                 default:
                     System.out.println("Invalid choice");
+                    break;
             }
         }
     }
@@ -61,13 +64,18 @@ public class CRSProfessorMenu {
     private void addGrade(int profId) {
         double grade;
         int studentId, courseId;
-        System.out.println("-----Add Grade-----");
-        System.out.println("StudentID:");
-        studentId=sc.nextInt();
-        System.out.println("Course Code:");
-        courseId=sc.nextInt();
-        System.out.println("Grade:");
-        grade=sc.nextDouble();
+        try {
+            System.out.println("-----Add Grade-----");
+            System.out.println("StudentID:");
+            studentId = sc.nextInt();
+            System.out.println("Course Code:");
+            courseId = sc.nextInt();
+            System.out.println("Grade:");
+            grade = sc.nextDouble();
+        } catch(InputMismatchException ex) {
+            System.out.println(ex.getMessage());
+            return;
+        }
         professorInterface.addGrade(studentId,courseId,grade);
     }
 
@@ -76,8 +84,14 @@ public class CRSProfessorMenu {
      * @param profId
      */
     private void viewEnrolledStudents(int profId) {
-        System.out.println("Course Code:");
-        int courseId=sc.nextInt();
+        int courseId;
+        try {
+            System.out.println("Course Code:");
+            courseId = sc.nextInt();
+        } catch(InputMismatchException ex) {
+            System.out.println(ex.getMessage());
+            return;
+        }
         System.out.println("-----Enrolled Students-----");
         List<String> studentList =  professorInterface.viewEnrolledStudents(courseId);
         for(String student: studentList) {

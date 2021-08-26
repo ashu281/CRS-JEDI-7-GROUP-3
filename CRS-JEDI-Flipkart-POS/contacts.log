@@ -30,3 +30,26 @@
 23:16:40,924  INFO AdminOperation,main:54 - Retrieving user type
 23:16:40,926  INFO StudentOperation,main:47 - isApproved()
 23:16:40,926 DEBUG StudentOperation,main:48 - 1
+01:11:02,177  INFO AdminOperation,main:36 - Verifying Credentials...
+01:11:02,430  INFO AdminOperation,main:54 - Retrieving user type
+01:11:02,432  INFO StudentOperation,main:49 - isApproved()
+01:11:02,433 DEBUG StudentOperation,main:50 - 1
+01:11:05,927  INFO StudentOperation,main:63 - makePayment()
+01:11:05,928 DEBUG StudentOperation,main:64 - 1 1
+01:11:05,980  INFO StudentOperation,main:68 - Payment Already Done
+01:11:58,536  INFO StudentOperation,main:36 - register()
+01:11:58,536 DEBUG StudentOperation,main:37 - PK CSE Delhi
+01:12:17,421  INFO AdminOperation,main:36 - Verifying Credentials...
+01:12:17,422  INFO AdminOperation,main:54 - Retrieving user type
+01:12:17,423  INFO StudentOperation,main:49 - isApproved()
+01:12:17,424 DEBUG StudentOperation,main:50 - 3
+01:12:24,991  INFO AdminOperation,main:36 - Verifying Credentials...
+01:12:24,993  INFO AdminOperation,main:54 - Retrieving user type
+01:12:44,205  INFO AdminDaoOperation,main:64 - Student successfully approved by ADMIN
+01:12:58,235  INFO AdminOperation,main:36 - Verifying Credentials...
+01:12:58,241  INFO AdminOperation,main:54 - Retrieving user type
+01:12:58,243  INFO StudentOperation,main:49 - isApproved()
+01:12:58,244 DEBUG StudentOperation,main:50 - 3
+01:13:07,377  INFO StudentOperation,main:63 - makePayment()
+01:13:07,378 DEBUG StudentOperation,main:64 - 3 1
+01:13:07,384  INFO StudentOperation,main:68 - Payment Approved

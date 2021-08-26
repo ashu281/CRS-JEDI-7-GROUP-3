@@ -29,7 +29,7 @@ public class StudentDaoOperation implements StudentDaoInterface{
 
             PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.ADD_USER_QUERY, generatedColumns);
             statement.setString(1,password);
-            statement.setString(2, "S");
+            statement.setString(2, "Student");
             statement.setString(3, name);
             statement.setString(4, address);
             statement.setString(5, gender);

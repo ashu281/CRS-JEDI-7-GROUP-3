@@ -113,19 +113,22 @@ public class CRSStudentMenu {
 
         Grade gradeCard = studentInterface.viewGradeCard(studentId,semester);
         HashMap <String, Double> grades = gradeCard.getGrades();
-        System.out.printf("%-6s%20s\n","COURSE NAME", "GRADE");
-        if(gradeCard!=null){
-            for (Map.Entry mapElement : grades.entrySet()) {
-                String courseName = (String) mapElement.getKey();
-                Double grade = (Double) mapElement.getValue();
-                System.out.printf("%-6s%27f\n",courseName, grade);
+        if(grades.size()>=6) {
+            System.out.printf("%-6s%20s\n", "COURSE NAME", "GRADE");
+            if (gradeCard != null) {
+                for (Map.Entry mapElement : grades.entrySet()) {
+                    String courseName = (String) mapElement.getKey();
+                    Double grade = (Double) mapElement.getValue();
+                    System.out.printf("%-6s%27f\n", courseName, grade);
+                }
+                GradecardInterface gradecardInterface = new GradecardOperation();
+                float cgpa = gradecardInterface.calculateCGPA(gradeCard);
+                System.out.println("CGPA: " + cgpa);
+                System.out.println();
             }
-            GradecardInterface gradecardInterface = new GradecardOperation();
-            float cgpa = gradecardInterface.calculateCGPA(gradeCard);
-            System.out.println("CGPA: "+cgpa);
-            System.out.println();
+        } else {
+            System.out.println("Semester not yet completed");
         }
-
     }
 
     /**

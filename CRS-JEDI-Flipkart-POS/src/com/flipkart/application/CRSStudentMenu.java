@@ -110,12 +110,14 @@ public class CRSStudentMenu {
         try{
             Grade gradeCard = studentInterface.viewGradeCard(studentId,semester);
             HashMap <String, Double> grades = gradeCard.getGrades();
+            System.out.printf("%-6s%20s\n","COURSE NAME", "GRADE");
 
             for (Map.Entry mapElement : grades.entrySet()) {
                 String courseName = (String) mapElement.getKey();
                 Double grade = (Double) mapElement.getValue();
 
-                System.out.println(courseName + " : " + grade);
+                //System.out.println(courseName + " : " + grade);
+                System.out.printf("%-6s%27f\n",courseName, grade);
             }
         }catch (GradeNotAddedException ex){
             System.out.println(ex.getMessage());
@@ -127,9 +129,15 @@ public class CRSStudentMenu {
      * @param studentId
      */
     private void viewRegisteredCourse(int studentId) {
+
         List<Course> courseList = studentInterface.getRegisteredCourses(studentId);
+        System.out.println("----------------------------------------------");
+        System.out.println("You have registered for the following courses:");
+        System.out.println("----------------------------------------------");
+        System.out.printf("%-6s%20s\n","COURSE_ID", "COURSE_NAME");
         for(Course course: courseList) {
-            System.out.println(course.getCourseID() + "\t" + course.getCourseName());
+            //System.out.println(course.getCourseID() + "\t" + course.getCourseName());
+            System.out.printf("%-6d%15s\n",course.getCourseID(), course.getCourseName());
         }
     }
 
@@ -139,8 +147,14 @@ public class CRSStudentMenu {
      */
     private void viewCourse(int studentId) {
         List<Course> courseList = studentInterface.getCourses(studentId);
+        System.out.println("------------------------------------------");
+        System.out.println("These are the following available courses:");
+        System.out.println("------------------------------------------");
+        System.out.printf("%-6s%20s\n","COURSE ID", "COURSE NAME");
         for(Course course: courseList) {
-            System.out.println(course.getCourseID() + "\t" + course.getCourseName());
+            System.out.printf("%-6d%15s\n",course.getCourseID(),course.getCourseName());
+            //System.out.println(course.getCourseID() + "\t" + course.getCourseName());
+
         }
     }
 
@@ -150,8 +164,9 @@ public class CRSStudentMenu {
      */
     private void addCourse(int studentId) {
         int courseId;
-        System.out.println("-----Enrolled Students-----");
-        System.out.println("Course Code:");
+        System.out.println("----------------------");
+        viewCourse(studentId);
+        System.out.println("Enter Course ID:");
         try {
             courseId = sc.nextInt();
             sc.nextLine();
@@ -162,6 +177,7 @@ public class CRSStudentMenu {
         }
         try{
             studentInterface.addCourse(courseId, studentId);
+
         }catch (CourseNotFoundException ex){
             System.out.println(ex.getMessage());
         }catch (CourseLimitExceedException ex){
@@ -176,8 +192,9 @@ public class CRSStudentMenu {
      */
     private void dropCourse(int studentId) {
         int courseId;
-        System.out.println("-----Enrolled Students-----");
-        System.out.println("Course Code:");
+        System.out.println("-----------------------");
+        viewRegisteredCourse(studentId);
+        System.out.println("Enter Course ID:");
         try {
             courseId = sc.nextInt();
             sc.nextLine();
@@ -189,6 +206,7 @@ public class CRSStudentMenu {
 
         try {
             studentInterface.dropCourse(courseId, studentId);
+            System.out.println("Course with course code : "+courseId+" deleted successfully!");
         }catch (CourseNotFoundException ex){
             System.out.println(ex.getMessage());
         }
@@ -201,5 +219,6 @@ public class CRSStudentMenu {
      */
     private void registerCourses(int studentId) {
         studentInterface.registerForCourses(studentId);
+
     }
 }

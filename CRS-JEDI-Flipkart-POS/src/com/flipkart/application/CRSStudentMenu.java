@@ -2,6 +2,8 @@ package com.flipkart.application;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Grade;
+import com.flipkart.business.GradecardInterface;
+import com.flipkart.business.GradecardOperation;
 import com.flipkart.business.StudentInterface;
 import com.flipkart.business.StudentOperation;
 import com.flipkart.constant.ConsoleColors;
@@ -118,6 +120,10 @@ public class CRSStudentMenu {
                 Double grade = (Double) mapElement.getValue();
                 System.out.printf("%-6s%27f\n",courseName, grade);
             }
+            GradecardInterface gradecardInterface = new GradecardOperation();
+            float cgpa = gradecardInterface.calculateCGPA(gradeCard);
+            System.out.println("CGPA: "+cgpa);
+            System.out.println();
         }
 
     }

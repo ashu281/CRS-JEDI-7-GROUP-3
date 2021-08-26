@@ -23,3 +23,10 @@
 21:59:25,770 DEBUG StudentOperation,main:168 - 1
 21:59:29,894  INFO StudentOperation,main:91 - getCourses()
 21:59:29,894 DEBUG StudentOperation,main:92 - 1
+23:14:13,091  INFO AdminOperation,main:36 - Verifying Credentials...
+23:14:13,226  INFO AdminOperation,main:54 - Retrieving user type
+23:14:36,541  INFO AdminDaoOperation,main:48 - Professor successfully added by ADMIN
+23:16:40,788  INFO AdminOperation,main:36 - Verifying Credentials...
+23:16:40,924  INFO AdminOperation,main:54 - Retrieving user type
+23:16:40,926  INFO StudentOperation,main:47 - isApproved()
+23:16:40,926 DEBUG StudentOperation,main:48 - 1

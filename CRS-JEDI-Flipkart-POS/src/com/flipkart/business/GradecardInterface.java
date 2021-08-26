@@ -1,5 +1,12 @@
 package com.flipkart.business;
 
+import com.flipkart.bean.Grade;
+
 public interface GradecardInterface {
-    public float calculateCGPA(int studentId);
+    /**
+     * Method to calculate CGPA
+     * @param grade
+     * @return
+     */
+    public float calculateCGPA(Grade grade);
 }

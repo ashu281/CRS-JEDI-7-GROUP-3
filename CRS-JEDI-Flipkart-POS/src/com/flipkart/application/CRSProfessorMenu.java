@@ -21,6 +21,7 @@ public class CRSProfessorMenu {
      * @param profId
      */
     public void showMenu(int profId) {
+        System.out.println("-----Welcome Professor-----");
         String input="0";
         while(CRSApplicationClient.loggedIn)
         {
@@ -64,8 +65,10 @@ public class CRSProfessorMenu {
             System.out.println("-----Add Grade-----");
             System.out.println("StudentID:");
             studentId = sc.nextInt();
+            sc.nextLine();
             System.out.println("Course Code:");
             courseId = sc.nextInt();
+            sc.nextLine();
             System.out.println("Grade:");
             grade = sc.nextDouble();
         } catch(InputMismatchException ex) {
@@ -85,6 +88,7 @@ public class CRSProfessorMenu {
         try {
             System.out.println("Course Code:");
             courseId = sc.nextInt();
+            sc.nextLine();
         } catch(InputMismatchException ex) {
             System.out.println("Course Code must contain only digits");
             System.out.println();

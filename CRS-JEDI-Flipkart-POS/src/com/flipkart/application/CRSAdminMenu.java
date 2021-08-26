@@ -20,8 +20,8 @@ public class CRSAdminMenu {
      * Method to Show the Admin Menu
      */
     public void showMenu() {
+        System.out.println("----------Welcome Admin----------");
         while(CRSApplicationClient.loggedIn) {
-            System.out.println("----------Welcome Admin----------");
             System.out.println("----------Admin Choices----------");
             System.out.println("1. Add course in catalog");
             System.out.println("2. Delete Course from catalog");
@@ -72,8 +72,10 @@ public class CRSAdminMenu {
             System.out.println("-----Course Approval-----");
             System.out.println("StudentID:");
             studentId = sc.nextInt();
+            sc.nextLine();
             System.out.println("CourseID:");
             courseId = sc.nextInt();
+            sc.nextLine();
         } catch(InputMismatchException ex) {
             System.out.println("Enter only digits in each field");
             System.out.println();
@@ -124,6 +126,7 @@ public class CRSAdminMenu {
         try {
             System.out.println("StudentID:");
             studentId = sc.nextInt();
+            sc.nextLine();
         } catch(InputMismatchException ex) {
             System.out.println("StudentID must contain only digits");
             System.out.println();
@@ -146,6 +149,7 @@ public class CRSAdminMenu {
         try {
             System.out.println("CourseID:");
             courseId = sc.nextInt();
+            sc.nextLine();
         } catch(InputMismatchException ex) {
             System.out.println("CourseID must contain only digits");
             return;
@@ -172,8 +176,10 @@ public class CRSAdminMenu {
             courseName = sc.nextLine();
             System.out.println("ProfessorId:");
             instructorId = sc.nextInt();
+            sc.nextLine();
             System.out.println("Semester:");
             semester = sc.nextInt();
+            sc.nextLine();
         } catch(InputMismatchException ex) {
             System.out.println("ProfessorID and Semester must contain only digits");
             return;

@@ -23,9 +23,10 @@ public class CRSStudentMenu {
      * @param studentId
      */
     public void showMenu(int studentId) {
+        System.out.println("--------Welcome Student--------");
         while (CRSApplicationClient.loggedIn)
         {
-            System.out.println("-----Student Choices-----");
+            System.out.println("--------Student Choices--------");
             System.out.println("1. Course Registration");
             System.out.println("2. Add Course");
             System.out.println("3. Drop Course");
@@ -81,6 +82,7 @@ public class CRSStudentMenu {
         int semester;
         try {
             semester = sc.nextInt();
+            sc.nextLine();
         } catch(InputMismatchException ex) {
             System.out.println("Semester must be a digit");
             System.out.println();
@@ -99,6 +101,7 @@ public class CRSStudentMenu {
         int semester;
         try {
             semester = sc.nextInt();
+            sc.nextLine();
         } catch(InputMismatchException ex) {
             System.out.println("Semester must be a digit");
             System.out.println();
@@ -151,6 +154,7 @@ public class CRSStudentMenu {
         System.out.println("Course Code:");
         try {
             courseId = sc.nextInt();
+            sc.nextLine();
         } catch(InputMismatchException ex) {
             System.out.println("Course Code must be a digit");
             System.out.println();
@@ -176,6 +180,7 @@ public class CRSStudentMenu {
         System.out.println("Course Code:");
         try {
             courseId = sc.nextInt();
+            sc.nextLine();
         } catch(InputMismatchException ex) {
             System.out.println("Course Code must be a digit");
             System.out.println();

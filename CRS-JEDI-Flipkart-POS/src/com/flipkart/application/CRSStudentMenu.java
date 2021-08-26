@@ -129,10 +129,14 @@ public class CRSStudentMenu {
     private void viewRegisteredCourse(int studentId) {
 
         List<Course> courseList = studentInterface.getRegisteredCourses(studentId);
+        if(courseList.size() == 0){
+            System.out.println("No courses found!");
+            return;
+        }
         System.out.println("----------------------------------------------");
         System.out.println("You have registered for the following courses:");
         System.out.println("----------------------------------------------");
-        System.out.printf("%-6s%20s\n","COURSE_ID", "COURSE_NAME");
+        System.out.printf("%-6s%20s\n","COURSE ID", "COURSE NAME");
         for(Course course: courseList) {
             //System.out.println(course.getCourseID() + "\t" + course.getCourseName());
             System.out.printf("%-6d%15s\n",course.getCourseID(), course.getCourseName());

@@ -1,0 +1,25 @@
+21:50:56,244  INFO AdminOperation,main:36 - Verifying Credentials...
+21:51:35,882  INFO AdminOperation,main:36 - Verifying Credentials...
+21:51:35,883  INFO AdminOperation,main:54 - Retrieving user type
+21:51:35,887  INFO StudentOperation,main:47 - isApproved()
+21:51:35,888 DEBUG StudentOperation,main:48 - 1
+21:51:41,672  INFO StudentOperation,main:91 - getCourses()
+21:51:41,673 DEBUG StudentOperation,main:92 - 1
+21:52:10,566  INFO AdminOperation,main:36 - Verifying Credentials...
+21:52:10,971  INFO AdminOperation,main:54 - Retrieving user type
+21:52:10,973  INFO StudentOperation,main:47 - isApproved()
+21:52:10,974 DEBUG StudentOperation,main:48 - 1
+21:52:14,037  INFO StudentOperation,main:77 - getRegisteredCourses()
+21:52:14,037 DEBUG StudentOperation,main:78 - 1
+21:55:24,832  INFO AdminOperation,main:36 - Verifying Credentials...
+21:55:25,236  INFO AdminOperation,main:54 - Retrieving user type
+21:55:25,238  INFO StudentOperation,main:47 - isApproved()
+21:55:25,238 DEBUG StudentOperation,main:48 - 1
+21:55:28,249  INFO StudentOperation,main:77 - getRegisteredCourses()
+21:55:28,250 DEBUG StudentOperation,main:78 - 1
+21:57:59,866  INFO StudentOperation,main:77 - getRegisteredCourses()
+21:57:59,866 DEBUG StudentOperation,main:78 - 1
+21:59:25,770  INFO StudentOperation,main:167 - registerForCourses()
+21:59:25,770 DEBUG StudentOperation,main:168 - 1
+21:59:29,894  INFO StudentOperation,main:91 - getCourses()
+21:59:29,894 DEBUG StudentOperation,main:92 - 1

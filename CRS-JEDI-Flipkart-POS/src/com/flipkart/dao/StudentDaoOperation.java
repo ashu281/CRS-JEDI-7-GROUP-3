@@ -131,8 +131,11 @@ public class StudentDaoOperation implements StudentDaoInterface{
         catch(SQLException e)
         {
             System.out.println(e.getMessage());
+            List<Course> empty_list = new ArrayList<>();
+            return empty_list;
+
         }
-        return null;
+
     }
 
     @Override

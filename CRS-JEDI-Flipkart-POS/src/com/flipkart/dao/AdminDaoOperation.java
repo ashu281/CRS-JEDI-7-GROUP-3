@@ -4,6 +4,7 @@ import com.flipkart.constant.SQLQueriesConstants;
 import com.flipkart.exception.CourseNotFoundException;
 import com.flipkart.exception.StudentNotFoundForApprovalException;
 import com.flipkart.utils.DBUtil;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,24 +13,27 @@ import java.sql.SQLException;
 
 public class AdminDaoOperation implements AdminDaoInterface {
 
+    private static Logger logger = Logger.getLogger(AdminDaoOperation.class);
+
     @Override
     public void addProfessor(String name, String gender, String password, String address, String designation, String department) {
+
 
         Connection connection = DBUtil.getConnection();
         try {
             int userId;
 
-            String generatedColumns[] = { "userId" };
+            String generatedColumns[] = {"userId"};
 
             PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.ADD_USER_QUERY, generatedColumns);
-            statement.setString(1,password);
+            statement.setString(1, password);
             statement.setString(2, "P");
             statement.setString(3, name);
             statement.setString(4, address);
             statement.setString(5, gender);
             statement.executeUpdate();
             ResultSet rs = statement.getGeneratedKeys();
-            if(rs.next()){
+            if (rs.next()) {
                 userId = rs.getInt(1);
 
                 statement = connection.prepareStatement(SQLQueriesConstants.ADD_PROFESSOR);
@@ -38,11 +42,10 @@ public class AdminDaoOperation implements AdminDaoInterface {
                 statement.setInt(1, userId);
                 statement.executeUpdate();
             }
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
         }
-        catch(SQLException e)
-        {
-            System.out.println(e.getMessage());
-        }
+        logger.info("Professor successfully added by ADMIN");
     }
 
     @Override
@@ -52,14 +55,13 @@ public class AdminDaoOperation implements AdminDaoInterface {
             PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.APPROVE_STUDENT);
             statement.setInt(1, studentId);
             int rows = statement.executeUpdate();
-            if(rows==0)
+            if (rows == 0)
                 throw new StudentNotFoundForApprovalException(studentId);
 
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
         }
-        catch(SQLException e)
-        {
-            System.out.println(e.getMessage());
-        }
+        logger.info("Student successfully approved by ADMIN");
 
     }
 
@@ -72,11 +74,10 @@ public class AdminDaoOperation implements AdminDaoInterface {
             statement.setInt(2, instructorID);
             statement.setInt(3, semester);
             statement.executeUpdate();
-        }
-        catch(SQLException e)
-        {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        logger.info("Course successfully added by ADMIN");
 
     }
 
@@ -87,14 +88,13 @@ public class AdminDaoOperation implements AdminDaoInterface {
             PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.DELETE_COURSE);
             statement.setInt(1, courseID);
             int rows = statement.executeUpdate();
-            if(rows==0){
+            if (rows == 0) {
                 throw new CourseNotFoundException(courseID);
             }
-        }
-        catch(SQLException e)
-        {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        logger.info("Course successfully deleted by ADMIN");
     }
 
     /**
@@ -111,10 +111,9 @@ public class AdminDaoOperation implements AdminDaoInterface {
             statement.setInt(1, studentId);
             statement.setInt(2, courseId);
             statement.executeUpdate();
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
         }
-        catch(SQLException e)
-        {
-            System.out.println(e.getMessage());
-        }
+        logger.info("Course successfully approved by ADMIN");
     }
 }

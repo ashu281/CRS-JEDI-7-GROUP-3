@@ -7,8 +7,6 @@ import com.flipkart.exception.UserNotFoundException;
  */
 public interface UserInterface {
 
-
-
     /**
      * Method to update password
      * @param userId
@@ -16,7 +14,13 @@ public interface UserInterface {
      */
     public void updatePassword(int userId, String password);
 
-
+    /**
+     * Method to verify credentials
+     * @param userId
+     * @param password
+     * @return
+     * @throws UserNotFoundException
+     */
     public boolean verifyCredentials(int userId, String password) throws UserNotFoundException;
 
     /**

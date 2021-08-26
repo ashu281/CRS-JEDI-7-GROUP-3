@@ -42,7 +42,7 @@ public class AdminOperation implements AdminInterface {
         AdminDaoInterface adminDaoInterface = new AdminDaoOperation();
         adminDaoInterface.approveStudent(studentId);
     }
-    
+
     /**
      * Method to add courses in the catalog
      *  @param courseName
@@ -54,7 +54,7 @@ public class AdminOperation implements AdminInterface {
         AdminDaoInterface adminDaoInterface = new AdminDaoOperation();
         adminDaoInterface.addCourse(courseName,instructorID,semester);
     }
-    
+
     /**
      * Method to delete courses in the catalog
      *

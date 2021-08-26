@@ -77,6 +77,8 @@ public class CRSProfessorMenu {
             return;
         }
         professorInterface.addGrade(studentId,courseId,grade);
+        System.out.println("Grade added successfully!");
+        System.out.println();
     }
 
     /**
@@ -94,11 +96,18 @@ public class CRSProfessorMenu {
             System.out.println();
             return;
         }
+
         System.out.println("-----Enrolled Students-----");
+        System.out.format("%-15s%-15s","STUDENT ID","STUDENT NAME");
+        System.out.println();
         List<String> studentList =  professorInterface.viewEnrolledStudents(courseId);
         for(String student: studentList) {
-            System.out.println(student);
+            String[] arrOfStr = student.split(":", 2);
+            System.out.format("%-15s%-15s",arrOfStr[0],arrOfStr[1]);
+            System.out.println();
         }
+
+        System.out.println();
     }
 
     /**
@@ -106,11 +115,15 @@ public class CRSProfessorMenu {
      * @param profId
      */
     private void getCourses(int profId) {
-        System.out.println("Courses for ProfessorID: "+profId);
+        System.out.println("-----Courses for ProfessorID: "+profId+" -----");
+        System.out.printf("%-10s%-15s","S.No","COURSE NAME");
+        System.out.println();
         List<Pair<Integer,String>> courseList = professorInterface.getCourses(profId);
         for(Pair<Integer,String>course: courseList) {
-            System.out.println(course);
+            System.out.format("%-10d%-15s",course.getKey(),course.getValue());
+            System.out.println();
         }
+        System.out.println();
     }
 
 }

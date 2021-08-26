@@ -7,8 +7,6 @@ import com.flipkart.exception.UserNotFoundException;
  */
 public interface UserInterface {
 
-
-
     /**
      * Method to update password
      * @param userId

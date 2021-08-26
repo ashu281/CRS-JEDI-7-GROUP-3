@@ -4,6 +4,7 @@ import com.flipkart.bean.Course;
 import com.flipkart.bean.Grade;
 import com.flipkart.business.StudentInterface;
 import com.flipkart.business.StudentOperation;
+import com.flipkart.constant.ConsoleColors;
 import com.flipkart.exception.CourseLimitExceedException;
 import com.flipkart.exception.CourseNotFoundException;
 import com.flipkart.exception.GradeNotAddedException;
@@ -110,11 +111,12 @@ public class CRSStudentMenu {
 
         Grade gradeCard = studentInterface.viewGradeCard(studentId,semester);
         HashMap <String, Double> grades = gradeCard.getGrades();
+        System.out.printf("%-6s%20s\n","COURSE NAME", "GRADE");
         if(gradeCard!=null){
             for (Map.Entry mapElement : grades.entrySet()) {
                 String courseName = (String) mapElement.getKey();
                 Double grade = (Double) mapElement.getValue();
-                System.out.println(courseName + " : " + grade);
+                System.out.printf("%-6s%27f\n",courseName, grade);
             }
         }
 
@@ -125,9 +127,15 @@ public class CRSStudentMenu {
      * @param studentId
      */
     private void viewRegisteredCourse(int studentId) {
+
         List<Course> courseList = studentInterface.getRegisteredCourses(studentId);
+        System.out.println("----------------------------------------------");
+        System.out.println("You have registered for the following courses:");
+        System.out.println("----------------------------------------------");
+        System.out.printf("%-6s%20s\n","COURSE_ID", "COURSE_NAME");
         for(Course course: courseList) {
-            System.out.println(course.getCourseID() + "\t" + course.getCourseName());
+            //System.out.println(course.getCourseID() + "\t" + course.getCourseName());
+            System.out.printf("%-6d%15s\n",course.getCourseID(), course.getCourseName());
         }
     }
 
@@ -137,8 +145,14 @@ public class CRSStudentMenu {
      */
     private void viewCourse(int studentId) {
         List<Course> courseList = studentInterface.getCourses(studentId);
+        System.out.println("------------------------------------------");
+        System.out.println("These are the following available courses:");
+        System.out.println("------------------------------------------");
+        System.out.printf("%-6s%20s\n","COURSE ID", "COURSE NAME");
         for(Course course: courseList) {
-            System.out.println(course.getCourseID() + "\t" + course.getCourseName());
+            System.out.printf("%-6d%15s\n",course.getCourseID(),course.getCourseName());
+            //System.out.println(course.getCourseID() + "\t" + course.getCourseName());
+
         }
     }
 
@@ -148,8 +162,9 @@ public class CRSStudentMenu {
      */
     private void addCourse(int studentId) {
         int courseId;
-        System.out.println("-----Enrolled Students-----");
-        System.out.println("Course Code:");
+        System.out.println("----------------------");
+        viewCourse(studentId);
+        System.out.println("Enter Course ID:");
         try {
             courseId = sc.nextInt();
             sc.nextLine();
@@ -161,7 +176,7 @@ public class CRSStudentMenu {
         try{
             studentInterface.addCourse(courseId, studentId);
         }catch (CourseLimitExceedException ex){
-            System.out.println(ex.getMessage());
+            System.out.println(ConsoleColors.RED+ex.getMessage()+ConsoleColors.RESET);
         }
 
     }
@@ -172,8 +187,9 @@ public class CRSStudentMenu {
      */
     private void dropCourse(int studentId) {
         int courseId;
-        System.out.println("-----Enrolled Students-----");
-        System.out.println("Course Code:");
+        System.out.println("-----------------------");
+        viewRegisteredCourse(studentId);
+        System.out.println("Enter Course ID:");
         try {
             courseId = sc.nextInt();
             sc.nextLine();
@@ -182,7 +198,6 @@ public class CRSStudentMenu {
             System.out.println();
             return;
         }
-
         studentInterface.dropCourse(courseId, studentId);
 
 
@@ -194,5 +209,6 @@ public class CRSStudentMenu {
      */
     private void registerCourses(int studentId) {
         studentInterface.registerForCourses(studentId);
+
     }
 }

@@ -179,6 +179,9 @@ public class StudentDaoOperation implements StudentDaoInterface{
             if(rows == 0){
                 throw new CourseNotFoundException(courseId);
             }
+            else{
+                System.out.println("Course added successfully !");
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -191,13 +194,14 @@ public class StudentDaoOperation implements StudentDaoInterface{
         try{
             PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.STUDENT_DROP_COURSE);
 
-            statement.setInt(1, studentId);
-            statement.setInt(2, courseId);
+            statement.setInt(2, studentId);
+            statement.setInt(1, courseId);
 
             int rows = statement.executeUpdate();
             if(rows == 0){
                 throw new CourseNotFoundException(courseId);
             }
+
         }
         catch(SQLException e)
         {

@@ -24,8 +24,9 @@ public class CRSAdminMenu {
             System.out.println("2. Delete Course from catalog");
             System.out.println("3. Approve Student Registration");
             System.out.println("4. Add Professor");
-            System.out.println("5. Generate Report Card");
-            System.out.println("6. Logout");
+            System.out.println("5. Approve Student Courses");
+            System.out.println("6. Generate Report Card");
+            System.out.println("7. Logout");
             System.out.println("Enter choice:-");
 
             int choice = scanner.nextInt();
@@ -47,10 +48,13 @@ public class CRSAdminMenu {
                     break;
 
                 case 5:
+                    approveCourse();
+
+                case 6:
                     generateReportCard();
                     break;
 
-                case 6:
+                case 7:
                     CRSApplicationClient.loggedin = false;
                     return;
 
@@ -61,10 +65,23 @@ public class CRSAdminMenu {
     }
 
     /**
+     * Method to approve student's course
+     */
+    private void approveCourse() {
+        int studentId, courseId;
+        Scanner sc=new Scanner(System.in);
+        System.out.println("-----Course Approval-----");
+        System.out.println("StudentID:");
+        studentId = sc.nextInt();
+        System.out.println("CourseID:");
+        courseId = sc.nextInt();
+        adminOperation.approveCourse(studentId,courseId);
+    }
+
+    /**
      * Method to Add a professor into the system
      */
     private void addProfessor() {
-        int userId;
         String name;
         String password;
         String gender;
@@ -113,7 +130,6 @@ public class CRSAdminMenu {
      * Method to Add course to catalogue
      */
     private void addCourse() {
-        int courseId;
         String courseName;
         int instructorId;
         int semester, seatsAvailable=10;

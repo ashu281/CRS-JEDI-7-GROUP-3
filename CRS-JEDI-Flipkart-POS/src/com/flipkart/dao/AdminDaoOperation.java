@@ -88,4 +88,25 @@ public class AdminDaoOperation implements AdminDaoInterface {
             System.out.println(e.getMessage());
         }
     }
+
+    /**
+     * Method to approve student's course
+     *
+     * @param studentId
+     * @param courseId
+     */
+    @Override
+    public void approveCourse(int studentId, int courseId) {
+        Connection connection = DBUtil.getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.APPROVE_COURSE);
+            statement.setInt(1, studentId);
+            statement.setInt(2, courseId);
+            statement.executeUpdate();
+        }
+        catch(SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
 }

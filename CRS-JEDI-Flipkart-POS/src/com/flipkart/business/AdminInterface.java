@@ -41,5 +41,11 @@ public interface AdminInterface {
 	 * Method to generate students' grade card
 	 */
 	public void generateGradeCard();
-	
+
+	/**
+	 * Method to approve student's selected course
+	 * @param studentId
+	 * @param courseId
+	 */
+    void approveCourse(int studentId, int courseId);
 }

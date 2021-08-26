@@ -18,7 +18,7 @@ public class SQLQueriesConstants {
       public static final String APPROVE_STUDENT = "update student set isApproved = 1 where studentId = ?";
       public static final String ADD_USER_QUERY = "insert into user(password,role,name,address,gender) values (?, ?, ?, ?,?)";
       public static final String ADD_PROFESSOR = "insert into professor(userId,department, designation) values (?, ?, ?)";
-
+      public static final String APPROVE_COURSE = "update student_reg_course set isApproved = 1 where studentId = ? and courseId = ?";
       public static final String ADD_STUDENT="insert into student (branch,semester,userId) values (?,?,?)";
 
 

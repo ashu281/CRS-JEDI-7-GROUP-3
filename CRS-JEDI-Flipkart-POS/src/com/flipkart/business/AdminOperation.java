@@ -64,4 +64,16 @@ public class AdminOperation implements AdminInterface {
     public void generateGradeCard() {
 
     }
+
+    /**
+     * Method to approve student's selected course
+     *
+     * @param studentId
+     * @param courseId
+     */
+    @Override
+    public void approveCourse(int studentId, int courseId) {
+        AdminDaoInterface adminDaoInterface = new AdminDaoOperation();
+        adminDaoInterface.approveCourse(studentId,courseId);
+    }
 }

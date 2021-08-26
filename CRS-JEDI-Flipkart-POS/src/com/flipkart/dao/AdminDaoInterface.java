@@ -23,5 +23,10 @@ public interface AdminDaoInterface {
      */
     public void deleteCourse(int courseID);
 
-
+    /**
+     * Method to approve student's course
+     * @param studentId
+     * @param courseId
+     */
+    void approveCourse(int studentId, int courseId);
 }

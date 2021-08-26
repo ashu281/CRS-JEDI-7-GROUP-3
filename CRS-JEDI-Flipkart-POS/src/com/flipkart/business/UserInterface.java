@@ -1,5 +1,7 @@
 package com.flipkart.business;
 
+import com.flipkart.exception.UserNotFoundException;
+
 /**
  * @author Sarthak
  */
@@ -15,7 +17,7 @@ public interface UserInterface {
     public void updatePassword(int userId, String password);
 
 
-    public boolean verifyCredentials(int userId, String password);
+    public boolean verifyCredentials(int userId, String password) throws UserNotFoundException;
 
     /**
      * Method to return User Role

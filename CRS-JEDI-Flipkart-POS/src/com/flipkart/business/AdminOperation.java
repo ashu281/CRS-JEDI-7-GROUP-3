@@ -3,6 +3,7 @@ package com.flipkart.business;
 
 import com.flipkart.dao.AdminDaoInterface;
 import com.flipkart.dao.AdminDaoOperation;
+import com.flipkart.exception.StudentNotFoundForApprovalException;
 
 /**
  * @author JEDI-07
@@ -32,7 +33,7 @@ public class AdminOperation implements AdminInterface {
      * @param studentId
      */
     @Override
-    public void approveStudent(int studentId) {
+    public void approveStudent(int studentId)throws StudentNotFoundForApprovalException {
         AdminDaoInterface adminDaoInterface = new AdminDaoOperation();
         adminDaoInterface.approveStudent(studentId);
     }

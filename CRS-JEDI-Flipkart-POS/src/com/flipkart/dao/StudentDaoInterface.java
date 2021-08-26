@@ -3,6 +3,8 @@ package com.flipkart.dao;
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Grade;
 import com.flipkart.bean.Notification;
+import com.flipkart.exception.CourseNotFoundException;
+import com.flipkart.exception.GradeNotAddedException;
 
 import java.util.List;
 
@@ -23,7 +25,7 @@ public interface StudentDaoInterface {
      * @param semester
      * @return Grade Card
      */
-    Grade viewGradeCard(int studentId, int semester);
+    Grade viewGradeCard(int studentId, int semester) throws GradeNotAddedException;
 
     /**+
      * Method to check Approval status of Student
@@ -56,13 +58,13 @@ public interface StudentDaoInterface {
      * Method to add course
      * @param courseId
      */
-    void addCourse(int studentId, int courseId);
+    void addCourse(int studentId, int courseId) throws CourseNotFoundException;
 
     /**
      * Method to drop course
      * @param courseId
      */
-    void dropCourse(int studentId, int courseId);
+    void dropCourse(int studentId, int courseId) throws CourseNotFoundException;
 
     int getStudentId(int userId);
 

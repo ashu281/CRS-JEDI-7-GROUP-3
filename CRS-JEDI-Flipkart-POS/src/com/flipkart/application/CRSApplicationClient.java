@@ -2,6 +2,7 @@ package com.flipkart.application;
 
 import com.flipkart.business.*;
 import com.flipkart.dao.*;
+import com.flipkart.exception.UserNotFoundException;
 import com.flipkart.utils.DBUtil;
 
 import java.util.Scanner;
@@ -85,45 +86,47 @@ public class CRSApplicationClient {
         userId=sc.nextInt();
         System.out.println("Password:");
         password=sc.next();
+        try{
+            loggedin = userInterface.verifyCredentials(userId, password);
+            if(loggedin)
+            {
 
-        loggedin = userInterface.verifyCredentials(userId, password);
+                String userType=userInterface.userType(userId);
+                switch(userType) {
+                    case "A":
+                        CRSAdminMenu adminMenu = new CRSAdminMenu();
+                        adminMenu.showMenu();
+                        break;
+                    case "P":
+                        CRSProfessorMenu professorMenu = new CRSProfessorMenu();
+                        ProfessorDaoInterface professorDaoInterface = new ProfessorDaoOperation();
+                        int profId = professorDaoInterface.getProfId(userId);
+                        professorMenu.showMenu(profId);
 
-        if(loggedin)
-        {
+                        break;
+                    case "S":
+                        StudentDaoOperation studentDaoOperation = new StudentDaoOperation();
+                        int studentId = studentDaoOperation.getStudentId(userId);
+                        boolean isApproved = studentInterface.isApproved(studentId);
+                        if (isApproved) {
+                            CRSStudentMenu studentMenu = new CRSStudentMenu();
+                            studentMenu.showMenu(studentId);
 
-            String userType=userInterface.userType(userId);
-            switch(userType) {
-                case "A":
-                    CRSAdminMenu adminMenu = new CRSAdminMenu();
-                    adminMenu.showMenu();
-                    break;
-                case "P":
-                    CRSProfessorMenu professorMenu = new CRSProfessorMenu();
-                    ProfessorDaoInterface professorDaoInterface = new ProfessorDaoOperation();
-                    int profId = professorDaoInterface.getProfId(userId);
-                    professorMenu.showMenu(profId);
-
-                    break;
-                case "S":
-                    StudentDaoOperation studentDaoOperation = new StudentDaoOperation();
-                    int studentId = studentDaoOperation.getStudentId(userId);
-                    boolean isApproved = studentInterface.isApproved(studentId);
-                    if (isApproved) {
-                        CRSStudentMenu studentMenu = new CRSStudentMenu();
-                        studentMenu.showMenu(studentId);
-
-                    } else {
-                        System.out.println("Administrator approval pending.");
-                        loggedin = false;
-                    }
-                    break;
+                        } else {
+                            System.out.println("Administrator approval pending.");
+                            loggedin = false;
+                        }
+                        break;
+                }
             }
+            else
+            {
+                System.out.println("Invalid Credentials");
+            }
+        }catch (UserNotFoundException ex){
+            System.out.println(ex.getMessage());
         }
-        else
-        {
-            System.out.println("Invalid Credentials");
-        }
-        System.out.println();
+
     }
 
     /**
@@ -170,22 +173,26 @@ public class CRSApplicationClient {
         userId=sc.nextInt();
         System.out.println("Password:");
         password=sc.next();
+        try{
+            loggedin = userInterface.verifyCredentials(userId, password);
 
-        loggedin = userInterface.verifyCredentials(userId, password);
+            if(loggedin) {
+                String newPassword;
 
-        if(loggedin) {
-            String newPassword;
-
-            System.out.println();
-            System.out.println("-----Update Password-----");
-            System.out.println("New Password:");
-            newPassword = sc.next();
-            userInterface.updatePassword(userId, newPassword);
-            System.out.println("Password updated successfully.");
-            System.out.println();
+                System.out.println();
+                System.out.println("-----Update Password-----");
+                System.out.println("New Password:");
+                newPassword = sc.next();
+                userInterface.updatePassword(userId, newPassword);
+                System.out.println("Password updated successfully.");
+                System.out.println();
+            }
+            else {
+                System.out.println("Invalid Credentials");
+            }
+        }catch (UserNotFoundException ex){
+            System.out.println(ex.getMessage());
         }
-        else {
-            System.out.println("Invalid Credentials");
-        }
+
     }
 }

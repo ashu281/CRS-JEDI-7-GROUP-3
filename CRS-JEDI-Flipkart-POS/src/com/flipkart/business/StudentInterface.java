@@ -2,6 +2,9 @@ package com.flipkart.business;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Grade;
+import com.flipkart.exception.CourseLimitExceedException;
+import com.flipkart.exception.CourseNotFoundException;
+import com.flipkart.exception.GradeNotAddedException;
 
 import java.util.List;
 
@@ -28,7 +31,7 @@ public interface StudentInterface {
      * @param semester
      * @return Grade Card
      */
-    Grade viewGradeCard(int studentId, int semester);
+    Grade viewGradeCard(int studentId, int semester) throws GradeNotAddedException;
 
     /**+
      * Method to check Approval status of Student
@@ -63,14 +66,14 @@ public interface StudentInterface {
      * @param courseId
      * @param studentId
      */
-    void addCourse(int courseId, int studentId);
+    void addCourse(int courseId, int studentId) throws CourseNotFoundException, CourseLimitExceedException;
 
     /**
      * Method to drop course
      * @param courseId
      * @param studentId
      */
-    void dropCourse(int courseId, int studentId);
+    void dropCourse(int courseId, int studentId) throws CourseNotFoundException;
 
     void registerForCourses(int studentId);
 }

@@ -1,5 +1,7 @@
 package com.flipkart.business;
 
+import com.flipkart.exception.StudentNotFoundForApprovalException;
+
 /**
  *
  * @author JEDI-07
@@ -24,7 +26,7 @@ public interface AdminInterface {
 	 * Method to approve a student
 	 * @param studentId
 	 */
-	public void approveStudent(int studentId);
+	public void approveStudent(int studentId) throws StudentNotFoundForApprovalException;
 
 	/**
 	 * Method to add courses in the catalog

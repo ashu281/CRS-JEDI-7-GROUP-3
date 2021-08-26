@@ -1,6 +1,7 @@
 package com.flipkart.dao;
 
 import com.flipkart.constant.SQLQueriesConstants;
+import com.flipkart.exception.UserNotFoundException;
 import com.flipkart.utils.DBUtil;
 
 import java.sql.Connection;
@@ -39,7 +40,7 @@ public class UserDaoOperation implements UserDaoInterface {
 
 
     @Override
-    public boolean verifyCredentials(int userId, String password) {
+    public boolean verifyCredentials(int userId, String password) throws UserNotFoundException {
         Connection connection = DBUtil.getConnection();
         try
         {
@@ -49,8 +50,7 @@ public class UserDaoOperation implements UserDaoInterface {
             preparedStatement.setInt(1,userId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if(!resultSet.next()){
-                System.out.println("Error fetching details!");
-                return false;
+                throw new UserNotFoundException(userId);
             }
 
             else if(password.equals(resultSet.getString("password")))

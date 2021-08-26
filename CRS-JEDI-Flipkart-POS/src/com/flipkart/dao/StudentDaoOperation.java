@@ -4,6 +4,8 @@ import com.flipkart.bean.Course;
 import com.flipkart.bean.Grade;
 import com.flipkart.bean.Notification;
 import com.flipkart.constant.SQLQueriesConstants;
+import com.flipkart.exception.CourseNotFoundException;
+import com.flipkart.exception.GradeNotAddedException;
 import com.flipkart.utils.DBUtil;
 
 import java.sql.Connection;
@@ -49,7 +51,7 @@ public class StudentDaoOperation implements StudentDaoInterface{
     }
 
     @Override
-    public Grade viewGradeCard(int studentId, int semester) {
+    public Grade viewGradeCard(int studentId, int semester) throws GradeNotAddedException {
         Connection connection=DBUtil.getConnection();
         HashMap<String, Double> grades =new HashMap<>();
 
@@ -62,6 +64,9 @@ public class StudentDaoOperation implements StudentDaoInterface{
             ResultSet results=statement.executeQuery();
             while(results.next())
             {
+                if(results.getDouble("grade") == -1){
+                    throw new GradeNotAddedException(studentId);
+                }
                 grades.put(results.getString("courseName"), results.getDouble("grade"));
             }
             return new Grade(studentId, grades);
@@ -161,7 +166,7 @@ public class StudentDaoOperation implements StudentDaoInterface{
     }
 
     @Override
-    public void addCourse(int studentId, int courseId) {
+    public void addCourse(int studentId, int courseId) throws CourseNotFoundException {
         Connection connection = DBUtil.getConnection();
 
         try {
@@ -170,14 +175,17 @@ public class StudentDaoOperation implements StudentDaoInterface{
             statement.setInt(1, studentId);
             statement.setInt(2, courseId);
 
-            statement.executeUpdate();
+            int rows = statement.executeUpdate();
+            if(rows == 0){
+                throw new CourseNotFoundException(courseId);
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
     @Override
-    public void dropCourse(int studentId, int courseId) {
+    public void dropCourse(int studentId, int courseId) throws CourseNotFoundException {
         Connection connection=DBUtil.getConnection();
 
         try{
@@ -186,7 +194,10 @@ public class StudentDaoOperation implements StudentDaoInterface{
             statement.setInt(1, studentId);
             statement.setInt(2, courseId);
 
-            statement.executeUpdate();
+            int rows = statement.executeUpdate();
+            if(rows == 0){
+                throw new CourseNotFoundException(courseId);
+            }
         }
         catch(SQLException e)
         {

@@ -2,6 +2,7 @@ package com.flipkart.application;
 
 import com.flipkart.business.AdminInterface;
 import com.flipkart.business.AdminOperation;
+import com.flipkart.exception.StudentNotFoundForApprovalException;
 
 import java.util.Scanner;
 
@@ -113,7 +114,12 @@ public class CRSAdminMenu {
         Scanner sc = new Scanner(System.in);
         System.out.println("StudentID:");
         int studentId = sc.nextInt();
-        adminOperation.approveStudent(studentId);
+        try{
+            adminOperation.approveStudent(studentId);
+        }catch (StudentNotFoundForApprovalException ex){
+            System.out.println(ex.getMessage());
+        }
+
     }
 
     /**

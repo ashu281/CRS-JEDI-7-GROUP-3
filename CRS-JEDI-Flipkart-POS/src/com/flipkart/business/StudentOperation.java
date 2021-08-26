@@ -5,6 +5,9 @@ import com.flipkart.bean.Grade;
 import com.flipkart.bean.Notification;
 import com.flipkart.dao.StudentDaoInterface;
 import com.flipkart.dao.StudentDaoOperation;
+import com.flipkart.exception.CourseLimitExceedException;
+import com.flipkart.exception.CourseNotFoundException;
+import com.flipkart.exception.GradeNotAddedException;
 
 import java.util.List;
 
@@ -85,8 +88,12 @@ public class StudentOperation implements StudentInterface{
      * @param studentId
      */
     @Override
-    public void addCourse(int courseId, int studentId) {
+    public void addCourse(int courseId, int studentId) throws CourseNotFoundException, CourseLimitExceedException {
         StudentDaoInterface studentDao = new StudentDaoOperation();
+        List<Course> selectedCourses = studentDao.getSelectedCourses(studentId);
+        if(selectedCourses.size() >= 6){
+            throw new CourseLimitExceedException(selectedCourses.size());
+        }
         studentDao.addCourse(studentId, courseId);
     }
 
@@ -97,7 +104,7 @@ public class StudentOperation implements StudentInterface{
      * @param studentId
      */
     @Override
-    public void dropCourse(int courseId, int studentId) {
+    public void dropCourse(int courseId, int studentId) throws CourseNotFoundException {
         StudentDaoInterface studentDao = new StudentDaoOperation();
         studentDao.dropCourse(studentId, courseId);
     }
@@ -111,7 +118,7 @@ public class StudentOperation implements StudentInterface{
      * @return grade card
      */
     @Override
-    public Grade viewGradeCard(int studentID, int semester) {
+    public Grade viewGradeCard(int studentID, int semester) throws GradeNotAddedException {
         StudentDaoInterface studentDao = new StudentDaoOperation();
         return studentDao.viewGradeCard(studentID, semester);
     }

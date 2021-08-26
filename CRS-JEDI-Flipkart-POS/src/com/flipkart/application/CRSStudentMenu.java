@@ -4,6 +4,9 @@ import com.flipkart.bean.Course;
 import com.flipkart.bean.Grade;
 import com.flipkart.business.StudentInterface;
 import com.flipkart.business.StudentOperation;
+import com.flipkart.exception.CourseLimitExceedException;
+import com.flipkart.exception.CourseNotFoundException;
+import com.flipkart.exception.GradeNotAddedException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -96,14 +99,18 @@ public class CRSStudentMenu {
         System.out.println("-----View Grade Card-----");
         System.out.println("Semester:");
         int semester=sc.nextInt();
-        Grade gradeCard = studentInterface.viewGradeCard(studentId,semester);
-        HashMap <String, Double> grades = gradeCard.getGrades();
+        try{
+            Grade gradeCard = studentInterface.viewGradeCard(studentId,semester);
+            HashMap <String, Double> grades = gradeCard.getGrades();
 
-        for (Map.Entry mapElement : grades.entrySet()) {
-            String courseName = (String) mapElement.getKey();
-            Double grade = (Double) mapElement.getValue();
+            for (Map.Entry mapElement : grades.entrySet()) {
+                String courseName = (String) mapElement.getKey();
+                Double grade = (Double) mapElement.getValue();
 
-            System.out.println(courseName + " : " + grade);
+                System.out.println(courseName + " : " + grade);
+            }
+        }catch (GradeNotAddedException ex){
+            System.out.println(ex.getMessage());
         }
     }
 
@@ -138,7 +145,14 @@ public class CRSStudentMenu {
         System.out.println("-----Enrolled Students-----");
         System.out.println("Course Code:");
         courseId=sc.nextInt();
-        studentInterface.addCourse(courseId, studentId);
+        try{
+            studentInterface.addCourse(courseId, studentId);
+        }catch (CourseNotFoundException ex){
+            System.out.println(ex.getMessage());
+        }catch (CourseLimitExceedException ex){
+            System.out.println(ex.getMessage());
+        }
+
     }
 
     /**
@@ -150,7 +164,12 @@ public class CRSStudentMenu {
         System.out.println("-----Enrolled Students-----");
         System.out.println("Course Code:");
         courseId=sc.nextInt();
-        studentInterface.dropCourse(courseId, studentId);
+        try {
+            studentInterface.dropCourse(courseId, studentId);
+        }catch (CourseNotFoundException ex){
+            System.out.println(ex.getMessage());
+        }
+
     }
 
     /**

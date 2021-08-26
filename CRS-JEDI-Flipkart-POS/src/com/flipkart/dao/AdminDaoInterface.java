@@ -1,5 +1,7 @@
 package com.flipkart.dao;
 
+import com.flipkart.exception.StudentNotFoundForApprovalException;
+
 public interface AdminDaoInterface {
 
     /**
@@ -11,7 +13,7 @@ public interface AdminDaoInterface {
     /**
      * Method to approve a student
      */
-    public void approveStudent(int studentId);
+    public void approveStudent(int studentId) throws StudentNotFoundForApprovalException;
 
     /**
      * Method to add courses in the catalog

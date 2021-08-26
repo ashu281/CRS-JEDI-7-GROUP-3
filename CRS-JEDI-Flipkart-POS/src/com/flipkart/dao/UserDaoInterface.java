@@ -1,5 +1,7 @@
 package com.flipkart.dao;
 
+import com.flipkart.exception.UserNotFoundException;
+
 public interface UserDaoInterface {
 
     /**
@@ -16,7 +18,7 @@ public interface UserDaoInterface {
      * @param password
      * @return
      */
-    public boolean verifyCredentials(int userId, String password);
+    public boolean verifyCredentials(int userId, String password) throws UserNotFoundException;
 
     /**
      * Method to return User Role

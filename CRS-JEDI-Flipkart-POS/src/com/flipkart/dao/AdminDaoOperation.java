@@ -1,6 +1,7 @@
 package com.flipkart.dao;
 
 import com.flipkart.constant.SQLQueriesConstants;
+import com.flipkart.exception.StudentNotFoundForApprovalException;
 import com.flipkart.utils.DBUtil;
 
 import java.sql.Connection;
@@ -44,12 +45,15 @@ public class AdminDaoOperation implements AdminDaoInterface {
     }
 
     @Override
-    public void approveStudent(int studentId) {
+    public void approveStudent(int studentId) throws StudentNotFoundForApprovalException {
         Connection connection = DBUtil.getConnection();
         try {
             PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.APPROVE_STUDENT);
             statement.setInt(1, studentId);
-            statement.executeUpdate();
+            int rows = statement.executeUpdate();
+            if(rows==0)
+                throw new StudentNotFoundForApprovalException(studentId);
+
         }
         catch(SQLException e)
         {

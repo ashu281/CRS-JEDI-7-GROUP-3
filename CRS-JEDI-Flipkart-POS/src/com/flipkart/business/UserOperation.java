@@ -3,6 +3,7 @@ package com.flipkart.business;
 import com.flipkart.dao.UserDaoInterface;
 import com.flipkart.dao.UserDaoOperation;
 import com.flipkart.exception.UserNotFoundException;
+import org.apache.log4j.Logger;
 
 /**
  * @author Sarthak
@@ -10,7 +11,7 @@ import com.flipkart.exception.UserNotFoundException;
 public class UserOperation implements UserInterface {
 
     UserDaoInterface userDaoInterface = new UserDaoOperation();
-
+    private static Logger logger = Logger.getLogger(AdminOperation.class);
 
     /**
      * Method to update password
@@ -19,9 +20,8 @@ public class UserOperation implements UserInterface {
      */
     @Override
     public void updatePassword(int userId, String password) {
-
+        logger.info("Updating password...");
         userDaoInterface.updatePassword(userId,password);
-
     }
 
     /**
@@ -32,9 +32,8 @@ public class UserOperation implements UserInterface {
      */
     @Override
     public boolean verifyCredentials(int userId, String password) throws UserNotFoundException {
-
+        logger.info("Verifying Credentials...");
         return userDaoInterface.verifyCredentials(userId,password);
-//        return DummyDB.userList.containsKey(userId) && DummyDB.userList.get(userId).getPassword().equals(password);
     }
 
     /**
@@ -44,6 +43,7 @@ public class UserOperation implements UserInterface {
      */
     @Override
     public String userType(int userId) {
+        logger.info("Retrieving user type");
         return userDaoInterface.userType(userId);
     }
 }

@@ -173,7 +173,10 @@ public class CRSStudentMenu {
     private void addCourse(int studentId) {
         int courseId;
         System.out.println("----------------------");
-        viewCourse(studentId);
+        System.out.println("Enter Semester:");
+        int semester = sc.nextInt();
+        sc.nextLine();
+        viewCourse(semester);
         System.out.println("Enter Course ID:");
         try {
             courseId = sc.nextInt();

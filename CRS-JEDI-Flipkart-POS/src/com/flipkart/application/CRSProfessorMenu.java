@@ -71,6 +71,7 @@ public class CRSProfessorMenu {
             sc.nextLine();
             System.out.println("Grade:");
             grade = sc.nextDouble();
+            sc.nextLine();
         } catch(InputMismatchException ex) {
             System.out.println("Please enter only digits");
             System.out.println();

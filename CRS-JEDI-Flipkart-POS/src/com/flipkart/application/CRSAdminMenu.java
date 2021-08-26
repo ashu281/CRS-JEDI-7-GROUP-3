@@ -52,6 +52,7 @@ public class CRSAdminMenu {
 
                 case "5":
                     approveCourse();
+                    break;
 
                 case "6":
                     CRSApplicationClient.loggedIn = false;

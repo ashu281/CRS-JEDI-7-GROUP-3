@@ -26,7 +26,7 @@ public class Admin extends User{
 
 	/**
 	 * Method to set Admin ID
-	 * @param Admin ID
+	 * @param adminID
 	 */
 
 	public void setAdminID(int adminID) {

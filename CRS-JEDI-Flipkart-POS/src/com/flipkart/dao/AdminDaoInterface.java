@@ -1,5 +1,6 @@
 package com.flipkart.dao;
 
+import com.flipkart.exception.CourseNotFoundException;
 import com.flipkart.exception.StudentNotFoundForApprovalException;
 
 public interface AdminDaoInterface {
@@ -23,7 +24,7 @@ public interface AdminDaoInterface {
     /**
      * Method to delete courses in the catalog
      */
-    public void deleteCourse(int courseID);
+    public void deleteCourse(int courseID) throws CourseNotFoundException;
 
     /**
      * Method to approve student's course

@@ -2,6 +2,7 @@ package com.flipkart.application;
 
 import com.flipkart.business.AdminInterface;
 import com.flipkart.business.AdminOperation;
+import com.flipkart.exception.CourseNotFoundException;
 import com.flipkart.exception.StudentNotFoundForApprovalException;
 
 import java.util.Scanner;
@@ -129,7 +130,11 @@ public class CRSAdminMenu {
         Scanner sc = new Scanner(System.in);
         System.out.println("CourseID:");
         int courseId = sc.nextInt();
-        adminOperation.deleteCourse(courseId);
+        try {
+            adminOperation.deleteCourse(courseId);
+        }catch (CourseNotFoundException ex){
+            System.out.println(ex.getMessage());
+        }
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.flipkart.dao;
 
 import com.flipkart.constant.SQLQueriesConstants;
+import com.flipkart.exception.CourseNotFoundException;
 import com.flipkart.exception.StudentNotFoundForApprovalException;
 import com.flipkart.utils.DBUtil;
 
@@ -80,12 +81,15 @@ public class AdminDaoOperation implements AdminDaoInterface {
     }
 
     @Override
-    public void deleteCourse(int courseID) {
+    public void deleteCourse(int courseID) throws CourseNotFoundException {
         Connection connection = DBUtil.getConnection();
         try {
             PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.DELETE_COURSE);
             statement.setInt(1, courseID);
-            statement.executeUpdate();
+            int rows = statement.executeUpdate();
+            if(rows==0){
+                throw new CourseNotFoundException(courseID);
+            }
         }
         catch(SQLException e)
         {

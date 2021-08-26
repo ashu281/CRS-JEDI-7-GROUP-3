@@ -1,5 +1,6 @@
 package com.flipkart.business;
 
+import com.flipkart.exception.CourseNotFoundException;
 import com.flipkart.exception.StudentNotFoundForApprovalException;
 
 /**
@@ -37,7 +38,7 @@ public interface AdminInterface {
 	 * Method to delete courses in the catalog
 	 * @param courseID
 	 */
-	public void deleteCourse(int courseID);
+	public void deleteCourse(int courseID) throws CourseNotFoundException;
 
 	/**
 	 * Method to generate students' grade card

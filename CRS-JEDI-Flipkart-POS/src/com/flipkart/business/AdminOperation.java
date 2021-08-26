@@ -3,6 +3,7 @@ package com.flipkart.business;
 
 import com.flipkart.dao.AdminDaoInterface;
 import com.flipkart.dao.AdminDaoOperation;
+import com.flipkart.exception.CourseNotFoundException;
 import com.flipkart.exception.StudentNotFoundForApprovalException;
 
 /**
@@ -56,7 +57,7 @@ public class AdminOperation implements AdminInterface {
      * @param courseID
      */
     @Override
-    public void deleteCourse(int courseID) {
+    public void deleteCourse(int courseID) throws CourseNotFoundException {
         AdminDaoInterface adminDaoInterface = new AdminDaoOperation();
         adminDaoInterface.deleteCourse(courseID);
     }

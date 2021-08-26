@@ -132,11 +132,8 @@ public class CRSAdminMenu {
             System.out.println();
             return;
         }
-        try{
-            adminOperation.approveStudent(studentId);
-        }catch (StudentNotFoundForApprovalException ex){
-            System.out.println(ex.getMessage());
-        }
+        adminOperation.approveStudent(studentId);
+
 
     }
 
@@ -154,11 +151,7 @@ public class CRSAdminMenu {
             System.out.println("CourseID must contain only digits");
             return;
         }
-        try {
-            adminOperation.deleteCourse(courseId);
-        }catch (CourseNotFoundException ex){
-            System.out.println(ex.getMessage());
-        }
+        adminOperation.deleteCourse(courseId);
     }
 
     /**

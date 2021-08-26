@@ -31,7 +31,7 @@ public interface StudentInterface {
      * @param semester
      * @return Grade Card
      */
-    Grade viewGradeCard(int studentId, int semester) throws GradeNotAddedException;
+    Grade viewGradeCard(int studentId, int semester);
 
     /**+
      * Method to check Approval status of Student
@@ -66,14 +66,14 @@ public interface StudentInterface {
      * @param courseId
      * @param studentId
      */
-    void addCourse(int courseId, int studentId) throws CourseNotFoundException, CourseLimitExceedException;
+    void addCourse(int courseId, int studentId) throws CourseLimitExceedException;
 
     /**
      * Method to drop course
      * @param courseId
      * @param studentId
      */
-    void dropCourse(int courseId, int studentId) throws CourseNotFoundException;
+    void dropCourse(int courseId, int studentId);
 
     void registerForCourses(int studentId);
 }

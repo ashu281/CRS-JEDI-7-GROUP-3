@@ -94,7 +94,6 @@ public class CRSApplicationClient {
             return;
         }
 
-        try{
             loggedIn = userInterface.verifyCredentials(userId, password);
             if(loggedIn)
             {
@@ -130,9 +129,7 @@ public class CRSApplicationClient {
             {
                 System.out.println("Invalid Credentials");
             }
-        }catch (UserNotFoundException ex){
-            System.out.println(ex.getMessage());
-        }
+
 
     }
 
@@ -194,8 +191,6 @@ public class CRSApplicationClient {
             System.out.println();
             return;
         }
-
-        try{
             loggedIn = userInterface.verifyCredentials(userId, password);
 
             if(loggedIn) {
@@ -212,9 +207,7 @@ public class CRSApplicationClient {
             else {
                 System.out.println("Invalid Credentials");
             }
-        }catch (UserNotFoundException ex){
-            System.out.println(ex.getMessage());
-        }
+
 
     }
 }

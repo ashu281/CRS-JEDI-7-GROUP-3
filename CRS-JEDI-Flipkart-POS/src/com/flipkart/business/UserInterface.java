@@ -17,7 +17,7 @@ public interface UserInterface {
     public void updatePassword(int userId, String password);
 
 
-    public boolean verifyCredentials(int userId, String password) throws UserNotFoundException;
+    public boolean verifyCredentials(int userId, String password);
 
     /**
      * Method to return User Role

@@ -1,5 +1,6 @@
 package com.flipkart.business;
 
+import com.flipkart.constant.ConsoleColors;
 import com.flipkart.dao.UserDaoInterface;
 import com.flipkart.dao.UserDaoOperation;
 import com.flipkart.exception.UserNotFoundException;
@@ -31,9 +32,15 @@ public class UserOperation implements UserInterface {
      * @return
      */
     @Override
-    public boolean verifyCredentials(int userId, String password) throws UserNotFoundException {
+    public boolean verifyCredentials(int userId, String password){
 
-        return userDaoInterface.verifyCredentials(userId,password);
+        try{
+            return userDaoInterface.verifyCredentials(userId,password);
+        }catch (UserNotFoundException ex){
+            System.out.println(ConsoleColors.RED+ex.getMessage()+ConsoleColors.RESET);
+            return false;
+        }
+
 //        return DummyDB.userList.containsKey(userId) && DummyDB.userList.get(userId).getPassword().equals(password);
     }
 

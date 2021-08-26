@@ -107,19 +107,17 @@ public class CRSStudentMenu {
             System.out.println();
             return;
         }
-        try{
-            Grade gradeCard = studentInterface.viewGradeCard(studentId,semester);
-            HashMap <String, Double> grades = gradeCard.getGrades();
 
+        Grade gradeCard = studentInterface.viewGradeCard(studentId,semester);
+        HashMap <String, Double> grades = gradeCard.getGrades();
+        if(gradeCard!=null){
             for (Map.Entry mapElement : grades.entrySet()) {
                 String courseName = (String) mapElement.getKey();
                 Double grade = (Double) mapElement.getValue();
-
                 System.out.println(courseName + " : " + grade);
             }
-        }catch (GradeNotAddedException ex){
-            System.out.println(ex.getMessage());
         }
+
     }
 
     /**
@@ -162,8 +160,6 @@ public class CRSStudentMenu {
         }
         try{
             studentInterface.addCourse(courseId, studentId);
-        }catch (CourseNotFoundException ex){
-            System.out.println(ex.getMessage());
         }catch (CourseLimitExceedException ex){
             System.out.println(ex.getMessage());
         }
@@ -187,11 +183,8 @@ public class CRSStudentMenu {
             return;
         }
 
-        try {
-            studentInterface.dropCourse(courseId, studentId);
-        }catch (CourseNotFoundException ex){
-            System.out.println(ex.getMessage());
-        }
+        studentInterface.dropCourse(courseId, studentId);
+
 
     }
 

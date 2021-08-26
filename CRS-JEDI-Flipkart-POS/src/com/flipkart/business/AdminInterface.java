@@ -27,7 +27,7 @@ public interface AdminInterface {
 	 * Method to approve a student
 	 * @param studentId
 	 */
-	public void approveStudent(int studentId) throws StudentNotFoundForApprovalException;
+	public void approveStudent(int studentId);
 
 	/**
 	 * Method to add courses in the catalog
@@ -38,7 +38,7 @@ public interface AdminInterface {
 	 * Method to delete courses in the catalog
 	 * @param courseID
 	 */
-	public void deleteCourse(int courseID) throws CourseNotFoundException;
+	public void deleteCourse(int courseID);
 
 	/**
 	 * Method to approve student's selected course

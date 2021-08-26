@@ -1,6 +1,7 @@
 package com.flipkart.business;
 
 
+import com.flipkart.constant.ConsoleColors;
 import com.flipkart.dao.AdminDaoInterface;
 import com.flipkart.dao.AdminDaoOperation;
 import com.flipkart.exception.CourseNotFoundException;
@@ -38,9 +39,14 @@ public class AdminOperation implements AdminInterface {
      * @param studentId
      */
     @Override
-    public void approveStudent(int studentId)throws StudentNotFoundForApprovalException {
+    public void approveStudent(int studentId) {
         AdminDaoInterface adminDaoInterface = new AdminDaoOperation();
-        adminDaoInterface.approveStudent(studentId);
+        try{
+            adminDaoInterface.approveStudent(studentId);
+        }catch (StudentNotFoundForApprovalException ex){
+            System.out.println(ConsoleColors.RED+ex.getMessage()+ConsoleColors.RESET);
+        }
+
     }
 
     /**
@@ -61,9 +67,14 @@ public class AdminOperation implements AdminInterface {
      * @param courseID
      */
     @Override
-    public void deleteCourse(int courseID) throws CourseNotFoundException {
+    public void deleteCourse(int courseID) {
         AdminDaoInterface adminDaoInterface = new AdminDaoOperation();
-        adminDaoInterface.deleteCourse(courseID);
+        try{
+            adminDaoInterface.deleteCourse(courseID);
+        }catch (CourseNotFoundException ex){
+            System.out.println(ConsoleColors.RED+ex.getMessage()+ConsoleColors.RESET);
+        }
+
     }
 
     /**

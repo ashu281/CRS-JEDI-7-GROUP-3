@@ -3,6 +3,7 @@ package com.flipkart.business;
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Grade;
 import com.flipkart.bean.Notification;
+import com.flipkart.constant.ConsoleColors;
 import com.flipkart.dao.StudentDaoInterface;
 import com.flipkart.dao.StudentDaoOperation;
 import com.flipkart.exception.CourseLimitExceedException;
@@ -88,13 +89,19 @@ public class StudentOperation implements StudentInterface{
      * @param studentId
      */
     @Override
-    public void addCourse(int courseId, int studentId) throws CourseNotFoundException, CourseLimitExceedException {
+    public void addCourse(int courseId, int studentId) throws CourseLimitExceedException {
         StudentDaoInterface studentDao = new StudentDaoOperation();
         List<Course> selectedCourses = studentDao.getSelectedCourses(studentId);
         if(selectedCourses.size() >= 6){
             throw new CourseLimitExceedException(selectedCourses.size());
         }
-        studentDao.addCourse(studentId, courseId);
+        try{
+            studentDao.addCourse(studentId, courseId);
+        }catch (CourseNotFoundException ex){
+            System.out.println(ConsoleColors.RED+ex.getMessage()+ConsoleColors.RESET);
+
+        }
+
     }
 
     /**
@@ -104,9 +111,14 @@ public class StudentOperation implements StudentInterface{
      * @param studentId
      */
     @Override
-    public void dropCourse(int courseId, int studentId) throws CourseNotFoundException {
+    public void dropCourse(int courseId, int studentId) {
         StudentDaoInterface studentDao = new StudentDaoOperation();
-        studentDao.dropCourse(studentId, courseId);
+        try{
+            studentDao.dropCourse(studentId, courseId);
+        }catch (CourseNotFoundException ex){
+            System.out.println(ConsoleColors.RED+ex.getMessage()+ConsoleColors.RESET);
+        }
+
     }
 
 
@@ -118,9 +130,15 @@ public class StudentOperation implements StudentInterface{
      * @return grade card
      */
     @Override
-    public Grade viewGradeCard(int studentID, int semester) throws GradeNotAddedException {
+    public Grade viewGradeCard(int studentID, int semester) {
         StudentDaoInterface studentDao = new StudentDaoOperation();
-        return studentDao.viewGradeCard(studentID, semester);
+        try{
+            return studentDao.viewGradeCard(studentID, semester);
+        }catch (GradeNotAddedException ex){
+            System.out.println(ConsoleColors.RED+ex.getMessage()+ConsoleColors.RESET);
+            return null;
+        }
+
     }
 
     /**+

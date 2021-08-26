@@ -30,11 +30,15 @@ public class SQLQueriesConstants {
     public static final String STUDENT_ADD_COURSE="insert into registration (studentId,courseId) values ( ? , ?)";
     public static final String STUDENT_DROP_COURSE = "delete from registration where courseId = ? AND studentId = ?;";
     public static final String VIEW_GRADE = "select * from registration inner join course on course.courseId = registration.courseId where studentId = ? AND isApproved = 1 AND semester = ?;";
+    public static final String MAKE_PAYMENT = "update student set feesPaid=1 where studentId=?";
+    public static final String CHECK_PAYMENT = "select feesPaid from student where studentId=?";
 
-      // Professor Queries
+    // Professor Queries
     public static final String ADD_GRADE="update registration set grade=? where courseId=? and studentId=?";
     public static final String GET_COURSES="select * from course where profId=?";
     public static final String GET_PROFID="select profId from professor where userId = ?";
     public  static  final  String GET_ENROLLED_STUDENTS = "select registration.studentId,student.userId,user.name from registration join student on student.studentId = registration.studentId join user on user.userId = student.userId where courseId = ?";
 
+    // Notification Query
+    public static final String SAVE_NOTIFICATION="insert into notification (paymentId,notification,timestamp,studentId) values (?,?,?,?)";
 }

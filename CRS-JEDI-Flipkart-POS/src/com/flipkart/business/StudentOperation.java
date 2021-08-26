@@ -4,6 +4,8 @@ import com.flipkart.bean.Course;
 import com.flipkart.bean.Grade;
 import com.flipkart.bean.Notification;
 import com.flipkart.constant.ConsoleColors;
+import com.flipkart.dao.NotificationDaoInterface;
+import com.flipkart.dao.NotificationDaoOperation;
 import com.flipkart.dao.StudentDaoInterface;
 import com.flipkart.dao.StudentDaoOperation;
 import com.flipkart.exception.CourseLimitExceedException;
@@ -61,9 +63,13 @@ public class StudentOperation implements StudentInterface{
         logger.info("makePayment()");
         logger.debug(studentID+" "+semester);
         StudentDaoInterface studentDao = new StudentDaoOperation();
-        Notification paymentNotification = studentDao.makePayment(studentID, semester);
+        Notification notification = studentDao.makePayment(studentID, semester);
 
-        System.out.println("Notification: "+ paymentNotification.getNotificationMessage());
+        logger.info(notification.getNotificationMessage());
+
+        NotificationDaoInterface notificationDao = new NotificationDaoOperation();
+        notificationDao.saveNotification(notification);
+
     }
 
     /**
@@ -164,8 +170,8 @@ public class StudentOperation implements StudentInterface{
      */
     @Override
     public void registerForCourses(int studentId) {
-       logger.info("registerForCourses()");
-       logger.debug(studentId);
+        logger.info("registerForCourses()");
+        logger.debug(studentId);
         StudentDaoInterface studentDao = new StudentDaoOperation();
         List<Course> selectedCourses = studentDao.getSelectedCourses(studentId);
 

@@ -1,32 +1,25 @@
 package com.flipkart.bean;
 
+import java.time.LocalDateTime;
+
 public class Notification {
 
-    float refID;
-    int paymentID;
-    int studentID;
+    long paymentId;
+    int studentId;
+    LocalDateTime timestamp;
     String notificationMessage;
 
-    public Notification(String s) {
-        this.notificationMessage = s;
+    public Notification(int studentId, String notificationMessage, long paymentId){
+        this(studentId, notificationMessage);
+        this.paymentId = paymentId;
     }
-
-    /**
-     * Method to get reference ID
-     *
-     * @return reference ID
-     */
-    public float getRefID() {
-        return refID;
+    public Notification(int studentId, String notificationMessage){
+        this(notificationMessage);
+        this.studentId = studentId;
     }
-
-    /**
-     * Method to set reference ID
-     *
-     * @param refID
-     */
-    public void setRefID(float refID) {
-        this.refID = refID;
+    public Notification(String notificationMessage) {
+        this.notificationMessage = notificationMessage;
+        this.timestamp = LocalDateTime.now();
     }
 
     /**
@@ -34,35 +27,35 @@ public class Notification {
      *
      * @return payment ID
      */
-    public int getPaymentID() {
-        return paymentID;
+    public long getPaymentId() {
+        return paymentId;
     }
 
     /**
      * Method to set payment ID
      *
-     * @param paymentID
+     * @param paymentId
      */
-    public void setPaymentID(int paymentID) {
-        this.paymentID = paymentID;
+    public void setPaymentId(long paymentId) {
+        this.paymentId = paymentId;
     }
 
     /**
      * Method to get student ID
      *
-     * @return student ID
+     * @return user ID
      */
-    public int getStudentID() {
-        return studentID;
+    public int getStudentId() {
+        return studentId;
     }
 
     /**
      * Method to set student ID
      *
-     * @param studentID
+     * @param studentId
      */
-    public void setStudentID(int studentID) {
-        this.studentID = studentID;
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
     }
 
     /**
@@ -81,5 +74,13 @@ public class Notification {
      */
     public void setNotificationMessage(String notificationMessage) {
         this.notificationMessage = notificationMessage;
+    }
+
+    /**+
+     * Method to get timestamp of the notification
+     * @return Timestamp
+     */
+    public LocalDateTime getTimestamp() {
+        return timestamp;
     }
 }

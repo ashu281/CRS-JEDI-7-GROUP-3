@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -99,10 +100,53 @@ public class StudentDaoOperation implements StudentDaoInterface{
         return false;
     }
 
+    public boolean checkPayment(int studentId){
+        Connection connection=DBUtil.getConnection();
+
+        try{
+            PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.CHECK_PAYMENT);
+            statement.setInt(1, studentId);
+
+            ResultSet result = statement.executeQuery();
+
+            if(result.next()){
+                return result.getBoolean("feesPaid");
+            }
+        }catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
     @Override
     public Notification makePayment(int studentId, int semester) {
+        Connection connection=DBUtil.getConnection();
 
-        return new Notification("Payment Approved");    // TODO
+        Notification notification;
+
+        try{
+            boolean feesPaid = checkPayment(studentId);
+
+            if(feesPaid){
+                notification = new Notification(studentId, "Payment Already Done");
+            }else{
+
+                PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.MAKE_PAYMENT);
+                statement.setInt(1, studentId);
+
+                statement.executeUpdate();
+
+                long paymentId = Instant.now().toEpochMilli();
+                notification = new Notification(studentId,"Payment Approved", paymentId);
+
+            }
+            return notification;
+
+        }catch(SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+        return null;
     }
 
     @Override
@@ -124,7 +168,7 @@ public class StudentDaoOperation implements StudentDaoInterface{
                         results.getString("courseName"),
                         results.getInt("profId"),
                         results.getInt("semester")
-                        ));
+                ));
             }
             return registered_courses;
         }

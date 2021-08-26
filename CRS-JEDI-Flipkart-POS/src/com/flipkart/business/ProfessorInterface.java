@@ -23,8 +23,7 @@ public interface ProfessorInterface {
 
     /**
      * Method for viewing enrolled students in a course
-     * @param profId
-     * @param courseCode
+     * @param courseId
      * @return
      */
     public List<String> viewEnrolledStudents(int courseId);

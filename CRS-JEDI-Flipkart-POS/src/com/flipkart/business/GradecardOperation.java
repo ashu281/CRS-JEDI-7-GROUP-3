@@ -26,6 +26,7 @@ public class GradecardOperation implements GradecardInterface{
             logger.error("Student has no courses");
             cgpa = 0;
         }
+        grade.setCGPA((float)cgpa);
         return (float)cgpa;
     }
 }

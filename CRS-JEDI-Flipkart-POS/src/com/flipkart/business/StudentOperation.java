@@ -109,7 +109,7 @@ public class StudentOperation implements StudentInterface{
             throw new CourseLimitExceedException(selectedCourses.size());
         }
         studentDao.addCourse(studentId, courseId);
-       // System.out.println("Course added successfully in opera");
+
     }
 
     /**

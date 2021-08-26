@@ -21,7 +21,7 @@ public class CRSProfessorMenu {
      * @param profId
      */
     public void showMenu(int profId) {
-        int input=0;
+        String input="0";
         while(CRSApplicationClient.loggedIn)
         {
             System.out.println("-----Professor Options-----");
@@ -31,23 +31,19 @@ public class CRSProfessorMenu {
             System.out.println("4. Logout");
             System.out.println("Enter choice:-");
 
-            try {
-                input = sc.nextInt();
-            } catch(InputMismatchException ex) {
-                System.out.println(ex.getMessage());
-            }
+            input = sc.nextLine();
 
             switch (input) {
-                case 1:
+                case "1":
                     getCourses(profId);
                     break;
-                case 2:
+                case "2":
                     viewEnrolledStudents(profId);
                     break;
-                case 3:
+                case "3":
                     addGrade(profId);
                     break;
-                case 4:
+                case "4":
                     CRSApplicationClient.loggedIn = false;
                     return;
                 default:
@@ -73,7 +69,8 @@ public class CRSProfessorMenu {
             System.out.println("Grade:");
             grade = sc.nextDouble();
         } catch(InputMismatchException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("Please enter only digits");
+            System.out.println();
             return;
         }
         professorInterface.addGrade(studentId,courseId,grade);
@@ -89,7 +86,8 @@ public class CRSProfessorMenu {
             System.out.println("Course Code:");
             courseId = sc.nextInt();
         } catch(InputMismatchException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("Course Code must contain only digits");
+            System.out.println();
             return;
         }
         System.out.println("-----Enrolled Students-----");

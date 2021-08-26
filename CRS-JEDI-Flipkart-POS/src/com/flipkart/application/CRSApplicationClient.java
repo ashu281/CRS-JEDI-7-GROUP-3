@@ -1,6 +1,7 @@
 package com.flipkart.application;
 
 import com.flipkart.business.*;
+import com.flipkart.constant.RoleConstants;
 import com.flipkart.dao.*;
 import com.flipkart.exception.UserNotFoundException;
 import com.flipkart.utils.DBUtil;
@@ -22,37 +23,35 @@ public class CRSApplicationClient {
         Scanner sc = new Scanner(System.in);
         CRSApplicationClient CRSApplicationClient=new CRSApplicationClient();
 
+        System.out.println("--------------WELCOME-------------");
+        System.out.println("-----Course Management System-----");
+
         showMainMenu();
 
-        int userInput=0;
-        try {
-            userInput = sc.nextInt();
-        }
-        catch (InputMismatchException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        while(userInput!=4)
+        String userInput="0";
+        userInput=sc.nextLine();
+        while(!userInput.equals("4"))
         {
             switch (userInput) {
                 // login
-                case 1:
+                case "1":
                     CRSApplicationClient.loginUser();
                     break;
                 // student registration
-                case 2:
+                case "2":
                     CRSApplicationClient.registerStudent();
                     break;
                 // update Password
-                case 3:
+                case "3":
                     CRSApplicationClient.updatePassword();
                     break;
                 default:
                     System.out.println("Invalid input");
+                    System.out.println();
                     break;
             }
             showMainMenu();
-            userInput=sc.nextInt();
+            userInput=sc.nextLine();
         }
         sc.close();
         DBUtil.closeConnection();
@@ -63,8 +62,7 @@ public class CRSApplicationClient {
      */
     public static void showMainMenu()
     {
-        System.out.println("--------------WELCOME-------------");
-        System.out.println("-----Course Management System-----");
+        System.out.println("---------Choose an Option---------");
         System.out.println("1. Login");
         System.out.println("2. Student Registration");
         System.out.println("3. Update password");
@@ -86,11 +84,13 @@ public class CRSApplicationClient {
             System.out.println("-----Login-----");
             System.out.println("UserID:");
             userId = sc.nextInt();
+            sc.nextLine();
             System.out.println("Password:");
-            password = sc.next();
+            password = sc.nextLine();
         }
         catch(InputMismatchException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("UserID must contain only digits");
+            System.out.println();
             return;
         }
 
@@ -101,17 +101,17 @@ public class CRSApplicationClient {
 
                 String userType=userInterface.userType(userId);
                 switch (userType) {
-                    case "A":
+                    case RoleConstants.ADMIN:
                         CRSAdminMenu adminMenu = new CRSAdminMenu();
                         adminMenu.showMenu();
                         break;
-                    case "P":
+                    case RoleConstants.PROF:
                         CRSProfessorMenu professorMenu = new CRSProfessorMenu();
                         ProfessorDaoInterface professorDaoInterface = new ProfessorDaoOperation();
                         int profId = professorDaoInterface.getProfId(userId);
                         professorMenu.showMenu(profId);
                         break;
-                    case "S":
+                    case RoleConstants.STUDENT:
                         StudentDaoOperation studentDaoOperation = new StudentDaoOperation();
                         int studentId = studentDaoOperation.getStudentId(userId);
                         boolean isApproved = studentInterface.isApproved(studentId);
@@ -150,13 +150,13 @@ public class CRSApplicationClient {
             System.out.println();
             System.out.println("-----Student Registration-----");
             System.out.println("Name:");
-            name = sc.next();
+            name = sc.nextLine();
             System.out.println("Password:");
-            password = sc.next();
+            password = sc.nextLine();
             System.out.println("Gender:");
-            gender = sc.next();
+            gender = sc.nextLine();
             System.out.println("Branch:");
-            branchName = sc.next();
+            branchName = sc.nextLine();
             System.out.println("Semester:");
             semester = sc.nextInt();
             sc.nextLine();
@@ -165,7 +165,8 @@ public class CRSApplicationClient {
             System.out.println();
         }
         catch(InputMismatchException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("Semester must be a number");
+            System.out.println();
             return;
         }
         studentInterface.register(name, password, gender, branchName, semester, address);
@@ -184,11 +185,13 @@ public class CRSApplicationClient {
             System.out.println("-----Login-----");
             System.out.println("UserID:");
             userId = sc.nextInt();
+            sc.nextLine();
             System.out.println("Password:");
             password = sc.nextLine();
         }
         catch(InputMismatchException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("UserID must contain only digits");
+            System.out.println();
             return;
         }
 
@@ -201,7 +204,7 @@ public class CRSApplicationClient {
                 System.out.println();
                 System.out.println("-----Update Password-----");
                 System.out.println("New Password:");
-                newPassword = sc.next();
+                newPassword = sc.nextLine();
                 userInterface.updatePassword(userId, newPassword);
                 System.out.println("Password updated successfully.");
                 System.out.println();

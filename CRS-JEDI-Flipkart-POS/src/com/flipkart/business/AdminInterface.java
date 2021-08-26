@@ -41,11 +41,6 @@ public interface AdminInterface {
 	public void deleteCourse(int courseID) throws CourseNotFoundException;
 
 	/**
-	 * Method to generate students' grade card
-	 */
-	public void generateGradeCard();
-
-	/**
 	 * Method to approve student's selected course
 	 * @param studentId
 	 * @param courseId

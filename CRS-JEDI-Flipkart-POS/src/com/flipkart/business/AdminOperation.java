@@ -62,11 +62,6 @@ public class AdminOperation implements AdminInterface {
         adminDaoInterface.deleteCourse(courseID);
     }
 
-    @Override
-    public void generateGradeCard() {
-
-    }
-
     /**
      * Method to approve student's selected course
      *

@@ -36,36 +36,32 @@ public class CRSStudentMenu {
             System.out.println("8. Logout");
             System.out.println("Enter choice:-");
 
-            int choice=0;
-            try {
-                choice = sc.nextInt();
-            } catch(InputMismatchException ex) {
-                System.out.println(ex.getMessage());
-            }
+            String choice="0";
+            choice = sc.nextLine();
 
             switch (choice) {
-                case 1:
+                case "1":
                     registerCourses(studentId);
                     break;
-                case 2:
+                case "2":
                     addCourse(studentId);
                     break;
-                case 3:
+                case "3":
                     dropCourse(studentId);
                     break;
-                case 4:
+                case "4":
                     viewCourse(studentId);
                     break;
-                case 5:
+                case "5":
                     viewRegisteredCourse(studentId);
                     break;
-                case 6:
+                case "6":
                     viewGradeCard(studentId);
                     break;
-                case 7:
+                case "7":
                     makePayment(studentId);
                     break;
-                case 8:
+                case "8":
                     CRSApplicationClient.loggedIn = false;
                     return;
                 default:
@@ -86,7 +82,8 @@ public class CRSStudentMenu {
         try {
             semester = sc.nextInt();
         } catch(InputMismatchException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("Semester must be a digit");
+            System.out.println();
             return;
         }
         studentInterface.makePayment(studentId,semester);
@@ -103,7 +100,8 @@ public class CRSStudentMenu {
         try {
             semester = sc.nextInt();
         } catch(InputMismatchException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("Semester must be a digit");
+            System.out.println();
             return;
         }
         try{
@@ -154,10 +152,10 @@ public class CRSStudentMenu {
         try {
             courseId = sc.nextInt();
         } catch(InputMismatchException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("Course Code must be a digit");
+            System.out.println();
             return;
         }
-
         try{
             studentInterface.addCourse(courseId, studentId);
         }catch (CourseNotFoundException ex){
@@ -179,7 +177,8 @@ public class CRSStudentMenu {
         try {
             courseId = sc.nextInt();
         } catch(InputMismatchException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("Course Code must be a digit");
+            System.out.println();
             return;
         }
 

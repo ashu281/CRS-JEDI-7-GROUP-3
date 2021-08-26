@@ -28,46 +28,36 @@ public class CRSAdminMenu {
             System.out.println("3. Approve Student Registration");
             System.out.println("4. Add Professor");
             System.out.println("5. Approve Student Courses");
-            System.out.println("6. Generate Report Card");
-            System.out.println("7. Logout");
+            System.out.println("6. Logout");
             System.out.println("Enter choice:-");
 
-            int choice = 0;
-            try {
-                choice = scanner.nextInt();
-            } catch(InputMismatchException ex) {
-                System.out.println(ex.getMessage());
-            }
+            String choice = "0";
+            choice = scanner.nextLine();
             switch (choice) {
-                case 1:
+                case "1":
                     addCourse();
                     break;
 
-                case 2:
+                case "2":
                     deleteCourse();
                     break;
 
-                case 3:
+                case "3":
                     approveStudent();
                     break;
 
-                case 4:
+                case "4":
                     addProfessor();
                     break;
 
-                case 5:
+                case "5":
                     approveCourse();
 
-                case 6:
-                    generateReportCard();
-                    break;
-
-                case 7:
+                case "6":
                     CRSApplicationClient.loggedIn = false;
                     return;
-
                 default:
-                    System.out.println("Invalid choice");
+                    System.out.println("Invalid input");
             }
         }
     }
@@ -85,7 +75,8 @@ public class CRSAdminMenu {
             System.out.println("CourseID:");
             courseId = sc.nextInt();
         } catch(InputMismatchException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("Enter only digits in each field");
+            System.out.println();
             return;
         }
         adminOperation.approveCourse(studentId,courseId);
@@ -108,9 +99,9 @@ public class CRSAdminMenu {
             System.out.println("Name:");
             name = sc.nextLine();
             System.out.println("Password:");
-            password = sc.next();
+            password = sc.nextLine();
             System.out.println("Gender:");
-            gender = sc.next();
+            gender = sc.nextLine();
             System.out.println("Department:");
             department = sc.nextLine();
             System.out.println("Designation:");
@@ -118,7 +109,7 @@ public class CRSAdminMenu {
             System.out.println("Address:");
             address = sc.nextLine();
         } catch(InputMismatchException ex) {
-            System.out.println(ex.getMessage());
+            ex.printStackTrace();
             return;
         }
         adminOperation.addProfessor(name,gender,password,address,designation,department);
@@ -134,7 +125,8 @@ public class CRSAdminMenu {
             System.out.println("StudentID:");
             studentId = sc.nextInt();
         } catch(InputMismatchException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("StudentID must contain only digits");
+            System.out.println();
             return;
         }
         try{
@@ -155,7 +147,7 @@ public class CRSAdminMenu {
             System.out.println("CourseID:");
             courseId = sc.nextInt();
         } catch(InputMismatchException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("CourseID must contain only digits");
             return;
         }
         try {
@@ -183,16 +175,9 @@ public class CRSAdminMenu {
             System.out.println("Semester:");
             semester = sc.nextInt();
         } catch(InputMismatchException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("ProfessorID and Semester must contain only digits");
             return;
         }
         adminOperation.addCourse(courseName, instructorId, semester);
-    }
-
-    /**
-     * Method to Generate Report Card
-     */
-    private void generateReportCard() {
-
     }
 }

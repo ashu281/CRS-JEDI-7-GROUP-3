@@ -28,6 +28,9 @@ public class User {
         this.address = address;
         this.role = role;
     }
+    public User() {
+
+    }
 
     /**
      *

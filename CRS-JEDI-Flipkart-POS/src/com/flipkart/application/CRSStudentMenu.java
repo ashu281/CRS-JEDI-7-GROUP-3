@@ -157,7 +157,11 @@ public class CRSStudentMenu {
      * @param studentId
      */
     private void viewCourse(int studentId) {
-        List<Course> courseList = studentInterface.getCourses(studentId);
+        System.out.println("----------------------");
+        System.out.println("Semester:");
+        int semester = sc.nextInt();
+        sc.nextLine();
+        List<Course> courseList = studentInterface.getCourses(semester);
         System.out.println("------------------------------------------");
         System.out.println("These are the following available courses:");
         System.out.println("------------------------------------------");

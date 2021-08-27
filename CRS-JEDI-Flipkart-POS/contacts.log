@@ -53,3 +53,9 @@
 01:13:07,377  INFO StudentOperation,main:63 - makePayment()
 01:13:07,378 DEBUG StudentOperation,main:64 - 3 1
 01:13:07,384  INFO StudentOperation,main:68 - Payment Approved
+10:23:01,521  INFO AdminOperation,main:36 - Verifying Credentials...
+10:23:02,017  INFO AdminOperation,main:54 - Retrieving user type
+10:23:29,516  INFO AdminOperation,main:36 - Verifying Credentials...
+10:23:29,518  INFO AdminOperation,main:54 - Retrieving user type
+10:25:29,028  INFO StudentOperation,main:36 - register()
+10:25:29,031 DEBUG StudentOperation,main:37 - abcd cse delhi

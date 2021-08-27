@@ -64,7 +64,7 @@ public class ProfessorDaoOperation implements ProfessorDaoInterface{
 
             }
 
-            logger.info("Successfully retrieved list of students");
+            //logger.info("Successfully retrieved list of students");
             return students;
         }
         catch(SQLException e)
@@ -92,7 +92,7 @@ public class ProfessorDaoOperation implements ProfessorDaoInterface{
             {
                 courses.add(new Pair<Integer,String>(results.getInt("courseId"),results.getString("courseName")));
             }
-            logger.info("Successfully retrieved list of courses");
+            //logger.info("Successfully retrieved list of courses");
             return courses;
         }
         catch(SQLException e)
@@ -119,7 +119,7 @@ public class ProfessorDaoOperation implements ProfessorDaoInterface{
             while(results.next())
             {
 
-                logger.info("Successfully retrieved ProfId");
+                //logger.info("Successfully retrieved ProfId");
                 return results.getInt("profId");
             }
         }

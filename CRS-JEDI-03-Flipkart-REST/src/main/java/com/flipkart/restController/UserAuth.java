@@ -5,9 +5,9 @@ import java.util.Map;
 import java.util.Random;
 
 public class UserAuth {
-    public static Map<Integer,String> loggedInStudents = new HashMap<Integer,String>();
-    public static Map<Integer,String> loggedInProfessor = new HashMap<Integer,String>();
-    public static Map<Integer,String> loggedInAdmin = new HashMap<Integer,String>();
+    public static Map<String,Integer> loggedInStudents = new HashMap<>();
+    public static Map<String,Integer> loggedInProfessor = new HashMap<>();
+    public static Map<String,Integer> loggedInAdmin = new HashMap<>();
 
     public static String generateRandomString(){
         String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
@@ -22,41 +22,45 @@ public class UserAuth {
 
     }
 
-    public static void loginStudent(int studentId){
-        loggedInStudents.put(studentId,generateRandomString());
+    public static String loginStudent(int studentId){
+        String key = generateRandomString();
+        loggedInStudents.put(key,studentId);
+        return key;
     }
-    public static void logoutStudent(int studentId){
-        loggedInStudents.remove(studentId);
-    }
-
-    public static boolean  isStudentLogin(int studentId){
-        return loggedInStudents.containsKey(studentId);
+    public static void logoutStudent(String key){
+        loggedInStudents.remove(key);
     }
 
-
-
-
-
-    public static void loginAdmin(int adminId){
-        loggedInAdmin.put(adminId,generateRandomString());
-    }
-    public static void logoutAdmin(int adminId){
-        loggedInAdmin.remove(adminId);
-    }
-    public static boolean  isAdminLogin(int adminId){
-        return loggedInAdmin.containsKey(adminId);
+    public static int isStudentLogin(String key){
+        if(loggedInStudents.containsKey(key))
+            return loggedInStudents.get(key);
+        else return -1;
     }
 
 
 
 
-    public static void loginProfessor(int profId){
-        loggedInProfessor.put(profId,generateRandomString());
-    }
-    public static void logoutProfessor(int profId){
-        loggedInProfessor.remove(profId);
-    }
-    public static boolean  isProfessorLogin(int profId){
-        return loggedInProfessor.containsKey(profId);
-    }
+
+//    public static void loginAdmin(int adminId){
+//        loggedInAdmin.put(adminId,generateRandomString());
+//    }
+//    public static void logoutAdmin(int adminId){
+//        loggedInAdmin.remove(adminId);
+//    }
+//    public static boolean  isAdminLogin(int adminId){
+//        return loggedInAdmin.containsKey(adminId);
+//    }
+//
+//
+//
+//
+//    public static void loginProfessor(int profId){
+//        loggedInProfessor.put(profId,generateRandomString());
+//    }
+//    public static void logoutProfessor(int profId){
+//        loggedInProfessor.remove(profId);
+//    }
+//    public static boolean  isProfessorLogin(int profId){
+//        return loggedInProfessor.containsKey(profId);
+//    }
 }

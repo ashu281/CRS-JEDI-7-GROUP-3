@@ -1,136 +1,69 @@
-//package com.flipkart.application;
-//
-//import com.flipkart.business.ProfessorInterface;
-//import com.flipkart.business.ProfessorOperation;
-//import javafx.util.Pair;
-//
-//import javax.ws.rs.Path;
-//import java.util.InputMismatchException;
-//import java.util.List;
-//import java.util.Scanner;
-//
-///**
-// * @author Abhinav
-// */
-//@Path("/professor")
-//public class ProfessorRestAPI {
-//
-//    ProfessorInterface professorInterface = new ProfessorOperation();
-//    Scanner sc = new Scanner(System.in);
-//
-//    /**
-//     * Method to Show the professor Menu
-//     * @param profId
-//     */
-//    public void showMenu(int profId) {
-//        System.out.println("-----Welcome Professor-----");
-//        String input="0";
-//        while(CRSApplicationClient.loggedIn)
-//        {
-//            System.out.println("-----Professor Options-----");
-//            System.out.println("1. View Courses");
-//            System.out.println("2. View Enrolled Students");
-//            System.out.println("3. Add grade");
-//            System.out.println("4. Logout");
-//            System.out.println("Enter choice:-");
-//
-//            input = sc.nextLine();
-//
-//            switch (input) {
-//                case "1":
-//                    getCourses(profId);
-//                    break;
-//                case "2":
-//                    viewEnrolledStudents(profId);
-//                    break;
-//                case "3":
-//                    addGrade(profId);
-//                    break;
-//                case "4":
-//                    CRSApplicationClient.loggedIn = false;
-//                    return;
-//                default:
-//                    System.out.println("Invalid choice");
-//                    break;
-//            }
-//        }
-//    }
-//
-//    /**
-//     * Method to Add grade for a given student and course
-//     * @param profId
-//     */
-//    private void addGrade(int profId) {
-//        double grade;
-//        int studentId, courseId;
-//        try {
-//            System.out.println("-----Add Grade-----");
-//            System.out.println("StudentID:");
-//            studentId = sc.nextInt();
-//            sc.nextLine();
-//            System.out.println("Course Code:");
-//            courseId = sc.nextInt();
-//            sc.nextLine();
-//            System.out.println("Grade:");
-//            grade = sc.nextDouble();
-//            sc.nextLine();
-//        } catch(InputMismatchException ex) {
-//            System.out.println("Please enter only digits");
-//            System.out.println();
-//            return;
-//        }
-//        professorInterface.addGrade(studentId,courseId,grade);
-//        System.out.println("Grade added successfully!");
-//        System.out.println();
-//    }
-//
-//    /**
-//     * Method to View enrolled students for a specific course
-//     * @param profId
-//     */
-//    private void viewEnrolledStudents(int profId) {
-//        int courseId;
-//        try {
-//            System.out.println("Course Code:");
-//            courseId = sc.nextInt();
-//            sc.nextLine();
-//        } catch(InputMismatchException ex) {
-//            System.out.println("Course Code must contain only digits");
-//            System.out.println();
-//            return;
-//        }
-//
-//        System.out.println("-------------------------------------------------------");
-//        System.out.println("The following students have registered for this course:");
-//        System.out.println("-------------------------------------------------------");
-//        System.out.format("%-15s%-15s","STUDENT ID","STUDENT NAME");
-//        System.out.println();
-//        List<String> studentList =  professorInterface.viewEnrolledStudents(courseId);
-//        for(String student: studentList) {
-//            String[] arrOfStr = student.split(":", 2);
-//            System.out.format("%-15s%-15s",arrOfStr[0],arrOfStr[1]);
-//            System.out.println();
-//        }
-//
-//        System.out.println();
-//    }
-//
-//    /**
-//     * Method to Get course list that professor teaches
-//     * @param profId
-//     */
-//    private void getCourses(int profId) {
-//        System.out.println("---------------------------------------------------------------");
-//        System.out.println("These are the following available courses for prof with id "+profId+" : ");
-//        System.out.println("---------------------------------------------------------------");
-//        System.out.printf("%-12s%-15s","COURSE ID","COURSE NAME");
-//        System.out.println();
-//        List<Pair<Integer,String>> courseList = professorInterface.getCourses(profId);
-//        for(Pair<Integer,String>course: courseList) {
-//            System.out.format("%-12d%-15s",course.getKey(),course.getValue());
-//            System.out.println();
-//        }
-//        System.out.println();
-//    }
-//
-//}
+package com.flipkart.restController;
+
+import com.flipkart.business.ProfessorInterface;
+import com.flipkart.business.ProfessorOperation;
+import javafx.util.Pair;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import java.util.*;
+
+/**
+ * @author Sarthak
+ */
+@Path("/professor")
+public class ProfessorRestAPI {
+
+    ProfessorInterface professorInterface = new ProfessorOperation();
+
+    /**
+     * Method to Add grade for a given student and course
+     * @param
+     */
+
+    @POST
+    @Path("/addGrade")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String addGrade(Map<String,String> params, @HeaderParam("authKey") String authKey) {
+        if(UserAuth.isProfessorLogin(authKey) ==null){
+            return "Access Denied!";
+        }
+        professorInterface.addGrade(Integer.parseInt(params.get("studentId")),Integer.parseInt(params.get("courseId")),Double.parseDouble(params.get("grade")));
+        return "Grade added successfully!";
+    }
+
+    /**
+     * Method to View enrolled students for a specific course
+     * @param
+     */
+
+    @POST
+    @Path("/viewEnrolledStudents")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Object viewEnrolledStudents(Map<String,String> params, @HeaderParam("authKey") String authKey) {
+        if(UserAuth.isProfessorLogin(authKey) ==null){
+            //TODO CHECK IF IT WORKS!
+            return "Access Denied!";
+        }
+        return professorInterface.viewEnrolledStudents(Integer.parseInt(params.get("courseId")));
+    }
+
+    /**
+     * Method to Get course list that professor teaches
+     * @param
+     */
+    @GET
+    @Path("/getCourses")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Object getCourses(@HeaderParam("authKey") String authKey) {
+        if(UserAuth.isProfessorLogin(authKey) ==null){
+            //TODO CHECK IF IT WORKS!
+            return "Access Denied!";
+        }
+        return professorInterface.getCourses(UserAuth.isProfessorLogin(authKey));
+    }
+
+}

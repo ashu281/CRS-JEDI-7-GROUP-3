@@ -22,6 +22,44 @@ public class UserAuth {
 
     }
 
+
+
+    public static String loginProfessor(int profId){
+        String key = generateRandomString();
+        loggedInProfessor.put(key,profId);
+        return key;
+    }
+    public static void logoutProfessor(String key){
+        loggedInProfessor.remove(key);
+    }
+
+    public static Integer isProfessorLogin(String key){
+        return loggedInProfessor.get(key);
+
+    }
+
+
+
+
+    public static String loginAdmin(int adminId){
+        String key = generateRandomString();
+        loggedInProfessor.put(key,adminId);
+        return key;
+    }
+    public static void logoutAdmin(String key){
+        loggedInAdmin.remove(key);
+    }
+
+    public static Integer isAdminLogin(String key){
+        return loggedInAdmin.get(key);
+
+    }
+
+
+
+
+
+
     public static String loginStudent(int studentId){
         String key = generateRandomString();
         loggedInStudents.put(key,studentId);
@@ -31,36 +69,21 @@ public class UserAuth {
         loggedInStudents.remove(key);
     }
 
-    public static int isStudentLogin(String key){
-        if(loggedInStudents.containsKey(key))
-            return loggedInStudents.get(key);
-        else return -1;
+    public static Integer isStudentLogin(String key){
+        return loggedInStudents.get(key);
+
+    }
+
+
+
+    public static Boolean isUserLogin(String key){
+        return loggedInStudents.containsKey(key) || loggedInAdmin.containsKey((key)) || loggedInProfessor.containsKey(key);
     }
 
 
 
 
 
-//    public static void loginAdmin(int adminId){
-//        loggedInAdmin.put(adminId,generateRandomString());
-//    }
-//    public static void logoutAdmin(int adminId){
-//        loggedInAdmin.remove(adminId);
-//    }
-//    public static boolean  isAdminLogin(int adminId){
-//        return loggedInAdmin.containsKey(adminId);
-//    }
-//
-//
-//
-//
-//    public static void loginProfessor(int profId){
-//        loggedInProfessor.put(profId,generateRandomString());
-//    }
-//    public static void logoutProfessor(int profId){
-//        loggedInProfessor.remove(profId);
-//    }
-//    public static boolean  isProfessorLogin(int profId){
-//        return loggedInProfessor.containsKey(profId);
-//    }
+
+
 }

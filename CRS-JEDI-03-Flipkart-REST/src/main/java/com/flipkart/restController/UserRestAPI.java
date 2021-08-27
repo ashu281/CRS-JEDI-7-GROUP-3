@@ -54,14 +54,13 @@ public class UserRestAPI {
             String userType=userInterface.userType(userId);
             switch (userType) {
                 case RoleConstants.ADMIN:
+                    return UserAuth.loginProfessor(userId);
 
-                    break;
                 case RoleConstants.PROF:
 
                     ProfessorDaoInterface professorDaoInterface = new ProfessorDaoOperation();
                     int profId = professorDaoInterface.getProfId(userId);
-//                    UserAuth
-                    break;
+                    return UserAuth.loginProfessor(profId);
                 case RoleConstants.STUDENT:
                     StudentInterface studentInterface = new StudentOperation();
                     StudentDaoOperation studentDaoOperation = new StudentDaoOperation();
@@ -80,45 +79,24 @@ public class UserRestAPI {
         }
         return "PENDING";
     }
-//    /**
-//     * Method to Update Password of User
-//     */
-//    public void updatePassword()
-//    {
-//        Scanner sc=new Scanner(System.in);
-//        String password;
-//        int userId;
-//
-//        try {
-//            System.out.println("-----Login-----");
-//            System.out.println("UserID:");
-//            userId = sc.nextInt();
-//            sc.nextLine();
-//            System.out.println("Password:");
-//            password = sc.nextLine();
-//        }
-//        catch(InputMismatchException ex) {
-//            System.out.println("UserID must contain only digits");
-//            System.out.println();
-//            return;
-//        }
-//            loggedIn = userInterface.verifyCredentials(userId, password);
-//
-//            if(loggedIn) {
-//                String newPassword;
-//
-//                System.out.println();
-//                System.out.println("-----Update Password-----");
-//                System.out.println("New Password:");
-//                newPassword = sc.nextLine();
-//                userInterface.updatePassword(userId, newPassword);
-//                System.out.println("Password updated successfully.");
-//                System.out.println();
-//            }
-//            else {
-//                System.out.println("Invalid Credentials");
-//            }
-//
-//
-//    }
+
+    /**
+     * Method to Update Password of User
+     */
+
+    @POST
+    @Path("/updatePassword")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String updatePassword(Map<String,String> params,@HeaderParam("authKey") String authKey)
+    {
+        if(!UserAuth.isUserLogin(authKey)){
+            return "Access Denied";
+        }
+        UserInterface userInterface = new UserOperation();
+        userInterface.updatePassword(Integer.parseInt(params.get("userId")), params.get("newPassword"));
+
+        return "Password updated successfully.";
+
+    }
 }

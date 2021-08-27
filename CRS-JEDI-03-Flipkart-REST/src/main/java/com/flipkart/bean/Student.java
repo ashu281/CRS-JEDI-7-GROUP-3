@@ -30,6 +30,9 @@ public class Student extends User{
         this.semester = semester;
     }
 
+    public Student() {
+
+    }
     /**+
      * Method to get studentID of Student
      * @return studentId

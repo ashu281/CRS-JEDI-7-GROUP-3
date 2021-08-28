@@ -74,7 +74,7 @@ public class AdminRestAPI {
      */
 
     @DELETE
-    @Path("/deleteCourse")
+    @Path("/course")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String deleteCourse(Map<String,String> params, @HeaderParam("authKey") String authKey) {
@@ -90,7 +90,7 @@ public class AdminRestAPI {
      * Method to Add course to catalogue
      */
     @POST
-    @Path("/deleteCourse")
+    @Path("/course")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String addCourse(Map<String,String> params, @HeaderParam("authKey") String authKey) {

@@ -49,7 +49,7 @@ public class StudentRestAPI {
         if(UserAuth.isStudentLogin(authKey) == null){
             return "Access Denied";
         }
-        Grade gradeCard = studentInterface.viewGradeCard(Integer.parseInt(params.get("studentId")),Integer.parseInt(params.get("semester")));
+        Grade gradeCard = studentInterface.viewGradeCard(UserAuth.isStudentLogin(authKey),Integer.parseInt(params.get("semester")));
         HashMap <String, Double> grades = gradeCard.getGrades();
         if(grades.size()>=6) {
             return grades;

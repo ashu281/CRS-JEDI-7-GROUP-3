@@ -54,7 +54,7 @@ public class UserRestAPI {
             String userType=userInterface.userType(userId);
             switch (userType) {
                 case RoleConstants.ADMIN:
-                    return UserAuth.loginProfessor(userId);
+                    return UserAuth.loginAdmin(userId);
 
                 case RoleConstants.PROF:
 

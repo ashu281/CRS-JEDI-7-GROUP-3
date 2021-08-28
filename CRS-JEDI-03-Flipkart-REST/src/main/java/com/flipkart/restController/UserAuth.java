@@ -43,7 +43,7 @@ public class UserAuth {
 
     public static String loginAdmin(int adminId){
         String key = generateRandomString();
-        loggedInProfessor.put(key,adminId);
+        loggedInAdmin.put(key,adminId);
         return key;
     }
     public static void logoutAdmin(String key){

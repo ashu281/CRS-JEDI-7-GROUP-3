@@ -21,7 +21,8 @@ public class CRSProfessorMenu {
      * @param profId
      */
     public void showMenu(int profId) {
-        System.out.println("-----Welcome Professor-----");
+        System.out.println(ConsoleColors.GREEN+"-----Welcome Professor-----"+ConsoleColors.RESET);
+        System.out.println();
         String input="0";
         while(CRSApplicationClient.loggedIn)
         {
@@ -30,6 +31,7 @@ public class CRSProfessorMenu {
             System.out.println("2. View Enrolled Students");
             System.out.println("3. Add grade");
             System.out.println("4. Logout");
+            System.out.println();
             System.out.println("Enter choice:-");
 
             input = sc.nextLine();
@@ -62,7 +64,7 @@ public class CRSProfessorMenu {
         double grade;
         int studentId, courseId;
         try {
-            System.out.println("-----Add Grade-----");
+            System.out.println(ConsoleColors.GREEN+"-----Add Grade-----"+ConsoleColors.RESET);
             System.out.println("StudentID:");
             studentId = sc.nextInt();
             sc.nextLine();
@@ -98,15 +100,15 @@ public class CRSProfessorMenu {
             return;
         }
 
-        System.out.println("-------------------------------------------------------");
+        System.out.println(ConsoleColors.GREEN+"-------------------------------------------------------");
         System.out.println("The following students have registered for this course:");
-        System.out.println("-------------------------------------------------------");
-        System.out.format("%-15s%-15s","STUDENT ID","STUDENT NAME");
+        System.out.println("-------------------------------------------------------"+ConsoleColors.RESET);
+        System.out.format("%-6s%20s",ConsoleColors.BLUE+"STUDENT ID","STUDENT NAME"+ConsoleColors.RESET);
         System.out.println();
         List<String> studentList =  professorInterface.viewEnrolledStudents(courseId);
         for(String student: studentList) {
             String[] arrOfStr = student.split(":", 2);
-            System.out.format("%-15s%-15s",arrOfStr[0],arrOfStr[1]);
+            System.out.format("%-6s%15s",arrOfStr[0],arrOfStr[1]);
             System.out.println();
         }
 
@@ -118,14 +120,14 @@ public class CRSProfessorMenu {
      * @param profId
      */
     private void getCourses(int profId) {
-        System.out.println("---------------------------------------------------------------");
+        System.out.println(ConsoleColors.GREEN+"---------------------------------------------------------------");
         System.out.println("These are the following available courses for prof with id "+profId+" : ");
-        System.out.println("---------------------------------------------------------------");
-        System.out.printf("%-12s%-15s","COURSE ID","COURSE NAME");
+        System.out.println("---------------------------------------------------------------"+ConsoleColors.RESET);
+        System.out.printf("%-6s%20s",ConsoleColors.BLUE+"COURSE ID","COURSE NAME"+ConsoleColors.RESET);
         System.out.println();
         List<Pair<Integer,String>> courseList = professorInterface.getCourses(profId);
         for(Pair<Integer,String>course: courseList) {
-            System.out.format("%-12d%-15s",course.getKey(),course.getValue());
+            System.out.format("%-6d%15s",course.getKey(),course.getValue());
             System.out.println();
         }
         System.out.println();

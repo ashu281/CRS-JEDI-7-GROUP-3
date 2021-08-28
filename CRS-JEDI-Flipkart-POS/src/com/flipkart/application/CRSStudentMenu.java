@@ -26,10 +26,13 @@ public class CRSStudentMenu {
      * @param studentId
      */
     public void showMenu(int studentId) {
-        System.out.println("--------Welcome Student--------");
+        //System.out.println("--------Welcome Student--------");
+        System.out.println(ConsoleColors.GREEN+"--------Welcome Student--------"+ConsoleColors.RESET);
         while (CRSApplicationClient.loggedIn)
         {
-            System.out.println("--------Student Choices--------");
+//            System.out.println("--------Student Choices--------");
+            System.out.println();
+            System.out.println(ConsoleColors.GREEN+"--------Student Choices--------"+ConsoleColors.RESET);
             System.out.println("1. Course Registration");
             System.out.println("2. Add Course");
             System.out.println("3. Drop Course");
@@ -38,6 +41,7 @@ public class CRSStudentMenu {
             System.out.println("6. View Grade Card");
             System.out.println("7. Make Payment");
             System.out.println("8. Logout");
+            System.out.println();
             System.out.println("Enter choice:-");
 
             String choice="0";
@@ -80,7 +84,8 @@ public class CRSStudentMenu {
      * @param studentId
      */
     private void makePayment(int studentId) {
-        System.out.println("-----Make Payment-----");
+        //System.out.println("-----Make Payment-----");
+        System.out.println(ConsoleColors.GREEN+"-----Make Payment-----"+ConsoleColors.RESET);
         System.out.println("Semester:");
         int semester;
         try {
@@ -99,7 +104,8 @@ public class CRSStudentMenu {
      * @param studentId
      */
     private void viewGradeCard(int studentId) {
-        System.out.println("-----View Grade Card-----");
+        //System.out.println("-----View Grade Card-----");
+        System.out.println(ConsoleColors.GREEN+"-----View Grade Card-----"+ConsoleColors.RESET);
         System.out.println("Semester:");
         int semester;
         try {
@@ -123,7 +129,7 @@ public class CRSStudentMenu {
                 }
                 GradecardInterface gradecardInterface = new GradecardOperation();
                 float cgpa = gradecardInterface.calculateCGPA(gradeCard);
-                System.out.println("CGPA: " + cgpa);
+                System.out.println(ConsoleColors.YELLOW+"CGPA: "+cgpa+ConsoleColors.RESET);
                 System.out.println();
             }
         } else {
@@ -142,13 +148,15 @@ public class CRSStudentMenu {
             System.out.println("No courses found!");
             return;
         }
-        System.out.println("----------------------------------------------");
+//
+        System.out.println(ConsoleColors.GREEN+"----------------------------------------------");
         System.out.println("You have registered for the following courses:");
-        System.out.println("----------------------------------------------");
-        System.out.printf("%-6s%20s\n","COURSE ID", "COURSE NAME");
+        System.out.println("----------------------------------------------"+ConsoleColors.RESET);
+
+        System.out.printf("%-6s%20s%19s%20s\n",ConsoleColors.BLUE+"COURSE ID", "COURSE NAME","SEMESTER","PROFESSOR ID"+ConsoleColors.RESET);
         for(Course course: courseList) {
-            //System.out.println(course.getCourseID() + "\t" + course.getCourseName());
-            System.out.printf("%-6d%15s\n",course.getCourseID(), course.getCourseName());
+            //System.out.printf("%-6d%15s\n",course.getCourseID(), course.getCourseName());
+            System.out.printf("%-6d%15s%20s%16s\n",course.getCourseID(), course.getCourseName(),course.getSemester(),course.getCourseID());
         }
     }
 
@@ -162,13 +170,14 @@ public class CRSStudentMenu {
         int semester = sc.nextInt();
         sc.nextLine();
         List<Course> courseList = studentInterface.getCourses(semester);
-        System.out.println("------------------------------------------");
+        System.out.println(ConsoleColors.GREEN+"------------------------------------------");
         System.out.println("These are the following available courses:");
-        System.out.println("------------------------------------------");
-        System.out.printf("%-6s%20s\n","COURSE ID", "COURSE NAME");
+        System.out.println("------------------------------------------"+ConsoleColors.RESET);
+        //System.out.printf("%-6s%20s\n","COURSE ID", "COURSE NAME");
+        System.out.printf("%-6s%20s%19s%20s\n",ConsoleColors.BLUE+"COURSE ID", "COURSE NAME","SEMESTER","PROFESSOR ID"+ConsoleColors.RESET);
         for(Course course: courseList) {
-            System.out.printf("%-6d%15s\n",course.getCourseID(),course.getCourseName());
-            //System.out.println(course.getCourseID() + "\t" + course.getCourseName());
+            //System.out.printf("%-6d%15s\n",course.getCourseID(),course.getCourseName());
+            System.out.printf("%-6d%15s%20s%16s\n",course.getCourseID(), course.getCourseName(),course.getSemester(),course.getCourseID());
 
         }
     }

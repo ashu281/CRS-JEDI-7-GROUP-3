@@ -8,6 +8,7 @@ import com.flipkart.utils.DBUtil;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import com.flipkart.constant.ConsoleColors;
 
 /**
  * @author Abhinav
@@ -23,8 +24,10 @@ public class CRSApplicationClient {
         Scanner sc = new Scanner(System.in);
         CRSApplicationClient CRSApplicationClient=new CRSApplicationClient();
 
-        System.out.println("--------------WELCOME-------------");
-        System.out.println("-----Course Management System-----");
+        System.out.printf("%105s\n",ConsoleColors.BLUE+"------------------------WELCOME-----------------------"+ ConsoleColors.RESET);
+        System.out.printf("%105s\n",ConsoleColors.BLUE+"---------------Course Management System---------------"+ ConsoleColors.RESET);
+        System.out.println();
+
 
         showMainMenu();
 
@@ -62,12 +65,13 @@ public class CRSApplicationClient {
      */
     public static void showMainMenu()
     {
-        System.out.println("---------Choose an Option---------");
+        System.out.println(ConsoleColors.GREEN+"---------Choose an Option---------"+ConsoleColors.RESET);
         System.out.println("1. Login");
         System.out.println("2. Student Registration");
         System.out.println("3. Update password");
         System.out.println("4. Exit");
-        System.out.println("Enter choice:-");
+        System.out.println();
+        System.out.println(ConsoleColors.GREEN+"Enter choice:-"+ConsoleColors.RESET);
     }
 
 
@@ -127,7 +131,9 @@ public class CRSApplicationClient {
             }
             else
             {
+                System.out.println();
                 System.out.println("Invalid Credentials");
+                System.out.println();
             }
 
 
@@ -145,7 +151,10 @@ public class CRSApplicationClient {
 
         try {
             System.out.println();
-            System.out.println("-----Student Registration-----");
+            System.out.println("------------------------------");
+            System.out.println(ConsoleColors.GREEN+"-----Student Registration-----"+ConsoleColors.RESET);
+
+            System.out.println();
             System.out.println("Name:");
             name = sc.nextLine();
             System.out.println("Password:");
@@ -179,7 +188,9 @@ public class CRSApplicationClient {
         int userId;
 
         try {
-            System.out.println("-----Login-----");
+//            System.out.println("-----Login-----");
+            System.out.println(ConsoleColors.GREEN+"------------------------------");
+            System.out.println("-------------Login------------"+ ConsoleColors.RESET);
             System.out.println("UserID:");
             userId = sc.nextInt();
             sc.nextLine();
@@ -197,7 +208,9 @@ public class CRSApplicationClient {
                 String newPassword;
 
                 System.out.println();
-                System.out.println("-----Update Password-----");
+                System.out.println(ConsoleColors.GREEN+"------------------------------");
+                System.out.println("-----Update Password-----"+ConsoleColors.RESET);
+                System.out.println();
                 System.out.println("New Password:");
                 newPassword = sc.nextLine();
                 userInterface.updatePassword(userId, newPassword);

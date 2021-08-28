@@ -20,15 +20,16 @@ public class CRSAdminMenu {
      * Method to Show the Admin Menu
      */
     public void showMenu() {
-        System.out.println("----------Welcome Admin----------");
+        System.out.println(ConsoleColors.GREEN+"----------Welcome Admin----------"+ConsoleColors.RESET);
         while(CRSApplicationClient.loggedIn) {
-            System.out.println("----------Admin Choices----------");
+            System.out.println(ConsoleColors.GREEN+"----------Admin Choices----------"+ConsoleColors.RESET);
             System.out.println("1. Add course in catalog");
             System.out.println("2. Delete Course from catalog");
             System.out.println("3. Approve Student Registration");
             System.out.println("4. Add Professor");
             System.out.println("5. Approve Student Courses");
             System.out.println("6. Logout");
+            System.out.println();
             System.out.println("Enter choice:-");
 
             String choice = "0";
@@ -70,7 +71,7 @@ public class CRSAdminMenu {
         int studentId, courseId;
         Scanner sc = new Scanner(System.in);
         try {
-            System.out.println("-----Course Approval-----");
+            System.out.println(Consolecolors.GREEN+"-----Course Approval-----"+Consolecolors.RESET);
             System.out.println("StudentID:");
             studentId = sc.nextInt();
             sc.nextLine();
@@ -98,7 +99,7 @@ public class CRSAdminMenu {
         Scanner sc=new Scanner(System.in);
 
         try {
-            System.out.println("-----Professor Registration-----");
+            System.out.println(ConsoleColors.GREEN+"-----Professor Registration-----"+ConsoleColors.RESET);
             System.out.println("Name:");
             name = sc.nextLine();
             System.out.println("Password:");
@@ -165,7 +166,7 @@ public class CRSAdminMenu {
         Scanner sc=new Scanner(System.in);
 
         try {
-            System.out.println("-----Add Course-----");
+            System.out.println(ConsoleColors.GREEN+"-----Add Course-----"+ConsoleColors.RESET);
             System.out.println("Course Name:");
             courseName = sc.nextLine();
             System.out.println("ProfessorId:");

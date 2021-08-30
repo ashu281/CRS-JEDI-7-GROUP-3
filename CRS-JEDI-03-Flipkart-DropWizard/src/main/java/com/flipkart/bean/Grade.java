@@ -7,17 +7,17 @@ public class Grade {
     float CGPA;
     HashMap<String, Double> grades;
 
+
     public Grade(int studentId, HashMap<String, Double> grades) {
         this.studentID = studentId;
         this.grades = grades;
     }
-    /*courseCode to gradePoint*/
 
 
     /**
      * Method to get studentId
      *
-     * @return student Id
+     * @return studentId
      */
 
     public int getStudentID() {

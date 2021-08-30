@@ -39,7 +39,15 @@ public class UserRestAPI {
             logger.info(entry.getKey()+" "+entry.getValue());
         }
         StudentInterface studentInterface = new StudentOperation();
-        Pair<Integer,Integer> p = studentInterface.register(m.get("name"), m.get("password"), m.get("gender"), m.get("branch"), Integer.parseInt(m.get("semester")), m.get("address"));
+
+        Pair<Integer,Integer> p;
+        try {
+            p = studentInterface.register(m.get("name"), m.get("password"), m.get("gender"), m.get("branch"), Integer.parseInt(m.get("semester")), m.get("address"));
+        }
+        catch (NullPointerException ex) {
+            return "Invalid Input";
+        }
+
         logger.info("Registered the student inside the database");
         return "Admin approval pending. UserId: "+p.getValue()+" StudentId: "+p.getKey();
     }
@@ -56,8 +64,17 @@ public class UserRestAPI {
         {
             logger.info(entry.getKey()+" "+entry.getValue());
         }
-        int userId = Integer.parseInt(map.get("userId"));
-        String password = map.get("password");
+
+        int userId;
+        String password;
+        try {
+            password = map.get("password");
+            userId = Integer.parseInt(map.get("userId"));
+        }
+        catch (NullPointerException ex) {
+            return "Invalid Input";
+        }
+
         UserInterface userInterface = new UserOperation();
         Boolean loggedIn = userInterface.verifyCredentials(userId, password);
         if(loggedIn)
@@ -115,8 +132,13 @@ public class UserRestAPI {
             return "Access Denied";
         }
         UserInterface userInterface = new UserOperation();
-        userInterface.updatePassword(Integer.parseInt(params.get("userId")), params.get("newPassword"));
 
+        try {
+            userInterface.updatePassword(Integer.parseInt(params.get("userId")), params.get("newPassword"));
+        }
+        catch (NullPointerException ex) {
+            return "Invalid Input";
+        }
 
         logger.info("Password updated successfully");
         return "Password updated successfully.";

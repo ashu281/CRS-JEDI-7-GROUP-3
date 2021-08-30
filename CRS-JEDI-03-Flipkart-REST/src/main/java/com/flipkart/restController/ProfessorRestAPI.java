@@ -3,6 +3,7 @@ package com.flipkart.restController;
 import com.flipkart.business.ProfessorInterface;
 import com.flipkart.business.ProfessorOperation;
 import com.flipkart.utils.UserAuth;
+import javafx.util.Pair;
 import org.apache.log4j.Logger;
 
 import javax.ws.rs.*;
@@ -22,7 +23,6 @@ public class ProfessorRestAPI {
      * Method to Add grade for a given student and course
      * @param
      */
-
     @POST
     @Path("/addGrade")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -38,7 +38,12 @@ public class ProfessorRestAPI {
             logger.info("Invalid AuthKey");
             return "Access Denied!";
         }
-        professorInterface.addGrade(Integer.parseInt(params.get("studentId")),Integer.parseInt(params.get("courseId")),Double.parseDouble(params.get("grade")));
+        try {
+            professorInterface.addGrade(Integer.parseInt(params.get("studentId")),Integer.parseInt(params.get("courseId")),Double.parseDouble(params.get("grade")));
+        }
+        catch (NullPointerException ex) {
+            return "Invalid Input";
+        }
         logger.info("Grade added for student");
         return "Grade added successfully!";
     }
@@ -47,7 +52,6 @@ public class ProfessorRestAPI {
      * Method to View enrolled students for a specific course
      * @param
      */
-
     @POST
     @Path("/viewEnrolledStudents")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -57,12 +61,18 @@ public class ProfessorRestAPI {
         logger.debug("authKey is "+authKey);
 
         if(UserAuth.isProfessorLogin(authKey) ==null){
-            //TODO CHECK IF IT WORKS!
             logger.info("Invalid AuthKey");
             return "Access Denied!";
         }
         logger.info("Successfully retrieved the list of students");
-        return professorInterface.viewEnrolledStudents(Integer.parseInt(params.get("courseId")));
+        List<String> students;
+        try {
+            students = professorInterface.viewEnrolledStudents(Integer.parseInt(params.get("courseId")));
+        }
+        catch (NullPointerException ex) {
+            return "Invalid Input";
+        }
+        return students;
     }
 
     /**
@@ -77,11 +87,17 @@ public class ProfessorRestAPI {
         logger.info("Grade added for student");
         if(UserAuth.isProfessorLogin(authKey) ==null){
             logger.info("Invalid AuthKey");
-            //TODO CHECK IF IT WORKS!
             return "Access Denied!";
         }
         logger.info("Successfully retrieved the list of courses");
-        return professorInterface.getCourses(UserAuth.isProfessorLogin(authKey));
+        List<Pair<Integer,String>> courses;
+        try {
+            courses = professorInterface.getCourses(UserAuth.isProfessorLogin(authKey));
+        }
+        catch (NullPointerException ex) {
+            return "Invalid Input";
+        }
+        return courses;
     }
 
 }

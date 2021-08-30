@@ -7,6 +7,7 @@ import com.flipkart.constant.SQLQueriesConstants;
 import com.flipkart.exception.CourseNotFoundException;
 import com.flipkart.exception.GradeNotAddedException;
 import com.flipkart.utils.DBUtil;
+import javafx.util.Pair;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,10 +21,10 @@ import java.util.List;
 public class StudentDaoOperation implements StudentDaoInterface{
 
     @Override
-    public void register(String name, String password, String gender, String branch, int semester, String address) {
+    public Pair<Integer, Integer> register(String name, String password, String gender, String branch, int semester, String address) {
         Connection connection = DBUtil.getConnection();
+        int userId=0,studentId = 0;
         try {
-            int userId;
 
             String generatedColumns[] = { "userId" };
 
@@ -37,18 +38,23 @@ public class StudentDaoOperation implements StudentDaoInterface{
             ResultSet rs = statement.getGeneratedKeys();
             if(rs.next()){
                 userId = rs.getInt(1);
-
-                statement = connection.prepareStatement(SQLQueriesConstants.ADD_STUDENT);
+                String generatedColumns2[] = { "studentId" };
+                statement = connection.prepareStatement(SQLQueriesConstants.ADD_STUDENT,generatedColumns2);
                 statement.setString(1, branch);
                 statement.setInt(2, semester);
                 statement.setInt(3, userId);
                 statement.executeUpdate();
+                ResultSet rs2 = statement.getGeneratedKeys();
+                if(rs2.next()) {
+                    studentId = rs2.getInt(1);
+                }
             }
         }
         catch(SQLException e)
         {
             System.out.println(e.getMessage());
         }
+        return new Pair<>(studentId,userId);
     }
 
     @Override

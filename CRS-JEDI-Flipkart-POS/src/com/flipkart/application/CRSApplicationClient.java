@@ -9,6 +9,7 @@ import com.flipkart.utils.DBUtil;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import com.flipkart.constant.ConsoleColors;
+import javafx.util.Pair;
 
 /**
  * @author Abhinav
@@ -175,7 +176,10 @@ public class CRSApplicationClient {
             System.out.println();
             return;
         }
-        studentInterface.register(name, password, gender, branchName, semester, address);
+        Pair<Integer, Integer> pair = studentInterface.register(name, password, gender, branchName, semester, address);
+        if(pair.getKey()!=0 && pair.getValue()!=0) {
+            System.out.println("Student Registered! User Id: " + pair.getValue() + " Student Id: " + pair.getKey());
+        }
     }
 
     /**

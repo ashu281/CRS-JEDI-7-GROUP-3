@@ -1,7 +1,6 @@
 package com.flipkart.business;
 
-import com.flipkart.exception.CourseNotFoundException;
-import com.flipkart.exception.StudentNotFoundForApprovalException;
+import javafx.util.Pair;
 
 /**
  *
@@ -20,8 +19,9 @@ public interface AdminInterface {
 	 * @param address
 	 * @param designation
 	 * @param department
+	 * @return
 	 */
-	public void addProfessor(String name, String gender, String password, String address, String designation, String department);
+	public Pair<Integer, Integer> addProfessor(String name, String gender, String password, String address, String designation, String department);
 
 	/**
 	 * Method to approve a student
@@ -31,8 +31,9 @@ public interface AdminInterface {
 
 	/**
 	 * Method to add courses in the catalog
+	 * @return
 	 */
-	public void addCourse(String courseName, int instructorID, Integer semester);
+	public int addCourse(String courseName, int instructorID, Integer semester);
 
 	/**
 	 * Method to delete courses in the catalog

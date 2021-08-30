@@ -11,6 +11,7 @@ import com.flipkart.dao.StudentDaoOperation;
 import com.flipkart.exception.CourseLimitExceedException;
 import com.flipkart.exception.CourseNotFoundException;
 import com.flipkart.exception.GradeNotAddedException;
+import javafx.util.Pair;
 import org.apache.log4j.Logger;
 
 import java.util.List;
@@ -30,13 +31,14 @@ public class StudentOperation implements StudentInterface{
      * @param branch
      * @param semester
      * @param address
+     * @return
      */
     @Override
-    public void register(String name, String password, String gender, String branch, int semester, String address) {
+    public Pair<Integer, Integer> register(String name, String password, String gender, String branch, int semester, String address) {
         logger.info("register()");
         logger.debug(name+" "+branch+" "+address);
         StudentDaoInterface studentDao = new StudentDaoOperation();
-        studentDao.register(name, password, gender, branch, semester, address);
+        return studentDao.register(name, password, gender, branch, semester, address);
     }
 
     /**+

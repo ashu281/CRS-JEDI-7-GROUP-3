@@ -2,8 +2,10 @@ package com.flipkart.application;
 
 import com.flipkart.business.AdminInterface;
 import com.flipkart.business.AdminOperation;
+import com.flipkart.constant.ConsoleColors;
 import com.flipkart.exception.CourseNotFoundException;
 import com.flipkart.exception.StudentNotFoundForApprovalException;
+import javafx.util.Pair;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -71,7 +73,7 @@ public class CRSAdminMenu {
         int studentId, courseId;
         Scanner sc = new Scanner(System.in);
         try {
-            System.out.println(Consolecolors.GREEN+"-----Course Approval-----"+Consolecolors.RESET);
+            System.out.println(ConsoleColors.GREEN+"-----Course Approval-----"+ConsoleColors.RESET);
             System.out.println("StudentID:");
             studentId = sc.nextInt();
             sc.nextLine();
@@ -116,7 +118,10 @@ public class CRSAdminMenu {
             ex.printStackTrace();
             return;
         }
-        adminOperation.addProfessor(name,gender,password,address,designation,department);
+        Pair<Integer, Integer> pair = adminOperation.addProfessor(name,gender,password,address,designation,department);
+        if(pair.getKey()!=0 && pair.getValue()!=0){
+            System.out.println("Professor Added! User Id: "+pair.getValue()+" Prof Id: "+pair.getKey());
+        }
     }
 
     /**
@@ -179,6 +184,9 @@ public class CRSAdminMenu {
             System.out.println("ProfessorID and Semester must contain only digits");
             return;
         }
-        adminOperation.addCourse(courseName, instructorId, semester);
+        int courseId = adminOperation.addCourse(courseName, instructorId, semester);
+        if(courseId!=0){
+            System.out.println("Course Added! Course Id: "+courseId);
+        }
     }
 }

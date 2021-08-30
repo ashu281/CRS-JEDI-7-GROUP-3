@@ -2,7 +2,7 @@ package com.flipkart.restController;
 
 import com.flipkart.business.ProfessorInterface;
 import com.flipkart.business.ProfessorOperation;
-import javafx.util.Pair;
+import com.flipkart.utils.UserAuth;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

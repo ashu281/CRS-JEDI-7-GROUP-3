@@ -3,20 +3,15 @@ package com.flipkart.restController;
 import com.flipkart.bean.Student;
 import com.flipkart.business.*;
 
-import com.flipkart.constant.ConsoleColors;
 import com.flipkart.constant.RoleConstants;
 import com.flipkart.dao.ProfessorDaoInterface;
 import com.flipkart.dao.ProfessorDaoOperation;
 import com.flipkart.dao.StudentDaoOperation;
-import com.flipkart.exception.UserNotFoundException;
-import org.apache.log4j.Logger;
+import com.flipkart.utils.UserAuth;
 
-import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.InputMismatchException;
 import java.util.Map;
-import java.util.Scanner;
 
 /**
  * @author Abhinav

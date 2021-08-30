@@ -3,10 +3,13 @@ package com.flipkart.restController;
 
 import com.flipkart.bean.Grade;
 
+import com.flipkart.business.GradecardInterface;
+import com.flipkart.business.GradecardOperation;
 import com.flipkart.business.StudentInterface;
 import com.flipkart.business.StudentOperation;
 
 import com.flipkart.exception.CourseLimitExceedException;
+import com.flipkart.utils.UserAuth;
 
 
 import javax.ws.rs.*;
@@ -50,9 +53,11 @@ public class StudentRestAPI {
             return "Access Denied";
         }
         Grade gradeCard = studentInterface.viewGradeCard(Integer.parseInt(params.get("studentId")),Integer.parseInt(params.get("semester")));
+        GradecardInterface gradecardInterface = new GradecardOperation();
+        gradecardInterface.calculateCGPA(gradeCard);
         HashMap <String, Double> grades = gradeCard.getGrades();
         if(grades.size()>=6) {
-            return grades;
+            return gradeCard;
         } else {
             return "Semester not yet completed";
         }
@@ -64,7 +69,7 @@ public class StudentRestAPI {
      */
 
     @GET
-    @Path("/viewRegisteredCourse")
+    @Path("/viewRegisteredCourses")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Object viewRegisteredCourse(@HeaderParam("authKey") String authKey) {

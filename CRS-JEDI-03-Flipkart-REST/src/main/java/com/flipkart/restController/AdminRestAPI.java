@@ -2,6 +2,8 @@ package com.flipkart.restController;
 
 import com.flipkart.business.AdminInterface;
 import com.flipkart.business.AdminOperation;
+import com.flipkart.utils.UserAuth;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.Map;
@@ -90,7 +92,7 @@ public class AdminRestAPI {
      * Method to Add course to catalogue
      */
     @POST
-    @Path("/deleteCourse")
+    @Path("/addCourse")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String addCourse(Map<String,String> params, @HeaderParam("authKey") String authKey) {

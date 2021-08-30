@@ -1,4 +1,4 @@
-package com.flipkart.restController;
+package com.flipkart.utils;
 
 import java.util.HashMap;
 import java.util.Map;

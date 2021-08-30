@@ -9,6 +9,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 
 /**
  * @author Sarthak
@@ -17,6 +19,7 @@ import java.util.Map;
 @Path("/admin")
 public class AdminRestAPI {
 
+    private static Logger logger = Logger.getLogger(AdminRestAPI.class);
 
     AdminInterface adminOperation = new AdminOperation();
     /**
@@ -28,10 +31,18 @@ public class AdminRestAPI {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String approveCourse(Map<String,String> params, @HeaderParam("authKey") String authKey) {
+        logger.debug("Inside approveCourse");
+        logger.debug("authKey is "+authKey);
+        for (Map.Entry<String,String> entry : params.entrySet())
+        {
+            logger.info(entry.getKey()+" "+entry.getValue());
+        }
         if(UserAuth.isAdminLogin(authKey) == null){
+            logger.info("Invalid Auth Key");
             return "Access Denied";
         }
         adminOperation.approveCourse(Integer.parseInt(params.get("studentId")),Integer.parseInt(params.get("courseId")));
+        logger.info("Course Approved");
         return "Course Approved Successfully!";
     }
 
@@ -44,12 +55,20 @@ public class AdminRestAPI {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String addProfessor(Map<String,String> params, @HeaderParam("authKey") String authKey) {
+        logger.debug("Inside addProfessor");
+        logger.debug("authKey is "+authKey);
+        for (Map.Entry<String,String> entry : params.entrySet())
+        {
+            logger.info(entry.getKey()+" "+entry.getValue());
+        }
         if(UserAuth.isAdminLogin(authKey) == null){
+            logger.info("Invalid Auth Key");
             return "Access Denied";
         }
         Pair<Integer,Integer> p = adminOperation.addProfessor(params.get("name"),params.get("gender"),params.get("password"),
                                     params.get("address"),params.get("designation"),params.get("department"));
 
+        logger.info("Successfully added the new professor");
         return "Professor "+params.get("name")+" Added! UserID: "+p.getValue()+" ProfId: "+p.getKey();
 
     }
@@ -63,10 +82,17 @@ public class AdminRestAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public String approveStudent(Map<String,String> params, @HeaderParam("authKey") String authKey) {
 
+        logger.debug("Inside approveStudent");
+        logger.debug("authKey is "+authKey);
+        for (Map.Entry<String,String> entry : params.entrySet())
+        {
+            logger.info(entry.getKey()+" "+entry.getValue());
+        }
         if(UserAuth.isAdminLogin(authKey) == null){
+            logger.info("Invalid Auth Key");
             return "Access Denied";
         }
-
+        logger.info("Successfully approved the new student");
         adminOperation.approveStudent(Integer.parseInt(params.get("studentId")));
         return "Student "+params.get("studentId")+" Approved!";
 

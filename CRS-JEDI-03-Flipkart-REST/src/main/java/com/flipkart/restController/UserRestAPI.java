@@ -8,6 +8,7 @@ import com.flipkart.dao.ProfessorDaoInterface;
 import com.flipkart.dao.ProfessorDaoOperation;
 import com.flipkart.dao.StudentDaoOperation;
 import com.flipkart.utils.UserAuth;
+import javafx.util.Pair;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -26,11 +27,11 @@ public class UserRestAPI {
     /**
      * Method for Student registration into the system
      */
-    public String registerStudent(Student student)
+    public String registerStudent(Map<String,String> m)
     {
         StudentInterface studentInterface = new StudentOperation();
-        studentInterface.register(student.getName(), student.getPassword(), student.getGender(), student.getBranch(), student.getSemester(), student.getAddress());
-        return "Admin approval pending";
+        Pair<Integer,Integer> p = studentInterface.register(m.get("name"), m.get("password"), m.get("gender"), m.get("branch"), Integer.parseInt(m.get("semester")), m.get("address"));
+        return "Admin approval pending. UserId: "+p.getValue()+" StudentId: "+p.getKey();
     }
     @POST
     @Path("/login")

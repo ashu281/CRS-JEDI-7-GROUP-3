@@ -4,6 +4,7 @@ import com.flipkart.constant.SQLQueriesConstants;
 import com.flipkart.exception.CourseNotFoundException;
 import com.flipkart.exception.StudentNotFoundForApprovalException;
 import com.flipkart.utils.DBUtil;
+import javafx.util.Pair;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -16,12 +17,13 @@ public class AdminDaoOperation implements AdminDaoInterface {
     private static Logger logger = Logger.getLogger(AdminDaoOperation.class);
 
     @Override
-    public void addProfessor(String name, String gender, String password, String address, String designation, String department) {
+    public Pair<Integer, Integer> addProfessor(String name, String gender, String password, String address, String designation, String department) {
 
 
         Connection connection = DBUtil.getConnection();
+        int userId=0, profId=0;
         try {
-            int userId;
+
 
             String generatedColumns[] = {"userId"};
 
@@ -35,17 +37,23 @@ public class AdminDaoOperation implements AdminDaoInterface {
             ResultSet rs = statement.getGeneratedKeys();
             if (rs.next()) {
                 userId = rs.getInt(1);
-
-                statement = connection.prepareStatement(SQLQueriesConstants.ADD_PROFESSOR);
+                String generatedColumns2[] = {"profId"};
+                statement = connection.prepareStatement(SQLQueriesConstants.ADD_PROFESSOR,generatedColumns2);
                 statement.setString(2, department);
                 statement.setString(3, designation);
                 statement.setInt(1, userId);
                 statement.executeUpdate();
+                ResultSet rs2 = statement.getGeneratedKeys();
+                if(rs2.next()) {
+                    profId = rs2.getInt(1);
+                }
             }
         } catch (SQLException e) {
             logger.error(e.getMessage());
         }
         logger.info("Professor successfully added by ADMIN");
+
+        return new Pair<>(profId,userId);
     }
 
     @Override
@@ -66,19 +74,25 @@ public class AdminDaoOperation implements AdminDaoInterface {
     }
 
     @Override
-    public void addCourse(String courseName, int instructorID, int semester) {
+    public int addCourse(String courseName, int instructorID, int semester) {
         Connection connection = DBUtil.getConnection();
+        String generatedColumns[] = {"courseId"};
+        int courseId = 0;
         try {
-            PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.ADD_COURSE);
+            PreparedStatement statement = connection.prepareStatement(SQLQueriesConstants.ADD_COURSE,generatedColumns);
             statement.setString(1, courseName);
             statement.setInt(2, instructorID);
             statement.setInt(3, semester);
             statement.executeUpdate();
+            ResultSet rs = statement.getGeneratedKeys();
+            if(rs.next()) {
+                courseId = rs.getInt(1);
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         logger.info("Course successfully added by ADMIN");
-
+        return courseId;
     }
 
     @Override

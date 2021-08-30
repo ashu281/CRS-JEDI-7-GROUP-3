@@ -3,6 +3,7 @@ package com.flipkart.restController;
 import com.flipkart.business.AdminInterface;
 import com.flipkart.business.AdminOperation;
 import com.flipkart.utils.UserAuth;
+import javafx.util.Pair;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -46,9 +47,10 @@ public class AdminRestAPI {
         if(UserAuth.isAdminLogin(authKey) == null){
             return "Access Denied";
         }
-        adminOperation.addProfessor(params.get("name"),params.get("gender"),params.get("password"),
+        Pair<Integer,Integer> p = adminOperation.addProfessor(params.get("name"),params.get("gender"),params.get("password"),
                                     params.get("address"),params.get("designation"),params.get("department"));
-        return "Professor "+params.get("name")+" Added!";
+
+        return "Professor "+params.get("name")+" Added! UserID: "+p.getValue()+" ProfId: "+p.getKey();
 
     }
 
@@ -99,8 +101,8 @@ public class AdminRestAPI {
         if(UserAuth.isAdminLogin(authKey) == null){
             return "Access Denied";
         }
-        adminOperation.addCourse(params.get("courseName"), Integer.parseInt(params.get("instructorId")), Integer.parseInt(params.get("semester")));
-        return "Course "+params.get("courseName")+" Added!";
+        int cid = adminOperation.addCourse(params.get("courseName"), Integer.parseInt(params.get("instructorId")), Integer.parseInt(params.get("semester")));
+        return "Course "+params.get("courseName")+" Added! CourseId: "+cid;
 
     }
 }

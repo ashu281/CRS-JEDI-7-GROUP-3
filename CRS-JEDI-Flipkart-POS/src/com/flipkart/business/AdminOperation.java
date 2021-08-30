@@ -6,6 +6,7 @@ import com.flipkart.dao.AdminDaoInterface;
 import com.flipkart.dao.AdminDaoOperation;
 import com.flipkart.exception.CourseNotFoundException;
 import com.flipkart.exception.StudentNotFoundForApprovalException;
+import javafx.util.Pair;
 import org.apache.log4j.Logger;
 
 /**
@@ -25,13 +26,14 @@ public class AdminOperation implements AdminInterface {
      * @param address
      * @param designation
      * @param department
+     * @return
      */
     @Override
-    public void addProfessor(String name, String gender, String password, String address, String designation, String department) {
+    public Pair<Integer, Integer> addProfessor(String name, String gender, String password, String address, String designation, String department) {
 //        logger.info("addProfessor()");
 //        logger.debug(name+" "+gender+" "+address);
         AdminDaoInterface adminDaoInterface = new AdminDaoOperation();
-        adminDaoInterface.addProfessor(name,gender,password,address,designation,department);
+        return adminDaoInterface.addProfessor(name,gender,password,address,designation,department);
     }
 
     /**+
@@ -51,14 +53,15 @@ public class AdminOperation implements AdminInterface {
 
     /**
      * Method to add courses in the catalog
-     *  @param courseName
+     * @param courseName
      * @param instructorID
      * @param semester
+     * @return
      */
     @Override
-    public void addCourse(String courseName, int instructorID, Integer semester) {
+    public int addCourse(String courseName, int instructorID, Integer semester) {
         AdminDaoInterface adminDaoInterface = new AdminDaoOperation();
-        adminDaoInterface.addCourse(courseName,instructorID,semester);
+        return adminDaoInterface.addCourse(courseName,instructorID,semester);
     }
 
     /**

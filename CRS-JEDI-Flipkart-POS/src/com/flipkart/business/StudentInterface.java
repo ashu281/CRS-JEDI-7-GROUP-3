@@ -3,8 +3,7 @@ package com.flipkart.business;
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Grade;
 import com.flipkart.exception.CourseLimitExceedException;
-import com.flipkart.exception.CourseNotFoundException;
-import com.flipkart.exception.GradeNotAddedException;
+import javafx.util.Pair;
 
 import java.util.List;
 
@@ -22,8 +21,9 @@ public interface StudentInterface {
      * @param branch
      * @param semester
      * @param address
+     * @return
      */
-    void register(String name, String password, String gender, String branch, int semester, String address);
+    Pair<Integer, Integer> register(String name, String password, String gender, String branch, int semester, String address);
 
     /**+
      * Method to view Student's grade card

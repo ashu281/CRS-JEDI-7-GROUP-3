@@ -10,6 +10,7 @@ import com.flipkart.business.StudentOperation;
 
 import com.flipkart.exception.CourseLimitExceedException;
 import com.flipkart.utils.UserAuth;
+import org.apache.log4j.Logger;
 
 
 import javax.ws.rs.*;
@@ -21,6 +22,7 @@ import java.util.*;
  */
 @Path("/student")
 public class StudentRestAPI {
+    private static Logger logger = Logger.getLogger(AdminRestAPI.class);
 
     StudentInterface studentInterface = new StudentOperation();
     /**
@@ -32,10 +34,18 @@ public class StudentRestAPI {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String makePayment(Map<String,String> params,@HeaderParam("authKey") String authKey) {
+        logger.debug("Inside makePayment");
+        logger.debug("authKey is "+authKey);
+        for (Map.Entry<String,String> entry : params.entrySet())
+        {
+            logger.info(entry.getKey()+" "+entry.getValue());
+        }
         if(UserAuth.isStudentLogin(authKey) == null){
+            logger.info("Invalid AuthKey");
             return "Access Denied";
         }
         studentInterface.makePayment(UserAuth.isStudentLogin(authKey),Integer.parseInt(params.get("semester")));
+        logger.info("Payment Successful");
         return  "Payment Successful";
 
     }
@@ -49,11 +59,19 @@ public class StudentRestAPI {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Object  viewGradeCard(Map<String,String> params,@HeaderParam("authKey") String authKey) {
+        logger.debug("Inside viewGradeCard");
+        logger.debug("authKey is "+authKey);
+        for (Map.Entry<String,String> entry : params.entrySet())
+        {
+            logger.info(entry.getKey()+" "+entry.getValue());
+        }
         if(UserAuth.isStudentLogin(authKey) == null){
+            logger.info("Invalid AuthKey");
             return "Access Denied";
         }
         Grade gradeCard = studentInterface.viewGradeCard(UserAuth.isStudentLogin(authKey),Integer.parseInt(params.get("semester")));
         GradecardInterface gradecardInterface = new GradecardOperation();
+        logger.info("Successfully retrieved graceCard");
         gradecardInterface.calculateCGPA(gradeCard);
         HashMap <String, Double> grades = gradeCard.getGrades();
         if(grades.size()>=6) {
